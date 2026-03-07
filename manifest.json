@@ -1,0 +1,11 @@
+{
+  "name": "Zee's Fitness Program",
+  "short_name": "FitZee",
+  "description": "12-Week Calisthenics & Mobility Program",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f"
+}

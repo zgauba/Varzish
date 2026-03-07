@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fit Program">
+<meta name="apple-mobile-web-app-title" content="FitZee">
 <title>Zee's Fitness Program</title>
+<link rel="manifest" href="./manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -1549,7 +1550,7 @@ function buildWeekGrid() {
       bodyContent = `<div class="rest-content"><div class="rest-icon">🌙</div><div class="rest-title">Rest & Recover</div><div class="rest-desc">Muscles grow during rest, not during exercise. Sleep 7–8 hours. Hydrate. You earned it.</div></div>`;
     } else {
       const rows = day.exercises.map(ex => `
-        <div class="ex-row" onclick="showExerciseModal('${ex.name.replace(/'/g,"\\'")}','${ex.detail}','${(EXERCISES[ex.name]||{benefit:''}).benefit.replace(/'/g,"\\'")}',${JSON.stringify((EXERCISES[ex.name]||{cues:[]}).cues)},'${ex.detail}','${ex.sets}')">
+        <div class="ex-row" onclick="showExerciseModal('${ex.name.replace(/'/g,"\\'")}','${ex.detail}','${(EXERCISES[ex.name]||{benefit:''}).benefit.replace(/'/g,"\\'")}',${JSON.stringify((EXERCISES[ex.name]||{cues:[]}).cues).replace(/"/g,'&quot;')},'${ex.detail}','${ex.sets}')">
           <div>
             <div class="ex-name">${ex.name}</div>
             <div class="ex-detail">${ex.detail}</div>
@@ -1630,8 +1631,8 @@ function showPage(id, btn) {
 // ── TRACKER ───────────────────────────────────────────────────────────────────
 
 const DAYS_SHORT = ['M','T','W','T','F','S','S'];
-let completedDays = JSON.parse(sessionStorage.getItem('completed') || '[]');
-let weightLog = JSON.parse(sessionStorage.getItem('weights') || '[]');
+let completedDays = JSON.parse(localStorage.getItem('completed') || '[]');
+let weightLog = JSON.parse(localStorage.getItem('weights') || '[]');
 
 function buildTracker() {
   const row = document.getElementById('tracker-week');
@@ -1649,7 +1650,7 @@ function toggleDay2(i) {
   } else {
     completedDays.push(i);
   }
-  try { sessionStorage.setItem('completed', JSON.stringify(completedDays)); } catch(e){}
+  try { localStorage.setItem('completed', JSON.stringify(completedDays)); } catch(e){}
   buildTracker();
 }
 
@@ -1658,7 +1659,7 @@ function logWeight() {
   if (!val || val < 100 || val > 400) return;
   const today = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric'});
   weightLog.push({ date: today, weight: val });
-  try { sessionStorage.setItem('weights', JSON.stringify(weightLog)); } catch(e){}
+  try { localStorage.setItem('weights', JSON.stringify(weightLog)); } catch(e){}
   document.getElementById('weight-input').value = '';
   renderWeightHistory();
 }
@@ -1681,6 +1682,10 @@ function renderWeightHistory() {
 buildWeekGrid();
 buildTracker();
 renderWeightHistory();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+}
 
 </script>
 </body>
