@@ -769,8 +769,13 @@
 
     <!-- ══ WEEK PLAN PAGE ══ -->
     <div class="page" id="page-week">
-      <div class="section-label" style="margin-bottom:16px">Week 1–4 · Foundation Phase</div>
-      <div class="week-grid" id="week-grid"></div>
+      <div style="display:flex;gap:8px;margin-bottom:20px;">
+        <button onclick="switchPhase(1)" id="phase-btn-1" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 1<br><span style="font-size:11px;font-weight:400">Weeks 1–4</span></button>
+        <button onclick="switchPhase(2)" id="phase-btn-2" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 2<br><span style="font-size:11px;font-weight:400">Weeks 5–8</span></button>
+        <button onclick="switchPhase(3)" id="phase-btn-3" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 3<br><span style="font-size:11px;font-weight:400">Weeks 9–12</span></button>
+      </div>
+      <div id="phase-description" style="background:#f0f7ff;border-radius:10px;padding:12px;margin-bottom:16px;font-size:14px;"></div>
+      <div id="week-plan-content"></div>
     </div>
 
     <!-- ══ NUTRITION PAGE ══ -->
@@ -1319,6 +1324,16 @@ function showPage(id, btn) {
   btn.classList.add('active');
 }
 
+// ── PHASE PERSISTENCE ─────────────────────────────────────────────────────────
+
+function getPhase() {
+  try { return parseInt(localStorage.getItem('fitzee_phase') || '1'); } catch(e) { return 1; }
+}
+function setPhase(p) {
+  try { localStorage.setItem('fitzee_phase', p); } catch(e) {}
+}
+let currentPhase = getPhase();
+
 // ── TRACKER ───────────────────────────────────────────────────────────────────
 
 const DAYS_SHORT = ['M','T','W','T','F','S','S'];
@@ -1392,12 +1407,294 @@ function buildEveningPage() {
   }).join('');
 }
 
+// ── PHASE DATA ────────────────────────────────────────────────────────────────
+
+const PHASE_META = {
+  1: {
+    label: "Foundation",
+    description: "🌱 Build the habit. Focus on form over reps. Every session completed is a win.",
+    color: "#4A90D9"
+  },
+  2: {
+    label: "Build",
+    description: "💪 Increase volume and intensity. You should feel challenged but not destroyed.",
+    color: "#E8A838"
+  },
+  3: {
+    label: "Peak",
+    description: "🔥 Full intensity. Harder variations, longer holds. Cross-legged sitting getting comfortable.",
+    color: "#E85D38"
+  }
+};
+
+const WEEK_PHASES = {
+  1: [
+    {
+      day: "Monday", focus: "Strength + Core", duration: "30 min",
+      exercises: [
+        { name: "Jumping Jacks", detail: "2 sets × 30 sec" },
+        { name: "Wall Push-Up", detail: "3 sets × 12 reps" },
+        { name: "Bodyweight Squat", detail: "3 sets × 10 reps" },
+        { name: "Glute Bridge", detail: "3 sets × 12 reps" },
+        { name: "Plank", detail: "3 sets × 20 sec hold" },
+        { name: "Dead Bug", detail: "2 sets × 6 reps per side" }
+      ]
+    },
+    {
+      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
+      exercises: [
+        { name: "Cat-Cow Stretch", detail: "2 sets × 10 reps" },
+        { name: "Hip Flexor Lunge Stretch", detail: "30 sec each side × 2" },
+        { name: "Butterfly Stretch", detail: "45 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch", detail: "30 sec each side × 2  🎯" },
+        { name: "Seated Forward Fold", detail: "45 sec hold × 2" },
+        { name: "Downward Dog", detail: "30 sec hold × 2" }
+      ]
+    },
+    {
+      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      exercises: [
+        { name: "Jumping Jacks", detail: "2 sets × 30 sec" },
+        { name: "Knee Push-Up", detail: "3 sets × 10 reps" },
+        { name: "Bodyweight Squat", detail: "3 sets × 12 reps" },
+        { name: "Mountain Climbers", detail: "2 sets × 20 sec" },
+        { name: "Glute Bridge", detail: "3 sets × 12 reps" },
+        { name: "Bicycle Crunches", detail: "2 sets × 10 reps per side" }
+      ]
+    },
+    {
+      day: "Thursday", focus: "Active Recovery", duration: "20 min",
+      exercises: [
+        { name: "Active Rest Walk", detail: "20 min easy walk" }
+      ]
+    },
+    {
+      day: "Friday", focus: "Strength + Posture", duration: "30 min",
+      exercises: [
+        { name: "Wall Push-Up", detail: "3 sets × 15 reps" },
+        { name: "Bodyweight Squat", detail: "3 sets × 12 reps" },
+        { name: "Superman Hold", detail: "3 sets × 10 reps" },
+        { name: "Plank", detail: "3 sets × 20 sec hold" },
+        { name: "Dead Bug", detail: "2 sets × 6 reps per side" },
+        { name: "Bicycle Crunches", detail: "2 sets × 10 reps per side" }
+      ]
+    },
+    {
+      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
+      exercises: [
+        { name: "World's Greatest Stretch", detail: "3 reps each side" },
+        { name: "Butterfly Stretch", detail: "60 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch", detail: "45 sec each side × 2  🎯" },
+        { name: "Pigeon Pose", detail: "45 sec each side × 2" },
+        { name: "Squat Hold (Deep)", detail: "3 sets × 20 sec hold" }
+      ]
+    },
+    {
+      day: "Sunday", focus: "Full Rest", duration: "0 min",
+      exercises: [
+        { name: "Rest", detail: "Recovery is when you actually improve. Take it." }
+      ]
+    }
+  ],
+
+  2: [
+    {
+      day: "Monday", focus: "Strength + Core", duration: "30 min",
+      exercises: [
+        { name: "Jumping Jacks", detail: "2 sets × 45 sec" },
+        { name: "Push-Up", detail: "3 sets × 10 reps" },
+        { name: "Bodyweight Squat", detail: "4 sets × 15 reps" },
+        { name: "Glute Bridge", detail: "3 sets × 15 reps" },
+        { name: "Plank", detail: "3 sets × 40 sec hold" },
+        { name: "Dead Bug", detail: "3 sets × 8 reps per side" },
+        { name: "Bicycle Crunches", detail: "3 sets × 12 reps per side" }
+      ]
+    },
+    {
+      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
+      exercises: [
+        { name: "Cat-Cow Stretch", detail: "2 sets × 12 reps" },
+        { name: "Hip Flexor Lunge Stretch", detail: "45 sec each side × 2" },
+        { name: "Butterfly Stretch", detail: "60 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch", detail: "45 sec each side × 2  🎯" },
+        { name: "Seated Forward Fold", detail: "60 sec hold × 2" },
+        { name: "Downward Dog", detail: "45 sec hold × 2" }
+      ]
+    },
+    {
+      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      exercises: [
+        { name: "Jumping Jacks", detail: "2 sets × 45 sec" },
+        { name: "Push-Up", detail: "3 sets × 8 reps" },
+        { name: "Bodyweight Squat", detail: "4 sets × 15 reps" },
+        { name: "Mountain Climbers", detail: "3 sets × 30 sec" },
+        { name: "Glute Bridge", detail: "3 sets × 15 reps" },
+        { name: "Bicycle Crunches", detail: "3 sets × 12 reps per side" }
+      ]
+    },
+    {
+      day: "Thursday", focus: "Active Recovery", duration: "20 min",
+      exercises: [
+        { name: "Active Rest Walk", detail: "20–30 min easy walk" }
+      ]
+    },
+    {
+      day: "Friday", focus: "Strength + Posture", duration: "30 min",
+      exercises: [
+        { name: "Push-Up", detail: "3 sets × 10 reps" },
+        { name: "Bodyweight Squat", detail: "4 sets × 15 reps" },
+        { name: "Superman Hold", detail: "3 sets × 12 reps" },
+        { name: "Plank", detail: "3 sets × 45 sec hold" },
+        { name: "Dead Bug", detail: "3 sets × 8 reps per side" },
+        { name: "Bicycle Crunches", detail: "3 sets × 12 reps per side" }
+      ]
+    },
+    {
+      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
+      exercises: [
+        { name: "World's Greatest Stretch", detail: "4 reps each side" },
+        { name: "Butterfly Stretch", detail: "60 sec hold × 3  🎯" },
+        { name: "90/90 Hip Stretch", detail: "45 sec each side × 3  🎯" },
+        { name: "Pigeon Pose", detail: "60 sec each side × 2" },
+        { name: "Squat Hold (Deep)", detail: "3 sets × 30 sec hold" }
+      ]
+    },
+    {
+      day: "Sunday", focus: "Full Rest", duration: "0 min",
+      exercises: [
+        { name: "Rest", detail: "Recovery is when you actually improve. Take it." }
+      ]
+    }
+  ],
+
+  3: [
+    {
+      day: "Monday", focus: "Strength + Core", duration: "30 min",
+      exercises: [
+        { name: "Jumping Jacks", detail: "2 sets × 60 sec" },
+        { name: "Push-Up", detail: "4 sets × 12 reps (3 sec slow negative)" },
+        { name: "Bodyweight Squat", detail: "4 sets × 20 reps" },
+        { name: "Glute Bridge", detail: "4 sets × 15 reps" },
+        { name: "Plank", detail: "3 sets × 60 sec hold" },
+        { name: "Dead Bug", detail: "3 sets × 10 reps per side" },
+        { name: "Bicycle Crunches", detail: "3 sets × 15 reps per side" }
+      ]
+    },
+    {
+      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
+      exercises: [
+        { name: "Cat-Cow Stretch", detail: "2 sets × 15 reps" },
+        { name: "Hip Flexor Lunge Stretch", detail: "60 sec each side × 2" },
+        { name: "Butterfly Stretch", detail: "90 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch", detail: "60 sec each side × 2  🎯" },
+        { name: "Seated Forward Fold", detail: "75 sec hold × 2" },
+        { name: "Downward Dog", detail: "60 sec hold × 2" }
+      ]
+    },
+    {
+      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      exercises: [
+        { name: "Jumping Jacks", detail: "2 sets × 60 sec" },
+        { name: "Push-Up", detail: "4 sets × 12 reps" },
+        { name: "Bodyweight Squat", detail: "4 sets × 20 reps" },
+        { name: "Mountain Climbers", detail: "3 sets × 45 sec" },
+        { name: "Glute Bridge", detail: "4 sets × 15 reps" },
+        { name: "Bicycle Crunches", detail: "3 sets × 15 reps per side" }
+      ]
+    },
+    {
+      day: "Thursday", focus: "Active Recovery", duration: "20 min",
+      exercises: [
+        { name: "Active Rest Walk", detail: "30 min easy walk" }
+      ]
+    },
+    {
+      day: "Friday", focus: "Strength + Posture", duration: "30 min",
+      exercises: [
+        { name: "Push-Up", detail: "4 sets × 12 reps (3 sec slow negative)" },
+        { name: "Bodyweight Squat", detail: "4 sets × 20 reps" },
+        { name: "Superman Hold", detail: "3 sets × 15 reps" },
+        { name: "Plank", detail: "3 sets × 60–90 sec hold" },
+        { name: "Dead Bug", detail: "3 sets × 10 reps per side" },
+        { name: "Bicycle Crunches", detail: "3 sets × 15 reps per side" }
+      ]
+    },
+    {
+      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
+      exercises: [
+        { name: "World's Greatest Stretch", detail: "5 reps each side" },
+        { name: "Butterfly Stretch", detail: "90 sec hold × 3  🎯" },
+        { name: "90/90 Hip Stretch", detail: "60 sec each side × 3  🎯" },
+        { name: "Pigeon Pose", detail: "75 sec each side × 2" },
+        { name: "Squat Hold (Deep)", detail: "3 sets × 45 sec hold" }
+      ]
+    },
+    {
+      day: "Sunday", focus: "Full Rest", duration: "0 min",
+      exercises: [
+        { name: "Rest", detail: "Recovery is when you actually improve. Take it." }
+      ]
+    }
+  ]
+};
+
+function switchPhase(p) {
+  currentPhase = p;
+  setPhase(p);
+  renderWeekPlan();
+  [1,2,3].forEach(n => {
+    const btn = document.getElementById('phase-btn-' + n);
+    if (!btn) return;
+    const meta = PHASE_META[n];
+    btn.style.background = n === p ? meta.color : '#f0f0f0';
+    btn.style.color = n === p ? '#fff' : '#333';
+  });
+  const desc = document.getElementById('phase-description');
+  if (desc) {
+    const meta = PHASE_META[p];
+    desc.innerHTML = `<strong>${meta.label}</strong> — ${meta.description}`;
+    desc.style.borderLeft = `4px solid ${meta.color}`;
+  }
+}
+
+function renderWeekPlan() {
+  const container = document.getElementById('week-plan-content');
+  if (!container) return;
+  const days = WEEK_PHASES[currentPhase];
+  container.innerHTML = days.map(day => `
+    <div style="background:#fff;border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
+      <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"
+           onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+        <div>
+          <div style="font-weight:700;font-size:16px">${day.day}</div>
+          <div style="font-size:13px;color:#666">${day.focus}</div>
+        </div>
+        <div style="font-size:13px;color:#999">${day.duration} ▾</div>
+      </div>
+      <div style="display:none;padding:0 16px 14px">
+        ${day.exercises.map(ex => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #f0f0f0;cursor:pointer"
+               onclick="openExerciseModal('${ex.name.replace(/'/g, "\\'")}')">
+            <span style="font-size:15px">${ex.name}</span>
+            <span style="font-size:13px;color:#888">${ex.detail}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function openExerciseModal(name) {
+  const ex = EXERCISES[name] || {};
+  showExerciseModal(name, '', ex.benefit || ex.muscles || '', ex.cues || [], '', ex.sets || '');
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
-buildWeekGrid();
 buildEveningPage();
 buildTracker();
 renderWeightHistory();
+switchPhase(currentPhase);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
