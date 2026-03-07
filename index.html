@@ -1297,8 +1297,8 @@ function getExerciseMedia(exName) {
   return imgs.map((img, i) => {
     const src = img.startsWith('./') ? img : BASE_IMG + img;
     const style = imgs.length === 1
-      ? 'width:100%;max-height:280px;border-radius:8px;display:block;object-fit:contain;background:#1a1a1a;'
-      : 'width:48%;max-height:220px;border-radius:8px;display:inline-block;margin:1%;object-fit:contain;background:#1a1a1a;';
+      ? 'width:100%;height:auto;border-radius:8px;display:block;object-fit:contain;background:#1a1a1a;'
+      : 'width:48%;height:auto;border-radius:8px;display:inline-block;margin:1%;object-fit:contain;background:#1a1a1a;';
     return `<img src="${src}" style="${style}" onerror="this.style.display='none'">`;
   }).join('');
 }
@@ -1411,9 +1411,6 @@ function renderWeightHistory() {
 const EVENING_WINDOWN = [
   { name: '90/90 Hip Stretch',   detail: '45 sec each side' },
   { name: 'Butterfly Stretch',   detail: '60 sec hold' },
-  { name: 'Hamstring Stretch',   detail: '45 sec each side' },
-  { name: "Child's Pose",        detail: '60 sec hold' },
-  { name: 'Legs Up The Wall',    detail: '2 min hold' },
 ];
 
 // ── PHASE DATA ────────────────────────────────────────────────────────────────
