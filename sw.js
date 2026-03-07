@@ -1,4 +1,4 @@
-const CACHE = 'fitzee-v5';
+const CACHE = 'fitzee-v6';
 
 const PRECACHE = [
   './',
