@@ -774,7 +774,7 @@
         <button onclick="switchPhase(2)" id="phase-btn-2" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 2<br><span style="font-size:11px;font-weight:400">Weeks 5–8</span></button>
         <button onclick="switchPhase(3)" id="phase-btn-3" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 3<br><span style="font-size:11px;font-weight:400">Weeks 9–12</span></button>
       </div>
-      <div id="phase-description" style="background:#f0f7ff;border-radius:10px;padding:12px;margin-bottom:16px;font-size:14px;"></div>
+      <div id="phase-description" style="background:#1a1a1a;border-radius:10px;padding:12px;margin-bottom:16px;font-size:14px;color:#e0e0e0;"></div>
       <div id="week-plan-content"></div>
     </div>
 
@@ -959,6 +959,35 @@
 </div>
 
 <script>
+// ── IMAGE MAP (verified against free-exercise-db exercises.json) ──────────────
+
+const BASE_IMG = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
+
+const IMAGE_MAP = {
+  // Verified exact matches from free-exercise-db
+  "Push-Up":                  ["Pushups/0.jpg", "Pushups/1.jpg"],
+  "Bodyweight Squat":         ["Bodyweight_Squat/0.jpg", "Bodyweight_Squat/1.jpg"],
+  "Squat Hold (Deep)":        ["Bodyweight_Squat/0.jpg", "Bodyweight_Squat/1.jpg"],
+  "Glute Bridge":             ["Single_Leg_Glute_Bridge/0.jpg", "Single_Leg_Glute_Bridge/1.jpg"],
+  "Plank":                    ["Plank/0.jpg", "Plank/1.jpg"],
+  "Superman Hold":            ["Superman/0.jpg", "Superman/1.jpg"],
+  "Mountain Climbers":        ["Mountain_Climbers/0.jpg", "Mountain_Climbers/1.jpg"],
+  "Dead Bug":                 ["Dead_Bug/0.jpg", "Dead_Bug/1.jpg"],
+  "Cat-Cow Stretch":          ["Cat_Stretch/0.jpg", "Cat_Stretch/1.jpg"],
+  "Seated Forward Fold":      ["Seated_Hamstring/0.jpg", "Seated_Hamstring/1.jpg"],
+  "Hip Flexor Lunge Stretch": ["Kneeling_Hip_Flexor/0.jpg", "Kneeling_Hip_Flexor/1.jpg"],
+  "Butterfly Stretch":        ["Butterfly/0.jpg", "Butterfly/1.jpg"],
+  "90/90 Hip Stretch":        ["90_90_Hamstring/0.jpg", "90_90_Hamstring/1.jpg"],
+  "Bicycle Crunches":         ["Air_Bike/0.jpg", "Air_Bike/1.jpg"],
+  "World's Greatest Stretch": ["Worlds_Greatest_Stretch/0.jpg", "Worlds_Greatest_Stretch/1.jpg"],
+  // No matching entry in free-exercise-db — show no image rather than broken link
+  "Jumping Jacks":            null,
+  "Wall Push-Up":             null,
+  "Knee Push-Up":             null,
+  "Downward Dog":             null,
+  "Pigeon Pose":              null,
+};
+
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
 const EXERCISES = {
@@ -1270,16 +1299,16 @@ function toggleDay(i) {
 
 // ── EXERCISE MODAL ────────────────────────────────────────────────────────────
 
-function getExerciseMedia(ex) {
-  if (ex.images && ex.images.length > 0) {
-    const base = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
-    return ex.images.map(img =>
-      `<img src="${base}${img}"
+function getExerciseMedia(exName) {
+  const imgs = IMAGE_MAP[exName];
+  if (imgs && imgs.length > 0) {
+    return imgs.map(img =>
+      `<img src="${BASE_IMG}${img}"
         style="width:48%;border-radius:8px;display:inline-block;margin:1%"
         onerror="this.style.display='none'">`
     ).join('');
   }
-  return ex.svg || '';
+  return '';
 }
 
 function showExerciseModal(name, tags, benefit, cues, tagsStr, sets) {
@@ -1295,7 +1324,7 @@ function showExerciseModal(name, tags, benefit, cues, tagsStr, sets) {
 
   // Illustration
   const illDiv = document.getElementById('modal-illustration');
-  illDiv.innerHTML = getExerciseMedia(ex);
+  illDiv.innerHTML = getExerciseMedia(name);
 
   // Cues
   const cueList = document.getElementById('modal-cues');
@@ -1646,8 +1675,8 @@ function switchPhase(p) {
     const btn = document.getElementById('phase-btn-' + n);
     if (!btn) return;
     const meta = PHASE_META[n];
-    btn.style.background = n === p ? meta.color : '#f0f0f0';
-    btn.style.color = n === p ? '#fff' : '#333';
+    btn.style.background = n === p ? meta.color : '#2a2a2a';
+    btn.style.color = n === p ? '#fff' : '#ccc';
   });
   const desc = document.getElementById('phase-description');
   if (desc) {
@@ -1662,21 +1691,21 @@ function renderWeekPlan() {
   if (!container) return;
   const days = WEEK_PHASES[currentPhase];
   container.innerHTML = days.map(day => `
-    <div style="background:#fff;border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
+    <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;margin-bottom:12px;overflow:hidden;">
       <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"
            onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
         <div>
-          <div style="font-weight:700;font-size:16px">${day.day}</div>
-          <div style="font-size:13px;color:#666">${day.focus}</div>
+          <div style="font-weight:700;font-size:16px;color:#e0e0e0">${day.day}</div>
+          <div style="font-size:13px;color:#999">${day.focus}</div>
         </div>
         <div style="font-size:13px;color:#999">${day.duration} ▾</div>
       </div>
       <div style="display:none;padding:0 16px 14px">
         ${day.exercises.map(ex => `
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #f0f0f0;cursor:pointer"
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #2a2a2a;cursor:pointer"
                onclick="openExerciseModal('${ex.name.replace(/'/g, "\\'")}')">
-            <span style="font-size:15px">${ex.name}</span>
-            <span style="font-size:13px;color:#888">${ex.detail}</span>
+            <span style="font-size:15px;color:#e0e0e0">${ex.name}</span>
+            <span style="font-size:13px;color:#999">${ex.detail}</span>
           </div>
         `).join('')}
       </div>
