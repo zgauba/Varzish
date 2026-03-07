@@ -939,11 +939,42 @@
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
 const EXERCISES = {
+  'Jumping Jacks': {
+    tags: ['Cardio', 'Warm-Up', 'Full Body'],
+    sets: '2 × 30 sec',
+    benefit: 'Simple cardio warm-up that elevates heart rate and loosens joints before strength work.',
+    cues: ['Stand with feet together, arms at sides', 'Jump feet out to shoulder-width while raising arms overhead', 'Jump feet back together, arms back down', 'Keep a light bounce — land softly on balls of feet', 'Maintain a steady rhythm', 'Can be done in place — no space needed'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
+      <!-- closed position left -->
+      <circle cx="80" cy="45" r="10" fill="none" stroke="#888898" stroke-width="1.5"/>
+      <line x1="80" y1="55" x2="80" y2="95" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <line x1="80" y1="70" x2="65" y2="80" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <line x1="80" y1="70" x2="95" y2="80" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <line x1="80" y1="95" x2="75" y2="135" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <line x1="80" y1="95" x2="85" y2="135" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <text x="80" y="148" fill="#888898" font-size="8" text-anchor="middle" font-family="monospace">CLOSED</text>
+      <!-- open position right -->
+      <circle cx="210" cy="40" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <line x1="210" y1="50" x2="210" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="210" y1="65" x2="175" y2="45" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="210" y1="65" x2="245" y2="45" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="210" y1="90" x2="185" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="185" y1="125" x2="175" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="210" y1="90" x2="235" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="235" y1="125" x2="245" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="210" y="148" fill="#c8f060" font-size="8" text-anchor="middle" font-family="monospace">OPEN</text>
+      <!-- arrow between -->
+      <path d="M 105 85 Q 150 75 175 85" stroke="#60c8f0" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+      <polygon points="175,81 180,88 172,89" fill="#60c8f0"/>
+    </svg>`
+  },
   'Wall Push-Up': {
     tags: ['Chest', 'Shoulders', 'Beginner'],
     sets: '3 × 12',
     benefit: 'Entry-level push movement. Builds chest and shoulder endurance with low joint stress.',
-    cues: ['Stand arm\'s length from wall', 'Place hands shoulder-width on wall at chest height', 'Lower your chest to the wall in controlled 3-count', 'Push back to start — squeeze chest at top', 'Keep core braced, body in straight line', 'Progress: incline push-up → regular push-up'],
+    cues: ['Stand arm\'s length from wall', 'Place hands shoulder-width on wall at chest height', 'Lower your chest to the wall in a controlled 3-count', 'Push back to start — squeeze chest at top', 'Keep core braced, body in a straight line', 'Progress to incline push-up when this feels easy'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="40" y1="20" x2="40" y2="130" stroke="#2a2a38" stroke-width="4" stroke-linecap="round"/>
@@ -986,36 +1017,11 @@ const EXERCISES = {
       <text x="50" y="100" fill="#c8f060" font-size="11" font-family="monospace">3 × 10</text>
     </svg>`
   },
-  'Push-Up': {
-    tags: ['Chest', 'Core', 'Triceps'],
-    sets: '3 × 10',
-    benefit: 'The king of upper body calisthenics. Develops chest, shoulders, triceps, and core stability.',
-    cues: ['Hands slightly wider than shoulder-width', 'Body in perfect straight line from head to heel', 'Lower until chest nearly touches floor — 3 count down', 'Push explosively back to top', 'Elbows track at ~45° from torso (not flared)', 'Squeeze glutes and abs throughout'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="125" x2="280" y2="125" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="180" cy="50" r="12" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <line x1="180" y1="62" x2="180" y2="95" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="180" y1="75" x2="225" y2="88" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="225" cy="88" r="4" fill="#c8f060"/>
-      <line x1="180" y1="75" x2="135" y2="88" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="135" cy="88" r="4" fill="#c8f060"/>
-      <line x1="180" y1="95" x2="195" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="195" y1="125" x2="210" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="180" y1="95" x2="165" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="165" y1="125" x2="150" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M 180 75 L 180 110" stroke="#60c8f0" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
-      <polygon points="177,112 180,119 183,112" fill="#60c8f0"/>
-      <text x="30" y="60" fill="#c8f060" font-size="11" font-family="monospace">STRAIGHT</text>
-      <text x="30" y="73" fill="#888898" font-size="10" font-family="monospace">BODY LINE</text>
-      <text x="30" y="95" fill="#60c8f0" font-size="11" font-family="monospace">3 × 10</text>
-    </svg>`
-  },
   'Bodyweight Squat': {
     tags: ['Legs', 'Glutes', 'Flexibility'],
-    sets: '3 × 15',
-    benefit: 'Builds lower body strength and begins the journey to a full deep squat. Critical for posture correction.',
-    cues: ['Stand feet shoulder-width apart, toes slightly out (30°)', 'Arms forward for balance or hands on hips', 'Push hips back and down — chest stays proud', 'Lower until thighs parallel or as low as comfortable', 'Drive through heels to stand up — squeeze glutes at top', 'Goal: work toward deeper range each week'],
+    sets: '3 × 12',
+    benefit: 'Builds lower body strength and begins the journey to a full deep squat.',
+    cues: ['Stand feet shoulder-width apart, toes slightly out 30°', 'Arms forward for balance', 'Push hips back and down — chest stays proud', 'Lower until thighs parallel or as low as comfortable', 'Drive through heels to stand — squeeze glutes at top', 'Work toward deeper range each week'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
@@ -1046,8 +1052,8 @@ const EXERCISES = {
   },
   'Glute Bridge': {
     tags: ['Glutes', 'Lower Back', 'Core'],
-    sets: '3 × 15',
-    benefit: 'Activates dormant glutes from sitting. Relieves lower back pain and improves posture. Essential for desk workers.',
+    sets: '3 × 12',
+    benefit: 'Activates dormant glutes from sitting. Relieves lower back pain and improves posture.',
     cues: ['Lie on back, knees bent, feet flat on floor hip-width apart', 'Press feet into floor and squeeze glutes', 'Drive hips toward ceiling until body forms a straight line', 'Hold at top for 2 seconds — really squeeze', 'Lower slowly, do not touch floor between reps', 'Progression: single-leg glute bridge'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
@@ -1067,61 +1073,10 @@ const EXERCISES = {
       <text x="205" y="108" fill="#60c8f0" font-size="11" font-family="monospace">3 × 15</text>
     </svg>`
   },
-  'Dead Bug': {
-    tags: ['Core', 'Lower Back', 'Coordination'],
-    sets: '3 × 8 each side',
-    benefit: 'Builds deep core stability and teaches lumbar spine control. The single best exercise for lower back health.',
-    cues: ['Lie on back, arms straight up toward ceiling', 'Bring knees to 90° — like a "table" position', 'Press lower back flat into the floor — maintain this throughout', 'Slowly lower opposite arm and leg toward floor', 'Keep lower back flat — this is the whole point', 'Return to start, alternate sides. Go slow.'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="130" x2="280" y2="130" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="90" cy="70" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <line x1="90" y1="80" x2="130" y2="85" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="130" y1="85" x2="130" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="130" y1="85" x2="155" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="155" y1="90" x2="170" y2="112" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- arms up -->
-      <line x1="115" y1="80" x2="95" y2="55" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="115" y1="80" x2="140" y2="58" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- extending arm -->
-      <line x1="95" y1="55" x2="65" y2="40" stroke="#f060c8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,2"/>
-      <!-- extending leg -->
-      <line x1="170" y1="112" x2="210" y2="128" stroke="#f060c8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,2"/>
-      <text x="220" y="70" fill="#f060c8" font-size="10" font-family="monospace">EXTEND</text>
-      <text x="220" y="83" fill="#888898" font-size="10" font-family="monospace">opposite</text>
-      <text x="220" y="96" fill="#888898" font-size="10" font-family="monospace">arm + leg</text>
-    </svg>`
-  },
-  'Superman Hold': {
-    tags: ['Lower Back', 'Glutes', 'Posture'],
-    sets: '3 × 10 × 3 sec',
-    benefit: 'Directly targets the posterior chain. Combats kyphosis and strengthens the lower back without equipment.',
-    cues: ['Lie face down, arms extended overhead (like Superman flying)', 'Simultaneously lift arms, chest, and legs off the floor', 'Squeeze glutes and the entire back as you rise', 'Hold for 3 seconds at the top — feel the contraction', 'Lower slowly, rest 1 second, repeat', 'Do not strain the neck — gaze at floor'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="120" x2="280" y2="120" stroke="#2a2a38" stroke-width="3"/>
-      <!-- Superman pose -->
-      <circle cx="155" cy="72" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <line x1="155" y1="82" x2="155" y2="105" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- arms extended forward -->
-      <line x1="145" y1="88" x2="95" y2="78" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="95" cy="78" r="3" fill="#c8f060"/>
-      <line x1="165" y1="88" x2="215" y2="78" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <!-- legs extended back -->
-      <line x1="155" y1="105" x2="130" y2="118" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="155" y1="105" x2="180" y2="118" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <!-- arrow up -->
-      <path d="M 155 115 L 155 90" stroke="#c8f060" stroke-width="1.5" stroke-dasharray="3,3"/>
-      <polygon points="152,88 155,82 158,88" fill="#c8f060"/>
-      <text x="30" y="55" fill="#c8f060" font-size="10" font-family="monospace">LIFT OFF</text>
-      <text x="30" y="68" fill="#888898" font-size="10" font-family="monospace">FLOOR</text>
-      <text x="30" y="85" fill="#f0a060" font-size="10" font-family="monospace">HOLD 3 SEC</text>
-    </svg>`
-  },
   'Plank': {
     tags: ['Core', 'Shoulders', 'Endurance'],
-    sets: '3 × 20 sec hold',
-    benefit: 'Foundational core strength. Directly improves posture and spinal stability. Build up to 60 seconds.',
+    sets: '3 × 20 sec',
+    benefit: 'Foundational core strength. Directly improves posture and spinal stability.',
     cues: ['Forearms on floor, elbows under shoulders', 'Body in perfect straight line — head to heel', 'Squeeze abs, glutes, and quads simultaneously', 'Breathe steadily — do not hold breath', 'Hold the target time; rest 30 sec between sets', 'Progress: add 5 sec each week'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
@@ -1143,119 +1098,10 @@ const EXERCISES = {
       <text x="30" y="78" fill="#f060c8" font-size="9" font-family="monospace">STRAIGHT</text>
     </svg>`
   },
-  'Mountain Climbers': {
-    tags: ['Cardio', 'Core', 'Stamina'],
-    sets: '3 × 20 sec',
-    benefit: 'Elevates heart rate while building core strength. Key for improving cardiovascular stamina with zero equipment.',
-    cues: ['Start in high push-up position', 'Drive right knee toward chest quickly', 'Immediately switch — left knee to chest as right extends', 'Maintain plank position — hips level, no bouncing', 'Speed: moderate — controlled, not chaotic', 'Breathe rhythmically throughout'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="130" x2="280" y2="130" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="220" cy="55" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <line x1="220" y1="65" x2="220" y2="85" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="220" y1="72" x2="180" y2="82" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="180" cy="82" r="4" fill="#c8f060"/>
-      <line x1="220" y1="72" x2="250" y2="72" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="250" cy="72" r="4" fill="#888898"/>
-      <line x1="220" y1="85" x2="200" y2="110" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <line x1="200" y1="110" x2="185" y2="130" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <!-- knee driving in -->
-      <line x1="220" y1="85" x2="210" y2="100" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="210" y1="100" x2="215" y2="78" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- motion arrows -->
-      <path d="M 215 82 Q 210 72 215 65" stroke="#f0a060" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
-      <polygon points="213,63 217,57 220,64" fill="#f0a060"/>
-      <text x="50" y="70" fill="#f060c8" font-size="10" font-family="monospace">DRIVE KNEE</text>
-      <text x="50" y="83" fill="#888898" font-size="10" font-family="monospace">IN &amp; SWITCH</text>
-      <text x="50" y="100" fill="#f0a060" font-size="10" font-family="monospace">20 SEC FAST</text>
-    </svg>`
-  },
-  'Jumping Jacks': {
-    tags: ['Cardio', 'Warm-Up', 'Full Body'],
-    sets: '2 × 30 sec',
-    benefit: 'Simple cardio warm-up that elevates heart rate and loosens joints before strength work.',
-    cues: ['Stand with feet together, arms at sides', 'Jump feet out to shoulder-width while raising arms overhead', 'Jump feet back together, arms back down', 'Keep a light bounce — land softly on balls of feet', 'Maintain a steady rhythm', 'Can be done in place — no space needed'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
-      <!-- closed position left -->
-      <circle cx="80" cy="45" r="10" fill="none" stroke="#888898" stroke-width="1.5"/>
-      <line x1="80" y1="55" x2="80" y2="95" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <line x1="80" y1="70" x2="65" y2="80" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <line x1="80" y1="70" x2="95" y2="80" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <line x1="80" y1="95" x2="75" y2="135" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <line x1="80" y1="95" x2="85" y2="135" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <text x="80" y="148" fill="#888898" font-size="8" text-anchor="middle" font-family="monospace">CLOSED</text>
-      <!-- open position right -->
-      <circle cx="210" cy="40" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <line x1="210" y1="50" x2="210" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="210" y1="65" x2="175" y2="45" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="210" y1="65" x2="245" y2="45" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="210" y1="90" x2="185" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="185" y1="125" x2="175" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="210" y1="90" x2="235" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="235" y1="125" x2="245" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <text x="210" y="148" fill="#c8f060" font-size="8" text-anchor="middle" font-family="monospace">OPEN</text>
-      <!-- arrow between -->
-      <path d="M 105 85 Q 150 75 175 85" stroke="#60c8f0" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
-      <polygon points="175,81 180,88 172,89" fill="#60c8f0"/>
-    </svg>`
-  },
-  'Seated Forward Fold': {
-    tags: ['Hamstrings', 'Lower Back', 'Flexibility'],
-    sets: '3 × 30 sec hold',
-    benefit: 'Stretches hamstrings, calves, and lower back — essential for achieving a deep squat and sitting on the floor.',
-    cues: ['Sit on floor, legs straight ahead', 'Flex feet toward you (dorsiflexion)', 'Hinge at hips — reach toward toes (not your back bending!)', 'Go as far as comfortable — hold a strap or towel if needed', 'Breathe out and relax deeper each exhale', 'Spine stays as long as possible — no rounding excessively'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="128" x2="280" y2="128" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="80" cy="60" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <!-- torso reaching forward -->
-      <line x1="80" y1="70" x2="120" y2="85" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- arms reaching -->
-      <line x1="100" y1="78" x2="200" y2="100" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="100" y1="78" x2="200" y2="115" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- legs -->
-      <line x1="120" y1="85" x2="120" y2="128" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="120" y1="85" x2="240" y2="115" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="240" y1="115" x2="260" y2="128" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- toes target -->
-      <circle cx="200" cy="108" r="5" fill="none" stroke="#f0a060" stroke-width="1.5" stroke-dasharray="3,2"/>
-      <text x="200" y="140" fill="#f0a060" font-size="9" text-anchor="middle" font-family="monospace">REACH</text>
-      <text x="30" y="105" fill="#60c8f0" font-size="10" font-family="monospace">HINGE</text>
-      <text x="30" y="118" fill="#888898" font-size="9" font-family="monospace">at hips</text>
-    </svg>`
-  },
-  'Pigeon Pose': {
-    tags: ['Hips', 'Glutes', 'Flexibility'],
-    sets: '2 × 45 sec each side',
-    benefit: 'Opens deep hip rotators (piriformis). Critical for people who sit all day. Directly improves squat depth and lower back pain.',
-    cues: ['From all-fours, bring right knee toward right hand', 'Extend left leg straight back behind you', 'Lower hips toward the floor — may need blanket under hip', 'Fold torso forward over front leg for deeper stretch', 'Breathe slowly — this one is intense, that is okay', 'Hold 45+ seconds, switch sides'],
-    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="155" cy="55" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <!-- torso -->
-      <line x1="155" y1="65" x2="155" y2="95" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- arms forward -->
-      <line x1="155" y1="78" x2="105" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="155" y1="78" x2="205" y2="108" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
-      <!-- front bent leg -->
-      <line x1="155" y1="95" x2="125" y2="115" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="125" y1="115" x2="140" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- back extended leg -->
-      <line x1="155" y1="95" x2="210" y2="120" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="210" y1="120" x2="250" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- hip area highlight -->
-      <circle cx="148" cy="108" r="8" fill="none" stroke="#f0a060" stroke-width="1.5" opacity="0.6"/>
-      <text x="48" y="78" fill="#f0a060" font-size="10" font-family="monospace">HIP OPENS</text>
-      <text x="48" y="91" fill="#888898" font-size="9" font-family="monospace">deep stretch</text>
-    </svg>`
-  },
   'Cat-Cow Stretch': {
     tags: ['Spine', 'Mobility', 'Lower Back'],
     sets: '10 slow cycles',
-    benefit: 'Lubricates the entire spine, reduces back stiffness from sitting. Best morning exercise — do it before getting out of bed.',
+    benefit: 'Lubricates the entire spine, reduces back stiffness from sitting.',
     cues: ['Start on all-fours — wrists under shoulders, knees under hips', 'CAT: exhale, round back to ceiling, tuck chin and pelvis', 'COW: inhale, drop belly toward floor, lift head and tailbone', 'Move slowly — 3–4 seconds each position', 'Feel each vertebra in the movement', '10 full cycles morning and evening'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
@@ -1281,11 +1127,11 @@ const EXERCISES = {
       <polygon points="163,74 168,81 161,82" fill="#60c8f0"/>
     </svg>`
   },
-  'World's Greatest Stretch': {
+  'World\'s Greatest Stretch': {
     tags: ['Full Body', 'Hips', 'Thoracic'],
-    sets: '5 reps each side',
-    benefit: 'One exercise that opens hips, thoracic spine, and hamstrings simultaneously. Fastest way to increase total-body flexibility.',
-    cues: ['Step right foot forward into a lunge', 'Drop left knee to the floor', 'Place right hand inside right foot on the floor', 'Rotate left arm up toward ceiling, following with your gaze', 'Hold 2 sec at top, return hand to floor', 'Now straighten front leg for a hamstring stretch — hold 2 sec, return. That is 1 rep.'],
+    sets: '4 reps each side',
+    benefit: 'One exercise that opens hips, thoracic spine, and hamstrings simultaneously.',
+    cues: ['Step right foot forward into a lunge', 'Drop left knee to the floor', 'Place right hand inside right foot on the floor', 'Rotate left arm up toward ceiling, following with your gaze', 'Hold 2 sec at top, return hand to floor', 'Straighten front leg for hamstring stretch — hold 2 sec. That is 1 rep.'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
@@ -1312,9 +1158,9 @@ const EXERCISES = {
   },
   'Hip Flexor Lunge Stretch': {
     tags: ['Hips', 'Posture', 'Flexibility'],
-    sets: '3 × 30 sec each',
-    benefit: 'Targets the psoas and iliacus — the muscles most shortened by sitting. Directly reduces anterior pelvic tilt and lower back pain.',
-    cues: ['Kneel on right knee, left foot forward', 'Keep torso upright — do not lean forward', 'Push hips gently forward until stretch felt in front of right hip', 'Optional: raise right arm overhead and lean slightly left for deeper stretch', 'Squeeze right glute to deepen the stretch', 'Hold 30 seconds, breathe, switch sides'],
+    sets: '2 × 30 sec each',
+    benefit: 'Targets the psoas — most shortened by sitting. Directly reduces lower back pain.',
+    cues: ['Kneel on right knee, left foot forward', 'Keep torso upright — do not lean forward', 'Push hips gently forward until stretch felt in front of right hip', 'Raise right arm overhead for deeper stretch', 'Squeeze right glute to deepen the stretch', 'Hold 30 seconds, breathe, switch sides'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
@@ -1338,11 +1184,142 @@ const EXERCISES = {
       <text x="225" y="111" fill="#888898" font-size="9" font-family="monospace">here</text>
     </svg>`
   },
+  'Butterfly Stretch': {
+    tags: ['Groin', 'Inner Thigh', 'Flexibility'],
+    sets: '2 × 45 sec',
+    benefit: 'Opens inner thighs and groin. Critical for cross-legged sitting and floor sitting.',
+    cues: ['Sit on floor, bring soles of feet together in front of you', 'Hold feet with both hands', 'Let knees fall outward toward floor', 'Gently press knees down with elbows for deeper stretch', 'Sit tall — spine long, not hunched', 'Breathe and relax deeper each exhale'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
+      <circle cx="150" cy="45" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <!-- torso -->
+      <line x1="150" y1="55" x2="150" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arms to feet -->
+      <line x1="150" y1="75" x2="150" y2="115" stroke="#c8f060" stroke-width="2" stroke-linecap="round"/>
+      <!-- butterfly legs -->
+      <path d="M 150 90 Q 110 100 90 125" stroke="#c8f060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M 150 90 Q 190 100 210 125" stroke="#c8f060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- feet together -->
+      <circle cx="150" cy="118" r="6" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <!-- knees arrows down -->
+      <path d="M 105 110 L 105 125" stroke="#f0a060" stroke-width="1.5" fill="none"/>
+      <polygon points="102,123 105,130 108,123" fill="#f0a060"/>
+      <path d="M 195 110 L 195 125" stroke="#f0a060" stroke-width="1.5" fill="none"/>
+      <polygon points="192,123 195,130 198,123" fill="#f0a060"/>
+      <text x="35" y="75" fill="#f0a060" font-size="10" font-family="monospace">KNEES</text>
+      <text x="35" y="88" fill="#f0a060" font-size="10" font-family="monospace">DOWN</text>
+    </svg>`
+  },
+  'Squat Hold (Deep)': {
+    tags: ['Flexibility', 'Hips', 'Ankles'],
+    sets: '2–3 × 30 sec',
+    benefit: 'Most direct path to regaining deep squat ability. Builds mobility in hips, knees, and ankles.',
+    cues: ['Stand feet wider than shoulder-width, toes out 30–45°', 'Lower into squat as deep as possible', 'Use a doorframe for balance if needed', 'Keep heels on floor — elevate on books if impossible', 'Chest tall, elbows press knees out gently', 'Hold — breathe deeply, relax into it'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
+      <circle cx="150" cy="50" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <line x1="150" y1="60" x2="150" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arms forward for balance -->
+      <line x1="150" y1="75" x2="120" y2="68" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="150" y1="75" x2="180" y2="68" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- deep squat legs -->
+      <line x1="150" y1="90" x2="120" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="120" y1="108" x2="105" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="150" y1="90" x2="180" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="180" y1="108" x2="195" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- depth arrow -->
+      <path d="M 150 60 L 150 90" stroke="#f0a060" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <polygon points="147,92 150,99 153,92" fill="#f0a060"/>
+      <text x="215" y="75" fill="#f0a060" font-size="10" font-family="monospace">DEEP</text>
+      <text x="215" y="88" fill="#c8f060" font-size="10" font-family="monospace">HOLD</text>
+      <text x="215" y="106" fill="#60c8f0" font-size="11" font-family="monospace">30 SEC</text>
+    </svg>`
+  },
+  'Superman Hold': {
+    tags: ['Lower Back', 'Glutes', 'Posture'],
+    sets: '3 × 10 × 3 sec',
+    benefit: 'Directly targets the posterior chain. Combats rounded back and strengthens lower back.',
+    cues: ['Lie face down, arms extended overhead', 'Simultaneously lift arms, chest, and legs off the floor', 'Squeeze glutes and entire back as you rise', 'Hold for 3 seconds at the top', 'Lower slowly, rest 1 second, repeat', 'Do not strain the neck — gaze at floor'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="120" x2="280" y2="120" stroke="#2a2a38" stroke-width="3"/>
+      <!-- Superman pose -->
+      <circle cx="155" cy="72" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <line x1="155" y1="82" x2="155" y2="105" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arms extended forward -->
+      <line x1="145" y1="88" x2="95" y2="78" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="95" cy="78" r="3" fill="#c8f060"/>
+      <line x1="165" y1="88" x2="215" y2="78" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <!-- legs extended back -->
+      <line x1="155" y1="105" x2="130" y2="118" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="155" y1="105" x2="180" y2="118" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <!-- arrow up -->
+      <path d="M 155 115 L 155 90" stroke="#c8f060" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <polygon points="152,88 155,82 158,88" fill="#c8f060"/>
+      <text x="30" y="55" fill="#c8f060" font-size="10" font-family="monospace">LIFT OFF</text>
+      <text x="30" y="68" fill="#888898" font-size="10" font-family="monospace">FLOOR</text>
+      <text x="30" y="85" fill="#f0a060" font-size="10" font-family="monospace">HOLD 3 SEC</text>
+    </svg>`
+  },
+  'Mountain Climbers': {
+    tags: ['Cardio', 'Core', 'Stamina'],
+    sets: '2 × 20 sec',
+    benefit: 'Elevates heart rate while building core strength. Key for improving cardiovascular stamina.',
+    cues: ['Start in high push-up position', 'Drive right knee toward chest quickly', 'Immediately switch — left knee in as right extends', 'Maintain plank position — hips level', 'Speed: moderate and controlled', 'Breathe rhythmically throughout'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="130" x2="280" y2="130" stroke="#2a2a38" stroke-width="3"/>
+      <circle cx="220" cy="55" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <line x1="220" y1="65" x2="220" y2="85" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="220" y1="72" x2="180" y2="82" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="180" cy="82" r="4" fill="#c8f060"/>
+      <line x1="220" y1="72" x2="250" y2="72" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="250" cy="72" r="4" fill="#888898"/>
+      <line x1="220" y1="85" x2="200" y2="110" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <line x1="200" y1="110" x2="185" y2="130" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <!-- knee driving in -->
+      <line x1="220" y1="85" x2="210" y2="100" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="210" y1="100" x2="215" y2="78" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- motion arrows -->
+      <path d="M 215 82 Q 210 72 215 65" stroke="#f0a060" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+      <polygon points="213,63 217,57 220,64" fill="#f0a060"/>
+      <text x="50" y="70" fill="#f060c8" font-size="10" font-family="monospace">DRIVE KNEE</text>
+      <text x="50" y="83" fill="#888898" font-size="10" font-family="monospace">IN &amp; SWITCH</text>
+      <text x="50" y="100" fill="#f0a060" font-size="10" font-family="monospace">20 SEC FAST</text>
+    </svg>`
+  },
+  'Dead Bug': {
+    tags: ['Core', 'Lower Back', 'Coordination'],
+    sets: '3 × 6 each side',
+    benefit: 'Builds deep core stability and teaches lumbar spine control. Best exercise for lower back health.',
+    cues: ['Lie on back, arms straight up toward ceiling', 'Bring knees to 90° — like a table position', 'Press lower back flat into the floor — maintain throughout', 'Slowly lower opposite arm and leg toward floor', 'Keep lower back flat — this is the whole point', 'Return to start, alternate sides. Go slow.'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="130" x2="280" y2="130" stroke="#2a2a38" stroke-width="3"/>
+      <circle cx="90" cy="70" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <line x1="90" y1="80" x2="130" y2="85" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="130" y1="85" x2="130" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="130" y1="85" x2="155" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="155" y1="90" x2="170" y2="112" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arms up -->
+      <line x1="115" y1="80" x2="95" y2="55" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="115" y1="80" x2="140" y2="58" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- extending arm -->
+      <line x1="95" y1="55" x2="65" y2="40" stroke="#f060c8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,2"/>
+      <!-- extending leg -->
+      <line x1="170" y1="112" x2="210" y2="128" stroke="#f060c8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,2"/>
+      <text x="220" y="70" fill="#f060c8" font-size="10" font-family="monospace">EXTEND</text>
+      <text x="220" y="83" fill="#888898" font-size="10" font-family="monospace">opposite</text>
+      <text x="220" y="96" fill="#888898" font-size="10" font-family="monospace">arm + leg</text>
+    </svg>`
+  },
   'Downward Dog': {
     tags: ['Hamstrings', 'Calves', 'Shoulders'],
-    sets: '3 × 30 sec hold',
-    benefit: 'Stretches the entire posterior chain while building shoulder stability. Signature yoga pose for overall flexibility.',
-    cues: ['Start on all-fours', 'Tuck toes, press hands into floor, lift knees off ground', 'Push hips up and back to form an inverted V', 'Try to press heels toward floor (they may not touch — that is fine)', 'Pedal heels alternately to warm up calves', 'Hold 30 sec — with each exhale, push hips higher'],
+    sets: '2 × 30 sec',
+    benefit: 'Stretches the entire posterior chain while building shoulder stability.',
+    cues: ['Start on all-fours', 'Tuck toes, press hands into floor, lift knees', 'Push hips up and back to form an inverted V', 'Try to press heels toward floor', 'Pedal heels alternately to warm up calves', 'Hold 30 sec — with each exhale push hips higher'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
@@ -1366,38 +1343,62 @@ const EXERCISES = {
       <text x="40" y="83" fill="#888898" font-size="9" font-family="monospace">inverted V</text>
     </svg>`
   },
-  'Butterfly Stretch': {
-    tags: ['Groin', 'Inner Thigh', 'Flexibility'],
-    sets: '2 × 60 sec',
-    benefit: 'Opens inner thighs and groin. Critical for cross-legged sitting and floor sitting that becomes harder with age.',
-    cues: ['Sit on floor, bring soles of feet together in front of you', 'Hold feet with both hands', 'Let knees fall outward toward floor', 'Gently press knees down with elbows for deeper stretch', 'Sit tall — spine long, not hunched', 'Breathe and relax deeper each exhale — 60 seconds minimum'],
+  'Pigeon Pose': {
+    tags: ['Hips', 'Glutes', 'Flexibility'],
+    sets: '2 × 45 sec each side',
+    benefit: 'Opens deep hip rotators. Critical for people who sit all day. Improves squat depth.',
+    cues: ['From all-fours, bring right knee toward right hand', 'Extend left leg straight back behind you', 'Lower hips toward the floor', 'Fold torso forward over front leg for deeper stretch', 'Breathe slowly — this one is intense, that is okay', 'Hold 45 sec, switch sides'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="150" cy="45" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <circle cx="155" cy="55" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
       <!-- torso -->
-      <line x1="150" y1="55" x2="150" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- arms to feet -->
-      <line x1="150" y1="75" x2="150" y2="115" stroke="#c8f060" stroke-width="2" stroke-linecap="round"/>
-      <!-- butterfly legs -->
-      <path d="M 150 90 Q 110 100 90 125" stroke="#c8f060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M 150 90 Q 190 100 210 125" stroke="#c8f060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <!-- feet together -->
-      <circle cx="150" cy="118" r="6" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <!-- knees arrows down -->
-      <path d="M 105 110 L 105 125" stroke="#f0a060" stroke-width="1.5" fill="none"/>
-      <polygon points="102,123 105,130 108,123" fill="#f0a060"/>
-      <path d="M 195 110 L 195 125" stroke="#f0a060" stroke-width="1.5" fill="none"/>
-      <polygon points="192,123 195,130 198,123" fill="#f0a060"/>
-      <text x="35" y="75" fill="#f0a060" font-size="10" font-family="monospace">KNEES</text>
-      <text x="35" y="88" fill="#f0a060" font-size="10" font-family="monospace">DOWN</text>
+      <line x1="155" y1="65" x2="155" y2="95" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arms forward -->
+      <line x1="155" y1="78" x2="105" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="155" y1="78" x2="205" y2="108" stroke="#888898" stroke-width="2" stroke-linecap="round"/>
+      <!-- front bent leg -->
+      <line x1="155" y1="95" x2="125" y2="115" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="125" y1="115" x2="140" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- back extended leg -->
+      <line x1="155" y1="95" x2="210" y2="120" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="210" y1="120" x2="250" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- hip area highlight -->
+      <circle cx="148" cy="108" r="8" fill="none" stroke="#f0a060" stroke-width="1.5" opacity="0.6"/>
+      <text x="48" y="78" fill="#f0a060" font-size="10" font-family="monospace">HIP OPENS</text>
+      <text x="48" y="91" fill="#888898" font-size="9" font-family="monospace">deep stretch</text>
+    </svg>`
+  },
+  'Seated Forward Fold': {
+    tags: ['Hamstrings', 'Lower Back', 'Flexibility'],
+    sets: '2 × 30 sec',
+    benefit: 'Stretches hamstrings and lower back — essential for achieving a deep squat.',
+    cues: ['Sit on floor, legs straight ahead', 'Flex feet toward you', 'Hinge at hips — reach toward toes', 'Go as far as comfortable — use a towel if needed', 'Breathe out and relax deeper each exhale', 'Spine stays long — no excessive rounding'],
+    svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="150" fill="#1c1c26"/>
+      <line x1="20" y1="128" x2="280" y2="128" stroke="#2a2a38" stroke-width="3"/>
+      <circle cx="80" cy="60" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <!-- torso reaching forward -->
+      <line x1="80" y1="70" x2="120" y2="85" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arms reaching -->
+      <line x1="100" y1="78" x2="200" y2="100" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="100" y1="78" x2="200" y2="115" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- legs -->
+      <line x1="120" y1="85" x2="120" y2="128" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="120" y1="85" x2="240" y2="115" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="240" y1="115" x2="260" y2="128" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- toes target -->
+      <circle cx="200" cy="108" r="5" fill="none" stroke="#f0a060" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="200" y="140" fill="#f0a060" font-size="9" text-anchor="middle" font-family="monospace">REACH</text>
+      <text x="30" y="105" fill="#60c8f0" font-size="10" font-family="monospace">HINGE</text>
+      <text x="30" y="118" fill="#888898" font-size="9" font-family="monospace">at hips</text>
     </svg>`
   },
   'Active Rest Walk': {
     tags: ['Cardio', 'Recovery', 'Low Impact'],
     sets: '20 min moderate pace',
-    benefit: 'Active recovery improves blood flow to muscles, burns additional calories, and builds aerobic base without fatigue.',
-    cues: ['Walk at a pace where you can hold a conversation', 'Aim for 20–30 minutes continuously', 'Swing arms naturally — do not hunch', 'Focus on heel-to-toe foot strike', 'Optional: listen to a podcast or music', 'This is NOT intense — it is restorative'],
+    benefit: 'Active recovery improves blood flow, burns calories, and builds aerobic base without fatigue.',
+    cues: ['Walk at a pace where you can hold a conversation', 'Aim for 20 minutes continuously', 'Swing arms naturally — do not hunch', 'Focus on heel-to-toe foot strike', 'Optional: listen to a podcast', 'This is restorative — not intense'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
       <line x1="20" y1="130" x2="280" y2="130" stroke="#2a2a38" stroke-width="3"/>
@@ -1419,46 +1420,45 @@ const EXERCISES = {
       <text x="210" y="97" fill="#60c8f0" font-size="11" font-family="monospace">20 MIN</text>
     </svg>`
   },
-  'Squat Hold (Deep)': {
-    tags: ['Flexibility', 'Hips', 'Ankles'],
-    sets: '3 × 30 sec hold',
-    benefit: 'The most direct path to regaining deep squat ability. Builds mobility in hips, knees, and ankles simultaneously.',
-    cues: ['Stand feet slightly wider than shoulder-width, toes pointed out 30–45°', 'Lower into squat as deep as possible', 'Use a doorframe or wall for balance if needed — that is okay', 'Keep heels on floor — if impossible, elevate slightly on books/plates', 'Chest tall, elbows press knees out gently', 'Hold — breathe deeply, relax into it. Each week you will go deeper.'],
+  'Push-Up': {
+    tags: ['Chest', 'Core', 'Triceps'],
+    sets: '3 × 10',
+    benefit: 'The king of upper body calisthenics. Develops chest, shoulders, triceps, and core stability.',
+    cues: ['Hands slightly wider than shoulder-width', 'Body in perfect straight line from head to heel', 'Lower until chest nearly touches floor — 3 count down', 'Push explosively back to top', 'Elbows track at ~45° from torso (not flared)', 'Squeeze glutes and abs throughout'],
     svg: `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="150" fill="#1c1c26"/>
-      <line x1="20" y1="135" x2="280" y2="135" stroke="#2a2a38" stroke-width="3"/>
-      <circle cx="150" cy="50" r="10" fill="none" stroke="#c8f060" stroke-width="2"/>
-      <line x1="150" y1="60" x2="150" y2="90" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- arms forward for balance -->
-      <line x1="150" y1="75" x2="120" y2="68" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="150" y1="75" x2="180" y2="68" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- deep squat legs -->
-      <line x1="150" y1="90" x2="120" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="120" y1="108" x2="105" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="150" y1="90" x2="180" y2="108" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="180" y1="108" x2="195" y2="135" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- depth arrow -->
-      <path d="M 150 60 L 150 90" stroke="#f0a060" stroke-width="1.5" stroke-dasharray="3,3"/>
-      <polygon points="147,92 150,99 153,92" fill="#f0a060"/>
-      <text x="215" y="75" fill="#f0a060" font-size="10" font-family="monospace">DEEP</text>
-      <text x="215" y="88" fill="#c8f060" font-size="10" font-family="monospace">HOLD</text>
-      <text x="215" y="106" fill="#60c8f0" font-size="11" font-family="monospace">30 SEC</text>
+      <line x1="20" y1="125" x2="280" y2="125" stroke="#2a2a38" stroke-width="3"/>
+      <circle cx="180" cy="50" r="12" fill="none" stroke="#c8f060" stroke-width="2"/>
+      <line x1="180" y1="62" x2="180" y2="95" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="180" y1="75" x2="225" y2="88" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="225" cy="88" r="4" fill="#c8f060"/>
+      <line x1="180" y1="75" x2="135" y2="88" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="135" cy="88" r="4" fill="#c8f060"/>
+      <line x1="180" y1="95" x2="195" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="195" y1="125" x2="210" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="180" y1="95" x2="165" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="165" y1="125" x2="150" y2="125" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 180 75 L 180 110" stroke="#60c8f0" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+      <polygon points="177,112 180,119 183,112" fill="#60c8f0"/>
+      <text x="30" y="60" fill="#c8f060" font-size="11" font-family="monospace">STRAIGHT</text>
+      <text x="30" y="73" fill="#888898" font-size="10" font-family="monospace">BODY LINE</text>
+      <text x="30" y="95" fill="#60c8f0" font-size="11" font-family="monospace">3 × 10</text>
     </svg>`
-  }
+  },
 };
 
 // ── WEEK SCHEDULE ─────────────────────────────────────────────────────────────
 
 const WEEK = [
   {
-    day: 'MON', num: '01', name: 'Upper Body + Core',
+    day: 'MON', num: '01', name: 'Strength + Core',
     type: 'strength', badge: 'badge-strength', badgeLabel: 'Strength',
-    duration: '40 min',
+    duration: '30 min', isRest: false,
     exercises: [
       { name: 'Jumping Jacks', detail: 'Warm-up · Full body', sets: '2 × 30 sec' },
-      { name: 'Wall Push-Up', detail: 'Chest · Shoulders · Beginner', sets: '3 × 12' },
-      { name: 'Glute Bridge', detail: 'Glutes · Lower Back', sets: '3 × 15' },
-      { name: 'Dead Bug', detail: 'Core · Spine Stability', sets: '3 × 8 each' },
+      { name: 'Wall Push-Up', detail: 'Chest · Shoulders', sets: '3 × 12' },
+      { name: 'Bodyweight Squat', detail: 'Legs · Glutes', sets: '3 × 12' },
+      { name: 'Glute Bridge', detail: 'Glutes · Lower Back', sets: '3 × 12' },
       { name: 'Plank', detail: 'Core · Posture', sets: '3 × 20 sec' },
       { name: 'Cat-Cow Stretch', detail: 'Cool-down · Spine', sets: '10 cycles' },
     ]
@@ -1466,71 +1466,66 @@ const WEEK = [
   {
     day: 'TUE', num: '02', name: 'Mobility + Flexibility',
     type: 'mobility', badge: 'badge-mobility', badgeLabel: 'Mobility',
-    duration: '25 min',
+    duration: '25 min', isRest: false,
     exercises: [
       { name: 'Cat-Cow Stretch', detail: 'Spine · Warm-up', sets: '10 cycles' },
-      { name: 'World\'s Greatest Stretch', detail: 'Full Body · Hips · Thoracic', sets: '5 each side' },
-      { name: 'Hip Flexor Lunge Stretch', detail: 'Hips · Posture Fix', sets: '3 × 30 sec' },
-      { name: 'Seated Forward Fold', detail: 'Hamstrings · Lower Back', sets: '3 × 30 sec' },
-      { name: 'Butterfly Stretch', detail: 'Groin · Inner Thigh', sets: '2 × 60 sec' },
-      { name: 'Squat Hold (Deep)', detail: 'Flexibility Goal', sets: '3 × 30 sec' },
+      { name: 'World\'s Greatest Stretch', detail: 'Full Body · Hips', sets: '4 each side' },
+      { name: 'Hip Flexor Lunge Stretch', detail: 'Hips · Posture Fix', sets: '2 × 30 sec' },
+      { name: 'Butterfly Stretch', detail: 'Groin · Floor sitting', sets: '2 × 45 sec' },
+      { name: 'Squat Hold (Deep)', detail: 'Flexibility Goal', sets: '2 × 30 sec' },
     ]
   },
   {
-    day: 'WED', num: '03', name: 'Lower Body + Stamina',
+    day: 'WED', num: '03', name: 'Full Body Circuit',
     type: 'full', badge: 'badge-full', badgeLabel: 'Full Body',
-    duration: '40 min',
-    exercises: [
-      { name: 'Jumping Jacks', detail: 'Warm-up', sets: '2 × 30 sec' },
-      { name: 'Bodyweight Squat', detail: 'Legs · Glutes · Flexibility', sets: '3 × 15' },
-      { name: 'Glute Bridge', detail: 'Glutes · Lower Back', sets: '3 × 15' },
-      { name: 'Mountain Climbers', detail: 'Cardio · Core · Stamina', sets: '3 × 20 sec' },
-      { name: 'Superman Hold', detail: 'Lower Back · Posture', sets: '3 × 10' },
-      { name: 'Pigeon Pose', detail: 'Cool-down · Hip Flexors', sets: '2 × 45 sec' },
-    ]
-  },
-  {
-    day: 'THU', num: '04', name: 'Active Recovery',
-    type: 'cardio', badge: 'badge-cardio', badgeLabel: 'Active Rest',
-    duration: '20 min',
-    exercises: [
-      { name: 'Active Rest Walk', detail: 'Low impact · Stamina base', sets: '20 min' },
-      { name: 'Cat-Cow Stretch', detail: 'Spine health · Daily', sets: '10 cycles' },
-      { name: 'Butterfly Stretch', detail: 'Hip opener', sets: '2 × 60 sec' },
-    ]
-  },
-  {
-    day: 'FRI', num: '05', name: 'Full Body + Posture',
-    type: 'full', badge: 'badge-full', badgeLabel: 'Full Body',
-    duration: '45 min',
+    duration: '30 min', isRest: false,
     exercises: [
       { name: 'Jumping Jacks', detail: 'Warm-up', sets: '2 × 30 sec' },
       { name: 'Knee Push-Up', detail: 'Chest · Shoulders', sets: '3 × 10' },
-      { name: 'Bodyweight Squat', detail: 'Legs · Glutes', sets: '3 × 15' },
+      { name: 'Bodyweight Squat', detail: 'Legs · Glutes', sets: '3 × 12' },
       { name: 'Superman Hold', detail: 'Lower Back · Posture', sets: '3 × 10' },
-      { name: 'Plank', detail: 'Core · Hold', sets: '3 × 20 sec' },
-      { name: 'Mountain Climbers', detail: 'Cardio finisher', sets: '3 × 20 sec' },
-      { name: 'Downward Dog', detail: 'Cool-down · Full stretch', sets: '3 × 30 sec' },
+      { name: 'Mountain Climbers', detail: 'Cardio · Core', sets: '2 × 20 sec' },
+      { name: 'Cat-Cow Stretch', detail: 'Cool-down', sets: '10 cycles' },
     ]
   },
   {
-    day: 'SAT', num: '06', name: 'Deep Flexibility',
+    day: 'THU', num: '04', name: 'Active Recovery Walk',
+    type: 'cardio', badge: 'badge-cardio', badgeLabel: 'Active Rest',
+    duration: '20 min', isRest: false,
+    exercises: [
+      { name: 'Active Rest Walk', detail: 'Low impact · Stamina base', sets: '20 min' },
+      { name: 'Cat-Cow Stretch', detail: 'Spine health · Daily', sets: '10 cycles' },
+    ]
+  },
+  {
+    day: 'FRI', num: '05', name: 'Strength + Posture',
+    type: 'full', badge: 'badge-full', badgeLabel: 'Full Body',
+    duration: '30 min', isRest: false,
+    exercises: [
+      { name: 'Jumping Jacks', detail: 'Warm-up', sets: '2 × 30 sec' },
+      { name: 'Wall Push-Up', detail: 'Chest · Shoulders', sets: '3 × 12' },
+      { name: 'Glute Bridge', detail: 'Glutes · Lower Back', sets: '3 × 12' },
+      { name: 'Dead Bug', detail: 'Core · Spine Stability', sets: '3 × 6 each' },
+      { name: 'Superman Hold', detail: 'Lower Back · Posture', sets: '3 × 10' },
+      { name: 'Downward Dog', detail: 'Cool-down · Full stretch', sets: '2 × 30 sec' },
+    ]
+  },
+  {
+    day: 'SAT', num: '06', name: 'Flexibility Focus',
     type: 'mobility', badge: 'badge-mobility', badgeLabel: 'Mobility',
-    duration: '30 min',
+    duration: '25 min', isRest: false,
     exercises: [
       { name: 'Cat-Cow Stretch', detail: 'Spine warm-up', sets: '10 cycles' },
-      { name: 'Downward Dog', detail: 'Posterior chain', sets: '3 × 30 sec' },
-      { name: 'World\'s Greatest Stretch', detail: 'Full body', sets: '5 each side' },
       { name: 'Pigeon Pose', detail: 'Deep hip opener', sets: '2 × 45 sec' },
+      { name: 'Seated Forward Fold', detail: 'Hamstrings · Lower Back', sets: '2 × 30 sec' },
       { name: 'Squat Hold (Deep)', detail: 'Flexibility goal', sets: '3 × 30 sec' },
-      { name: 'Butterfly Stretch', detail: 'Groin · Floor sitting', sets: '2 × 60 sec' },
+      { name: 'Butterfly Stretch', detail: 'Groin · Floor sitting', sets: '2 × 45 sec' },
     ]
   },
   {
     day: 'SUN', num: '07', name: 'Full Rest Day',
     type: 'rest', badge: 'badge-rest', badgeLabel: 'Rest',
-    duration: null,
-    isRest: true,
+    duration: null, isRest: true,
     exercises: []
   }
 ];
