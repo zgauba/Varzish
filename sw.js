@@ -1,5 +1,5 @@
-// FitZee Service Worker — v9: fixed images (90/90, dead bug, wall angels, walk) + resistance band exercises
-const CACHE = 'fitzee-v9';
+// FitZee Service Worker — v10: all images regenerated in consistent masculine style
+const CACHE = 'fitzee-v10';
 
 const PRECACHE = [
   './',
