@@ -472,7 +472,7 @@
   .close-modal {
     width: 100%;
     background: var(--surface2);
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     color: var(--text);
     padding: 14px;
     border-radius: 14px;
@@ -482,7 +482,7 @@
     margin-top: 20px;
     transition: all 0.2s;
   }
-  .close-modal:hover { border-color: var(--accent); color: var(--accent); }
+  .close-modal:hover { background: var(--surface); color: var(--accent); }
 
   /* ── REST DAY ── */
   .rest-content {
@@ -1869,10 +1869,16 @@ function renderWeekPlan() {
         <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.duration} ▾</div>
       </div>
       <div style="display:none;border-top:1px solid var(--border)">
-        ${day.exercises.map(ex => `
+        ${day.exercises.map(ex => ex.name === 'Rest' ? `
+          <div style="padding:16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s"
+               onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background=''"
+               onclick="openExerciseModal('Rest')">
+            <div style="font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;line-height:1.6">${ex.detail}</div>
+          </div>
+        ` : `
           <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s"
                onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background=''"
-               onclick="openExerciseModal('${ex.name.replace(/'/g, "\\'")}')">
+               onclick="openExerciseModal('${ex.name.replace(/'/g, "\\'")}')">  
             <span style="font-size:13px;color:var(--text);font-weight:500">${ex.name}</span>
             <span style="font-size:11px;color:var(--accent);font-family:'DM Mono',monospace">${ex.detail}</span>
           </div>
