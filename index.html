@@ -420,22 +420,20 @@
 
   .modal-subtitle { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
 
-  /* SVG illustration area */
+  /* Exercise illustration */
   .ex-illustration {
     width: 100%;
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 16px;
     margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    overflow: hidden;
   }
-
-  .ex-illustration svg {
+  .ex-illustration img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
   }
 
   .modal-section { margin-bottom: 16px; }
@@ -752,25 +750,6 @@
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
   }
-
-  /* Floating action */
-  .fab {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 48px; height: 48px;
-    background: var(--accent);
-    color: #0a0a0f;
-    border: none;
-    border-radius: 50%;
-    font-size: 22px;
-    cursor: pointer;
-    z-index: 150;
-    box-shadow: 0 4px 20px rgba(200,240,96,0.3);
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
 </style>
 </head>
 <body>
@@ -798,8 +777,8 @@
 
       <div class="hero">
         <div class="hero-tag">12-Week Program · Phase 1</div>
-        <h1>Build <em>Lean.</em><br>Move Free.<br>Feel Strong.</h1>
-        <p style="margin-top:10px">Calisthenics + mobility designed for your body, goals, and GLP-1 journey.</p>
+        <h1>Lose the Gut.<br>Build <em>Definition.</em><br>Move Free.</h1>
+        <p style="margin-top:10px">Calisthenics + mobility designed for your body, goals, and GLP-1 journey. 30 min a day. No gym needed.</p>
       </div>
 
       <div class="stats-row">
@@ -819,9 +798,9 @@
 
       <div class="section-label">Your Goals</div>
       <div class="goal-chips">
-        <div class="chip"><div class="chip-dot" style="background:var(--accent)"></div>Fat Loss</div>
-        <div class="chip"><div class="chip-dot" style="background:var(--accent2)"></div>Lean Muscle</div>
-        <div class="chip"><div class="chip-dot" style="background:var(--warm)"></div>Flexibility</div>
+        <div class="chip"><div class="chip-dot" style="background:var(--accent)"></div>Belly Fat Loss</div>
+        <div class="chip"><div class="chip-dot" style="background:var(--accent2)"></div>Muscle Definition</div>
+        <div class="chip"><div class="chip-dot" style="background:var(--warm)"></div>Deep Squat</div>
         <div class="chip"><div class="chip-dot" style="background:var(--accent3)"></div>Posture</div>
         <div class="chip"><div class="chip-dot" style="background:var(--danger)"></div>Stamina</div>
       </div>
@@ -829,16 +808,16 @@
       <div class="section-label">Program Strategy</div>
       <div class="info-card">
         <h3>Why This Works For You</h3>
-        <p>GLP-1 microdosing suppresses appetite and aids fat oxidation — but it also risks <strong style="color:var(--text)">muscle loss</strong> if protein intake and resistance training are insufficient. This program counteracts that directly: progressive calisthenics preserves and builds lean tissue while the caloric deficit does its job.</p>
+        <p>GLP-1 microdosing suppresses appetite and aids fat oxidation — but it also risks <strong style="color:var(--text)">muscle loss</strong> if protein intake and resistance training are insufficient. This program counteracts that directly: progressive calisthenics preserves and builds lean tissue while the caloric deficit burns the belly fat. Muscle definition appears as the fat comes off — these two goals work together, not against each other.</p>
       </div>
 
       <div class="info-card">
         <h3>Daily Time Commitment</h3>
         <ul>
-          <li><strong style="color:var(--text)">Strength/Full-body days:</strong> 35–45 min</li>
-          <li><strong style="color:var(--text)">Mobility days:</strong> 20–30 min</li>
-          <li><strong style="color:var(--text)">Active recovery:</strong> 20 min walk or light stretch</li>
-          <li><strong style="color:var(--text)">Rest day:</strong> Full rest or gentle walk</li>
+          <li><strong style="color:var(--text)">Strength/Full-body days:</strong> 30 min</li>
+          <li><strong style="color:var(--text)">Mobility days:</strong> 25 min</li>
+          <li><strong style="color:var(--text)">Active recovery:</strong> 20 min walk</li>
+          <li><strong style="color:var(--text)">Rest day:</strong> Full rest</li>
         </ul>
       </div>
 
@@ -858,81 +837,43 @@
           <div class="phase-seg future"></div>
           <div class="phase-seg future"></div>
         </div>
-        <ul style="margin-top:8px">
-          <li><strong style="color:var(--text)">Weeks 1–4 (Foundation):</strong> Build habit, activate muscles, improve flexibility baseline</li>
-          <li><strong style="color:var(--text)">Weeks 5–8 (Build):</strong> Add reps/sets, introduce harder progressions</li>
-          <li><strong style="color:var(--text)">Weeks 9–12 (Peak):</strong> Full intensity, visible definition, deep squat achieved</li>
+        <ul style="margin-top:10px">
+          <li><strong style="color:var(--text)">Phase 1 (Wks 1–4):</strong> Foundation — form, habit, baseline strength</li>
+          <li><strong style="color:var(--text)">Phase 2 (Wks 5–8):</strong> Build — add pulling, unilateral legs, more volume</li>
+          <li><strong style="color:var(--text)">Phase 3 (Wks 9–12):</strong> Peak — harder variations, longer holds, full definition</li>
         </ul>
       </div>
 
       <div class="info-card">
-        <h3>GLP-1 Notes</h3>
-        <p>On injection day (and day after): lighter activity is fine — skip strength if nauseous. Prioritize hitting <strong style="color:var(--text)">protein targets</strong> especially on low-appetite days. Nausea is temporary; muscle loss from skipping protein is not.</p>
+        <h3>What Changed in v2</h3>
+        <ul>
+          <li><strong style="color:var(--accent)">Added Door Towel Row</strong> — fixes the missing pulling movement for back definition</li>
+          <li><strong style="color:var(--accent)">Added Reverse Lunge</strong> — unilateral leg work for better definition in Phase 2+</li>
+          <li><strong style="color:var(--accent)">Added Glute Bridge March</strong> — progression from standard bridge in Phase 2+</li>
+          <li><strong style="color:var(--text)">Removed Wall Push-Up</strong> — replaced by Knee Push-Up as the true Phase 1 entry</li>
+          <li><strong style="color:var(--text)">All workouts capped at 30 min</strong> — realistic for a desk worker</li>
+          <li><strong style="color:var(--text)">Custom illustrations</strong> — uniform muscle-highlight images for every exercise</li>
+        </ul>
       </div>
-
     </div>
 
-    <!-- ══ WEEK PLAN PAGE ══ -->
+    <!-- ══ WEEK PAGE ══ -->
     <div class="page" id="page-week">
-      <div style="display:flex;gap:8px;margin-bottom:20px;">
-        <button onclick="switchPhase(1)" id="phase-btn-1" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 1<br><span style="font-size:11px;font-weight:400">Weeks 1–4</span></button>
-        <button onclick="switchPhase(2)" id="phase-btn-2" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 2<br><span style="font-size:11px;font-weight:400">Weeks 5–8</span></button>
-        <button onclick="switchPhase(3)" id="phase-btn-3" style="flex:1;padding:12px;border-radius:10px;border:none;font-weight:700;font-size:15px;cursor:pointer;">Phase 3<br><span style="font-size:11px;font-weight:400">Weeks 9–12</span></button>
-      </div>
-      <div id="phase-description" style="background:#1a1a1a;border-radius:10px;padding:12px;margin-bottom:16px;font-size:14px;color:#e0e0e0;"></div>
-      <div id="week-plan-content"></div>
-    </div>
-
-    <!-- ══ NUTRITION PAGE ══ -->
-    <div class="page" id="page-nutrition">
       <div class="hero" style="margin-bottom:20px">
-        <div class="hero-tag">Nutrition Protocol</div>
-        <h1 style="font-size:22px">Eat to <em>Build</em>,<br>Deficit to <em>Cut</em>.</h1>
-        <p style="margin-top:8px">High-protein, moderate carb. Aligned with South Asian food culture.</p>
+        <div class="hero-tag">Phase-Based Training</div>
+        <h1 style="font-size:22px">Your <em>Weekly</em><br>Program.</h1>
+        <p style="margin-top:8px">Select your current phase below. All days are 30 min or less.</p>
       </div>
 
-      <div class="section-label">Daily Macros</div>
-      <div class="info-card">
-        <h3>Calorie Target: ~1,800–2,000 kcal/day</h3>
-        <p style="margin-bottom:14px; font-size:12px">At 175 lbs, your TDEE (desk job, light activity) is ~2,400 kcal. A 400–600 kcal deficit drives ~0.5–1 lb/week loss while preserving muscle with adequate protein.</p>
-        <div class="macro-bar">
-          <div class="macro-label-row"><span class="macro-name">Protein</span><span class="macro-val">155–175g · 620–700 kcal</span></div>
-          <div class="macro-track"><div class="macro-fill" style="width:38%;background:var(--accent2)"></div></div>
-        </div>
-        <div class="macro-bar">
-          <div class="macro-label-row"><span class="macro-name">Carbs</span><span class="macro-val">180–200g · 720–800 kcal</span></div>
-          <div class="macro-track"><div class="macro-fill" style="width:43%;background:var(--warm)"></div></div>
-        </div>
-        <div class="macro-bar">
-          <div class="macro-label-row"><span class="macro-name">Fat</span><span class="macro-val">55–65g · 495–585 kcal</span></div>
-          <div class="macro-track"><div class="macro-fill" style="width:30%;background:var(--accent3)"></div></div>
-        </div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button id="phase-btn-1" onclick="switchPhase(1)" style="flex:1;padding:10px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;font-weight:600;transition:all 0.2s">Phase 1</button>
+        <button id="phase-btn-2" onclick="switchPhase(2)" style="flex:1;padding:10px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;font-weight:600;transition:all 0.2s">Phase 2</button>
+        <button id="phase-btn-3" onclick="switchPhase(3)" style="flex:1;padding:10px;border-radius:12px;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;font-weight:600;transition:all 0.2s">Phase 3</button>
       </div>
 
-      <div class="section-label">Best Protein Sources (South Asian-friendly)</div>
-      <div class="info-card">
-        <div class="food-item"><div class="food-emoji">🍗</div><div><div class="food-name">Chicken Breast / Tikka</div><div class="food-note">30g protein per 100g — season freely, avoid cream-heavy curries</div></div></div>
-        <div class="food-item"><div class="food-emoji">🥚</div><div><div class="food-name">Eggs (4–5/day)</div><div class="food-note">25–30g protein, affordable, versatile — anda bhurji is perfect</div></div></div>
-        <div class="food-item"><div class="food-emoji">🫘</div><div><div class="food-name">Lentils / Daal</div><div class="food-note">~18g protein per cooked cup — eat daily, pair with rice for complete amino profile</div></div></div>
-        <div class="food-item"><div class="food-emoji">🧀</div><div><div class="food-name">Greek Yogurt / Dahi</div><div class="food-note">17g protein per cup — use as dressing, raita, or snack</div></div></div>
-        <div class="food-item"><div class="food-emoji">🐟</div><div><div class="food-name">Fish (Salmon, Tilapia)</div><div class="food-note">25g+ per serving, high in omega-3 — reduces inflammation, aids recovery</div></div></div>
-        <div class="food-item"><div class="food-emoji">🫙</div><div><div class="food-name">Cottage Cheese / Paneer</div><div class="food-note">14g per 100g — great high-protein option for vegetarian meals</div></div></div>
-      </div>
+      <div id="phase-description" style="background:var(--surface);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:20px;font-size:13px;color:var(--muted);line-height:1.6"></div>
 
-      <div class="section-label">Sample Day</div>
-      <div class="info-card">
-        <h3>Meal Template</h3>
-        <div class="food-item"><div class="food-emoji">☀️</div><div><div class="food-name">Breakfast</div><div class="food-note">3 eggs + 1 cup dahi + handful of almonds. Or protein shake if appetite is low (GLP-1 day).</div></div></div>
-        <div class="food-item"><div class="food-emoji">🥗</div><div><div class="food-name">Lunch</div><div class="food-note">Daal + ½ cup rice + chicken or paneer + salad. No naan — swap for roti (1 piece).</div></div></div>
-        <div class="food-item"><div class="food-emoji">🍽️</div><div><div class="food-name">Dinner</div><div class="food-note">High-protein curry (chicken/fish) + sabzi + small portion rice. Load veggies.</div></div></div>
-        <div class="food-item"><div class="food-emoji">🥤</div><div><div class="food-name">Snacks (2x)</div><div class="food-note">Greek yogurt / boiled eggs / handful of nuts / protein shake if needed.</div></div></div>
-      </div>
-
-      <div class="section-label">Hydration</div>
-      <div class="info-card">
-        <h3>Water Intake</h3>
-        <p>Target 3–3.5L per day. GLP-1 increases dehydration risk. Start each morning with 500ml water before food. Hydration directly affects flexibility and joint health.</p>
-      </div>
+      <div id="week-plan-content"></div>
     </div>
 
     <!-- ══ POSTURE PAGE ══ -->
@@ -957,22 +898,22 @@
 
       <div class="section-label">Daily Desk Resets (do every 60-90 min)</div>
       <div class="posture-grid">
-        <div class="posture-card" onclick="showExerciseModal('Chin Tucks','Head Posture Fix','Sit tall. Pull chin straight back (not down). Hold 5 sec. Creates cervical retraction, combating forward head posture.',['Sit or stand tall with neutral spine','Gently pull chin straight back — not tucked down','Feel a gentle stretch at the back of your neck','Hold for 5 seconds','Release slowly, repeat 10 times','Do every 60–90 minutes at desk'],'Neck · Daily · 10 reps','3 × 10 reps')">
+        <div class="posture-card" onclick="openExerciseModal('Chin Tucks')">
           <div class="posture-icon">🧠</div>
           <div class="posture-title">Chin Tucks</div>
           <div class="posture-desc">Forward head reset. 10 reps × 5 sec hold.</div>
         </div>
-        <div class="posture-card" onclick="showExerciseModal('Wall Angels','Shoulder Mobility','Standing with back flat against wall, slide arms up and down in a snow-angel motion. Activates lower traps and opens chest.',['Stand with back, head, and butt flat against wall','Arms at 90° (goalpost position) — also against wall','Slowly slide arms up overhead, keeping contact with wall','Lower back down to start — controlled','If you cannot keep arms on wall, thats okay, go as far as possible','3 sets of 10 slow reps'],'Shoulders · Daily · 3 sets','3 × 10 reps')">
+        <div class="posture-card" onclick="openExerciseModal('Wall Angels')">
           <div class="posture-icon">🕊️</div>
           <div class="posture-title">Wall Angels</div>
           <div class="posture-desc">Opens chest, activates mid-back.</div>
         </div>
-        <div class="posture-card" onclick="showExerciseModal('Hip Flexor Stretch','Hip Decompression','Kneeling lunge position. Push hips forward gently. Essential for anyone who sits all day — unlocks lower back.',['Kneel on one knee (right knee down, left foot forward)','Keep torso upright — do not lean forward','Gently push hips forward until you feel stretch in front of right hip','Hold 30 seconds','Squeeze right glute slightly to deepen stretch','Switch sides, repeat 3x each'],'Hips · Daily · 3 × 30 sec','3 × 30 sec each side')">
+        <div class="posture-card" onclick="openExerciseModal('Hip Flexor Lunge Stretch')">
           <div class="posture-icon">🦵</div>
           <div class="posture-title">Hip Flexor Stretch</div>
           <div class="posture-desc">Undo sitting. Kneeling lunge hold.</div>
         </div>
-        <div class="posture-card" onclick="showExerciseModal('Thoracic Extension','Upper Back Opening','Use chair back edge. Sit at front of chair, hands behind head, gently arch upper back over the chair top. Opens thoracic spine.',['Sit at the edge of your chair','Clasp hands behind your head','Position the top of the chair back at your mid-upper spine','Gently arch backwards over the chair','Feel the stretch open your upper back','Hold 3–5 seconds, repeat 8–10 times — do not force it'],'Upper Back · Daily · 10 reps','10 reps × 3 sec hold')">
+        <div class="posture-card" onclick="openExerciseModal('Thoracic Extension')">
           <div class="posture-icon">🌿</div>
           <div class="posture-title">Thoracic Extension</div>
           <div class="posture-desc">Open upper back over chair edge.</div>
@@ -1027,6 +968,60 @@
       </div>
     </div>
 
+    <!-- ══ NUTRITION PAGE ══ -->
+    <div class="page" id="page-nutrition">
+      <div class="hero" style="margin-bottom:20px">
+        <div class="hero-tag">Fuel the Definition</div>
+        <h1 style="font-size:22px">Eat to <em>Preserve</em><br>Muscle.</h1>
+        <p style="margin-top:8px">High protein. Moderate deficit. South Asian-friendly.</p>
+      </div>
+
+      <div class="section-label">Daily Targets</div>
+      <div class="info-card">
+        <div class="macro-bar">
+          <div class="macro-label-row"><span class="macro-name">Calories</span><span class="macro-val">1,800–2,000 kcal (400–600 deficit)</span></div>
+          <div class="macro-track"><div class="macro-fill" style="width:100%;background:var(--accent)"></div></div>
+        </div>
+        <div class="macro-bar">
+          <div class="macro-label-row"><span class="macro-name">Protein</span><span class="macro-val">155–175g · 620–700 kcal</span></div>
+          <div class="macro-track"><div class="macro-fill" style="width:35%;background:var(--accent2)"></div></div>
+        </div>
+        <div class="macro-bar">
+          <div class="macro-label-row"><span class="macro-name">Carbs</span><span class="macro-val">180–200g · 720–800 kcal</span></div>
+          <div class="macro-track"><div class="macro-fill" style="width:43%;background:var(--warm)"></div></div>
+        </div>
+        <div class="macro-bar">
+          <div class="macro-label-row"><span class="macro-name">Fat</span><span class="macro-val">55–65g · 495–585 kcal</span></div>
+          <div class="macro-track"><div class="macro-fill" style="width:30%;background:var(--accent3)"></div></div>
+        </div>
+      </div>
+
+      <div class="section-label">Best Protein Sources (South Asian-friendly)</div>
+      <div class="info-card">
+        <div class="food-item"><div class="food-emoji">🍗</div><div><div class="food-name">Chicken Breast / Tikka</div><div class="food-note">30g protein per 100g — season freely, avoid cream-heavy curries</div></div></div>
+        <div class="food-item"><div class="food-emoji">🥚</div><div><div class="food-name">Eggs (4–5/day)</div><div class="food-note">25–30g protein, affordable, versatile — anda bhurji is perfect</div></div></div>
+        <div class="food-item"><div class="food-emoji">🫘</div><div><div class="food-name">Lentils / Daal</div><div class="food-note">~18g protein per cooked cup — eat daily, pair with rice for complete amino profile</div></div></div>
+        <div class="food-item"><div class="food-emoji">🧀</div><div><div class="food-name">Greek Yogurt / Dahi</div><div class="food-note">17g protein per cup — use as dressing, raita, or snack</div></div></div>
+        <div class="food-item"><div class="food-emoji">🐟</div><div><div class="food-name">Fish (Salmon, Tilapia)</div><div class="food-note">25g+ per serving, high in omega-3 — reduces inflammation, aids recovery</div></div></div>
+        <div class="food-item"><div class="food-emoji">🫙</div><div><div class="food-name">Cottage Cheese / Paneer</div><div class="food-note">14g per 100g — great high-protein option for vegetarian meals</div></div></div>
+      </div>
+
+      <div class="section-label">Sample Day</div>
+      <div class="info-card">
+        <h3>Meal Template</h3>
+        <div class="food-item"><div class="food-emoji">☀️</div><div><div class="food-name">Breakfast</div><div class="food-note">3 eggs + 1 cup dahi + handful of almonds. Or protein shake if appetite is low (GLP-1 day).</div></div></div>
+        <div class="food-item"><div class="food-emoji">🥗</div><div><div class="food-name">Lunch</div><div class="food-note">Daal + ½ cup rice + chicken or paneer + salad. No naan — swap for roti (1 piece).</div></div></div>
+        <div class="food-item"><div class="food-emoji">🍽️</div><div><div class="food-name">Dinner</div><div class="food-note">High-protein curry (chicken/fish) + sabzi + small portion rice. Load veggies.</div></div></div>
+        <div class="food-item"><div class="food-emoji">🥤</div><div><div class="food-name">Snacks (2x)</div><div class="food-note">Greek yogurt / boiled eggs / handful of nuts / protein shake if needed.</div></div></div>
+      </div>
+
+      <div class="section-label">Hydration</div>
+      <div class="info-card">
+        <h3>Water Intake</h3>
+        <p>Target 3–3.5L per day. GLP-1 increases dehydration risk. Start each morning with 500ml water before food. Hydration directly affects flexibility and joint health.</p>
+      </div>
+    </div>
+
   </div><!-- end content -->
 </div><!-- end shell -->
 
@@ -1073,392 +1068,630 @@
 </div>
 
 <script>
-// ── IMAGE MAP (verified against free-exercise-db exercises.json) ──────────────
-
-const BASE_IMG = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
+// ── LOCAL IMAGE MAP ────────────────────────────────────────────────────────────
+// All images are now hosted locally in /assets/ for reliability and consistency.
 
 const IMAGE_MAP = {
-  // ── Verified exact IDs from exercises.json ────────────────────────────────
-  "Push-Up":                  ["Pushups/0.jpg",                     "Pushups/1.jpg"],
-  "Bodyweight Squat":         ["Bodyweight_Squat/0.jpg",            "Bodyweight_Squat/1.jpg"],
-  "Squat Hold (Deep)":        ["Bodyweight_Squat/0.jpg",            "Bodyweight_Squat/1.jpg"],
-  "Glute Bridge":             ["Single_Leg_Glute_Bridge/0.jpg",     "Single_Leg_Glute_Bridge/1.jpg"], // only bodyweight glute bridge in DB
-  "Plank":                    ["Plank/0.jpg",                       "Plank/1.jpg"],
-  "Superman Hold":            ["Superman/0.jpg",                    "Superman/1.jpg"],
-  "Mountain Climbers":        ["Mountain_Climbers/0.jpg",           "Mountain_Climbers/1.jpg"],
-  "Dead Bug":                 ["Dead_Bug/0.jpg",                    "Dead_Bug/1.jpg"],
-  "Cat-Cow Stretch":          ["Cat_Stretch/0.jpg",                 "Cat_Stretch/1.jpg"],
-  "Seated Forward Fold":      ["Seated_Hamstring/0.jpg",            "Seated_Hamstring/1.jpg"],
-  "Hip Flexor Lunge Stretch": ["Kneeling_Hip_Flexor/0.jpg",         "Kneeling_Hip_Flexor/1.jpg"],
-  "90/90 Hip Stretch":        ["./assets/90hipstretch.PNG"],
-  "Bicycle Crunches":         ["Air_Bike/0.jpg",                    "Air_Bike/1.jpg"],
-  "World's Greatest Stretch": ["Worlds_Greatest_Stretch/0.jpg",     "Worlds_Greatest_Stretch/1.jpg"],
-  // ── Closest bodyweight/beginner alternatives ──────────────────────────────
-  "Jumping Jacks":            ["Star_Jump/0.jpg",               "Star_Jump/1.jpg"],       // Star Jump — beginner, body only
-  "Wall Push-Up":             ["Incline_Push-Up/0.jpg",         "Incline_Push-Up/1.jpg"], // Incline Push-Up — beginner, body only
-  "Active Rest Walk":         ["Trail_Running_Walking/0.jpg",   "Trail_Running_Walking/1.jpg"], // Trail Running/Walking — beginner, no equipment
-  // ── No DB match — local collage crops ────────────────────────────────────
-  "Downward Dog":             ["./assets/ex-downward-dog.png"],
-  "Butterfly Stretch":        ["./assets/ex-butterfly.png"],
-  "Pigeon Pose":              ["./assets/ex-pigeon.png"],
-  // ── Posture page — cropped from posture-collage.png ───────────────────────
-  "Chin Tucks":               ["./assets/ex-chin-tuck.png"],
-  "Wall Angels":              ["./assets/ex-wall-angels.png"],
-  "Hip Flexor Stretch":       ["./assets/ex-hip-flexor-posture.png"],
-  "Thoracic Extension":       ["./assets/ex-thoracic-extension.png"],
-  // ── No DB match, no image ─────────────────────────────────────────────────
-  "Knee Push-Up":             null,
+  'Knee Push-Up':             './assets/ex-knee-push-up.png',
+  'Push-Up':                  './assets/ex-push-up.png',
+  'Door Towel Row':           './assets/ex-door-towel-row.png',
+  'Bodyweight Squat':         './assets/ex-bodyweight-squat.png',
+  'Reverse Lunge':            './assets/ex-reverse-lunge.png',
+  'Glute Bridge':             './assets/ex-glute-bridge.png',
+  'Glute Bridge March':       './assets/ex-glute-bridge-march.png',
+  'Plank':                    './assets/ex-plank.png',
+  'Dead Bug':                 './assets/ex-dead-bug.png',
+  'Superman Hold':            './assets/ex-superman-hold.png',
+  'Mountain Climbers':        './assets/ex-mountain-climbers.png',
+  'Bicycle Crunches':         './assets/ex-bicycle-crunches.png',
+  'Cat-Cow Stretch':          './assets/ex-cat-cow-stretch.png',
+  "World's Greatest Stretch": './assets/ex-worlds-greatest-stretch.png',
+  'Hip Flexor Lunge Stretch': './assets/ex-hip-flexor-lunge-stretch.png',
+  'Butterfly Stretch':        './assets/ex-butterfly-stretch.png',
+  '90/90 Hip Stretch':        './assets/ex-90-90-hip-stretch.png',
+  'Pigeon Pose':              './assets/ex-pigeon-pose.png',
+  'Seated Forward Fold':      './assets/ex-seated-forward-fold.png',
+  'Downward Dog':             './assets/ex-downward-dog.png',
+  'Squat Hold (Deep)':        './assets/ex-squat-hold-deep.png',
+  'Wall Angels':              './assets/ex-wall-angels.png',
+  'Chin Tucks':               './assets/ex-chin-tuck.png',
+  'Thoracic Extension':       './assets/ex-thoracic-extension.png',
+  'Active Rest Walk':         './assets/ex-active-rest-walk.png',
 };
 
-// ── DATA ──────────────────────────────────────────────────────────────────────
+// ── EXERCISE DATA ─────────────────────────────────────────────────────────────
 
 const EXERCISES = {
-  'Jumping Jacks': {
-    tags: ['Cardio', 'Warm-Up', 'Full Body'],
-    images: ["Jumping_Jacks/0.jpg", "Jumping_Jacks/1.jpg"],
-    sets: '2 × 30 sec',
-    benefit: 'Simple cardio warm-up that elevates heart rate and loosens joints before strength work.',
-    cues: ['Stand with feet together, arms at sides', 'Jump feet out to shoulder-width while raising arms overhead', 'Jump feet back together, arms back down', 'Keep a light bounce — land softly on balls of feet', 'Maintain a steady rhythm', 'Can be done in place — no space needed'],
-  },
-  'Wall Push-Up': {
-    tags: ['Chest', 'Shoulders', 'Beginner'],
-    images: ["Push-Up_Wall/0.jpg", "Push-Up_Wall/1.jpg"],
-    sets: '3 × 12',
-    benefit: 'Entry-level push movement. Builds chest and shoulder endurance with low joint stress.',
-    cues: ['Stand arm\'s length from wall', 'Place hands shoulder-width on wall at chest height', 'Lower your chest to the wall in a controlled 3-count', 'Push back to start — squeeze chest at top', 'Keep core braced, body in a straight line', 'Progress to incline push-up when this feels easy'],
-  },
   'Knee Push-Up': {
-    tags: ['Chest', 'Shoulders', 'Beginner'],
-    images: ["Pushup_Modified/0.jpg", "Pushup_Modified/1.jpg"],
+    tags: ['Chest', 'Shoulders', 'Triceps'],
     sets: '3 × 10',
-    benefit: 'Modified push-up building chest, shoulder and tricep strength from the ground.',
-    cues: ['Start on hands and knees — hands slightly wider than shoulder-width', 'Lower chest to ground, elbows at ~45° angle from body', 'Push back up to start position', 'Keep hips in line — no sagging or raising', 'Breathe out on the push up', 'Progress to full push-up when 3×15 feels easy'],
+    benefit: 'Phase 1 push foundation. Builds chest, shoulder and tricep strength from the ground with reduced load.',
+    cues: [
+      'Start on hands and knees — hands slightly wider than shoulder-width',
+      'Lower chest to ground, elbows at ~45° angle from body',
+      'Push back up to start — squeeze chest at the top',
+      'Keep hips in line — no sagging or raising',
+      'Breathe out on the push up',
+      'Progress to full push-up when 3×15 feels easy',
+    ],
+  },
+  'Push-Up': {
+    tags: ['Chest', 'Core', 'Triceps'],
+    sets: '3 × 10',
+    benefit: 'The king of upper body calisthenics. Develops chest, shoulders, triceps, and core stability.',
+    cues: [
+      'Hands slightly wider than shoulder-width',
+      'Body in perfect straight line from head to heel',
+      'Lower until chest nearly touches floor — 3 count down',
+      'Push explosively back to top',
+      'Elbows track at ~45° from torso (not flared)',
+      'Squeeze glutes and abs throughout',
+    ],
+  },
+  'Door Towel Row': {
+    tags: ['Back', 'Biceps', 'Rear Delts'],
+    sets: '3 × 10',
+    benefit: 'The essential pulling movement. Targets lats, biceps, and rear delts — the muscles that create back definition and fix rounded shoulders.',
+    cues: [
+      'Loop a towel around a sturdy door handle at waist height',
+      'Hold both ends, step back until arms are extended, lean back at 45°',
+      'Feet hip-width apart, heels on floor, body in a straight line',
+      'Pull your chest toward the door, driving elbows back behind you',
+      'Squeeze your shoulder blades together at the top — hold 1 sec',
+      'Lower slowly back to start. The harder you lean back, the harder it gets.',
+    ],
   },
   'Bodyweight Squat': {
     tags: ['Legs', 'Glutes', 'Flexibility'],
-    images: ["Bodyweight_Squat/0.jpg", "Bodyweight_Squat/1.jpg"],
     sets: '3 × 12',
     benefit: 'Builds lower body strength and begins the journey to a full deep squat.',
-    cues: ['Stand feet shoulder-width apart, toes slightly out 30°', 'Arms forward for balance', 'Push hips back and down — chest stays proud', 'Lower until thighs parallel or as low as comfortable', 'Drive through heels to stand — squeeze glutes at top', 'Work toward deeper range each week'],
+    cues: [
+      'Stand feet shoulder-width apart, toes slightly out 30°',
+      'Arms forward for balance',
+      'Push hips back and down — chest stays proud',
+      'Lower until thighs parallel or as low as comfortable',
+      'Drive through heels to stand — squeeze glutes at top',
+      'Work toward deeper range each week',
+    ],
+  },
+  'Reverse Lunge': {
+    tags: ['Legs', 'Glutes', 'Balance'],
+    sets: '3 × 8 each side',
+    benefit: 'Unilateral leg work that builds quad and glute definition. Safer on knees than forward lunges and easier to balance.',
+    cues: [
+      'Stand tall, feet hip-width apart, hands on hips',
+      'Step one foot straight back — lower the rear knee toward the floor',
+      'Front knee stays at 90° directly over the front ankle',
+      'Keep torso upright — do not lean forward',
+      'Push through the front heel to return to standing',
+      'Alternate legs each rep, or complete all reps on one side first',
+    ],
   },
   'Glute Bridge': {
     tags: ['Glutes', 'Lower Back', 'Core'],
-    images: ["Glute_Bridge/0.jpg", "Glute_Bridge/1.jpg"],
     sets: '3 × 12',
     benefit: 'Activates dormant glutes from sitting. Relieves lower back pain and improves posture.',
-    cues: ['Lie on back, knees bent, feet flat on floor hip-width apart', 'Press feet into floor and squeeze glutes', 'Drive hips toward ceiling until body forms a straight line', 'Hold at top for 2 seconds — really squeeze', 'Lower slowly, do not touch floor between reps', 'Progression: single-leg glute bridge'],
+    cues: [
+      'Lie on back, knees bent, feet flat on floor hip-width apart',
+      'Press feet into floor and squeeze glutes',
+      'Drive hips toward ceiling until body forms a straight line',
+      'Hold at top for 2 seconds — really squeeze',
+      'Lower slowly, do not touch floor between reps',
+      'Progression: Glute Bridge March',
+    ],
+  },
+  'Glute Bridge March': {
+    tags: ['Glutes', 'Core', 'Stability'],
+    sets: '3 × 10 each side',
+    benefit: 'Progression from the standard bridge. Adds anti-rotation core challenge and single-leg glute demand for better definition.',
+    cues: [
+      'Get into a standard glute bridge — hips raised, body in a straight line',
+      'Brace your core hard — this is the key',
+      'Slowly lift one knee toward your chest without letting the hips drop or rotate',
+      'Hold for 2 seconds, lower the foot, then switch sides',
+      'If your hips drop or twist, reduce the range of motion',
+      'Think: keep the pelvis perfectly level throughout',
+    ],
   },
   'Plank': {
     tags: ['Core', 'Shoulders', 'Endurance'],
-    images: ["Plank/0.jpg", "Plank/1.jpg"],
     sets: '3 × 20 sec',
     benefit: 'Foundational core strength. Directly improves posture and spinal stability.',
-    cues: ['Forearms on floor, elbows under shoulders', 'Body in perfect straight line — head to heel', 'Squeeze abs, glutes, and quads simultaneously', 'Breathe steadily — do not hold breath', 'Hold the target time; rest 30 sec between sets', 'Progress: add 5 sec each week'],
-  },
-  'Cat-Cow Stretch': {
-    tags: ['Spine', 'Mobility', 'Lower Back'],
-    images: ["Cat_Stretch/0.jpg", "Cat_Stretch/1.jpg"],
-    sets: '10 slow cycles',
-    benefit: 'Lubricates the entire spine, reduces back stiffness from sitting.',
-    cues: ['Start on all-fours — wrists under shoulders, knees under hips', 'CAT: exhale, round back to ceiling, tuck chin and pelvis', 'COW: inhale, drop belly toward floor, lift head and tailbone', 'Move slowly — 3–4 seconds each position', 'Feel each vertebra in the movement', '10 full cycles morning and evening'],
-  },
-  'World\'s Greatest Stretch': {
-    tags: ['Full Body', 'Hips', 'Thoracic'],
-    images: ["World_Greatest_Stretch/0.jpg", "World_Greatest_Stretch/1.jpg"],
-    sets: '4 reps each side',
-    benefit: 'One exercise that opens hips, thoracic spine, and hamstrings simultaneously.',
-    cues: ['Step right foot forward into a lunge', 'Drop left knee to the floor', 'Place right hand inside right foot on the floor', 'Rotate left arm up toward ceiling, following with your gaze', 'Hold 2 sec at top, return hand to floor', 'Straighten front leg for hamstring stretch — hold 2 sec. That is 1 rep.'],
-  },
-  'Hip Flexor Lunge Stretch': {
-    tags: ['Hips', 'Posture', 'Flexibility'],
-    images: ["Hip_Flexors/0.jpg", "Hip_Flexors/1.jpg"],
-    sets: '2 × 30 sec each',
-    benefit: 'Targets the psoas — most shortened by sitting. Directly reduces lower back pain.',
-    cues: ['Kneel on right knee, left foot forward', 'Keep torso upright — do not lean forward', 'Push hips gently forward until stretch felt in front of right hip', 'Raise right arm overhead for deeper stretch', 'Squeeze right glute to deepen the stretch', 'Hold 30 seconds, breathe, switch sides'],
-  },
-  'Butterfly Stretch': {
-    images: ["Butterfly_Stretch/0.jpg", "Butterfly_Stretch/1.jpg"],
-    sets: "60 second hold × 2 rounds",
-    muscles: "Inner thighs, hip external rotators, groin",
     cues: [
-      "Sit with soles of feet pressed together, knees falling out to sides",
-      "Hold your feet and sit tall — do not round your lower back",
-      "Gently press knees toward floor using your elbows — never force it",
-      "If knees are very high, sit on a folded blanket to tilt pelvis forward",
-      "Do this daily — consistency matters more than how deep you go"
+      'Forearms on floor, elbows under shoulders',
+      'Body in perfect straight line — head to heel',
+      'Squeeze abs, glutes, and quads simultaneously',
+      'Breathe steadily — do not hold breath',
+      'Hold the target time; rest 30 sec between sets',
+      'Progress: add 5 sec each week',
     ],
   },
-  'Squat Hold (Deep)': {
-    tags: ['Flexibility', 'Hips', 'Ankles'],
-    images: ["Bodyweight_Squat/0.jpg", "Bodyweight_Squat/1.jpg"],
-    sets: '2–3 × 30 sec',
-    benefit: 'Most direct path to regaining deep squat ability. Builds mobility in hips, knees, and ankles.',
-    cues: ['Stand feet wider than shoulder-width, toes out 30–45°', 'Lower into squat as deep as possible', 'Use a doorframe for balance if needed', 'Keep heels on floor — elevate on books if impossible', 'Chest tall, elbows press knees out gently', 'Hold — breathe deeply, relax into it'],
+  'Dead Bug': {
+    tags: ['Core', 'Spine', 'Deep Abs'],
+    sets: '3 × 10 (5 per side)',
+    benefit: 'Trains the deep core (transverse abdominis) — the internal corset that flattens the stomach and protects the spine.',
+    cues: [
+      'Lie on back, arms pointing straight up, knees bent 90° lifted in the air',
+      'Press your lower back FLAT into the floor — this is the entire point',
+      'Slowly lower opposite arm and leg toward the floor without arching',
+      'If your back lifts off the floor, you have gone too far — reduce range',
+      'Return to start, then switch sides. That is 1 rep.',
+      'Best exercise for flattening the gut long-term — do it every session',
+    ],
   },
   'Superman Hold': {
     tags: ['Lower Back', 'Glutes', 'Posture'],
-    images: ["Superman/0.jpg", "Superman/1.jpg"],
     sets: '3 × 10 × 3 sec',
     benefit: 'Directly targets the posterior chain. Combats rounded back and strengthens lower back.',
-    cues: ['Lie face down, arms extended overhead', 'Simultaneously lift arms, chest, and legs off the floor', 'Squeeze glutes and entire back as you rise', 'Hold for 3 seconds at the top', 'Lower slowly, rest 1 second, repeat', 'Do not strain the neck — gaze at floor'],
+    cues: [
+      'Lie face down, arms extended overhead',
+      'Simultaneously lift arms, chest, and legs off the floor',
+      'Squeeze glutes and entire back as you rise',
+      'Hold for 3 seconds at the top',
+      'Lower slowly, rest 1 second, repeat',
+      'Do not strain the neck — gaze at floor',
+    ],
   },
   'Mountain Climbers': {
     tags: ['Cardio', 'Core', 'Stamina'],
-    images: ["Mountain_Climber/0.jpg", "Mountain_Climber/1.jpg"],
     sets: '2 × 20 sec',
     benefit: 'Elevates heart rate while building core strength. Key for improving cardiovascular stamina.',
-    cues: ['Start in high push-up position', 'Drive right knee toward chest quickly', 'Immediately switch — left knee in as right extends', 'Maintain plank position — hips level', 'Speed: moderate and controlled', 'Breathe rhythmically throughout'],
-  },
-  'Dead Bug': {
-    images: ["Dead_Bug/0.jpg", "Dead_Bug/1.jpg"],
-    sets: "3 sets × 10 reps (5 per side)",
-    muscles: "Deep core (transverse abdominis), lower back stabilizers",
     cues: [
-      "Lie on back, arms pointing straight up, knees bent 90° lifted in the air",
-      "Press your lower back FLAT into the floor — this is the entire point",
-      "Slowly lower opposite arm and leg toward the floor without arching",
-      "If your back lifts off the floor, you've gone too far — reduce range",
-      "Best exercise for flattening the gut long-term — trains the deep core"
+      'Start in high push-up position',
+      'Drive right knee toward chest quickly',
+      'Immediately switch — left knee in as right extends',
+      'Maintain plank position — hips level',
+      'Speed: moderate and controlled',
+      'Breathe rhythmically throughout',
+    ],
+  },
+  'Bicycle Crunches': {
+    tags: ['Obliques', 'Core', 'Abs'],
+    sets: '3 × 20 (10 per side)',
+    benefit: 'Targets the obliques and rectus abdominis. Key for creating the V-taper and visible core definition.',
+    cues: [
+      'Lie on back, hands loosely behind head — do not pull your neck',
+      'Bring right elbow toward left knee while extending right leg straight',
+      'Rotate through the torso, not just the elbow',
+      'Keep lower back pressed flat into the floor the entire time',
+      'Slow controlled reps beat fast sloppy ones — quality over speed',
+    ],
+  },
+  'Cat-Cow Stretch': {
+    tags: ['Spine', 'Mobility', 'Lower Back'],
+    sets: '10 slow cycles',
+    benefit: 'Lubricates the entire spine, reduces back stiffness from sitting.',
+    cues: [
+      'Start on all-fours — wrists under shoulders, knees under hips',
+      'CAT: exhale, round back to ceiling, tuck chin and pelvis',
+      'COW: inhale, drop belly toward floor, lift head and tailbone',
+      'Move slowly — 3–4 seconds each position',
+      'Feel each vertebra in the movement',
+      '10 full cycles morning and evening',
+    ],
+  },
+  "World's Greatest Stretch": {
+    tags: ['Full Body', 'Hips', 'Thoracic'],
+    sets: '4 reps each side',
+    benefit: 'One exercise that opens hips, thoracic spine, and hamstrings simultaneously.',
+    cues: [
+      'Step right foot forward into a lunge',
+      'Drop left knee to the floor',
+      'Place right hand inside right foot on the floor',
+      'Rotate left arm up toward ceiling, following with your gaze',
+      'Hold 2 sec at top, return hand to floor',
+      'Straighten front leg for hamstring stretch — hold 2 sec. That is 1 rep.',
+    ],
+  },
+  'Hip Flexor Lunge Stretch': {
+    tags: ['Hips', 'Posture', 'Flexibility'],
+    sets: '2 × 30 sec each',
+    benefit: 'Targets the psoas — most shortened by sitting. Directly reduces lower back pain.',
+    cues: [
+      'Kneel on right knee, left foot forward',
+      'Keep torso upright — do not lean forward',
+      'Push hips gently forward until stretch felt in front of right hip',
+      'Raise right arm overhead for deeper stretch',
+      'Squeeze right glute to deepen the stretch',
+      'Hold 30 seconds, breathe, switch sides',
+    ],
+  },
+  'Butterfly Stretch': {
+    tags: ['Inner Thighs', 'Hips', 'Groin'],
+    sets: '60 sec hold × 2',
+    benefit: 'Opens inner thighs and hip external rotators. Essential for comfortable cross-legged sitting.',
+    cues: [
+      'Sit with soles of feet pressed together, knees falling out to sides',
+      'Hold your feet and sit tall — do not round your lower back',
+      'Gently press knees toward floor using your elbows — never force it',
+      'If knees are very high, sit on a folded blanket to tilt pelvis forward',
+      'Do this daily — consistency matters more than how deep you go',
+    ],
+  },
+  '90/90 Hip Stretch': {
+    tags: ['Hip Rotators', 'Piriformis', 'Glutes'],
+    sets: '45 sec each side × 2',
+    benefit: 'The number one drill for achieving comfortable cross-legged floor sitting.',
+    cues: [
+      'Sit with front leg bent 90° in front of you, rear leg bent 90° out to the side',
+      'Sit tall — do not collapse or lean into the hip',
+      'Lean forward over your front shin to deepen the stretch',
+      'This is the #1 drill for cross-legged sitting comfort — do it daily',
+      'Switch sides and repeat',
+    ],
+  },
+  'Pigeon Pose': {
+    tags: ['Hips', 'Glutes', 'Flexibility'],
+    sets: '2 × 45 sec each side',
+    benefit: 'Opens deep hip rotators. Critical for people who sit all day. Improves squat depth.',
+    cues: [
+      'From all-fours, bring right knee toward right hand',
+      'Extend left leg straight back behind you',
+      'Lower hips toward the floor',
+      'Fold torso forward over front leg for deeper stretch',
+      'Breathe slowly — this one is intense, that is okay',
+      'Hold 45 sec, switch sides',
+    ],
+  },
+  'Seated Forward Fold': {
+    tags: ['Hamstrings', 'Lower Back', 'Flexibility'],
+    sets: '2 × 30 sec',
+    benefit: 'Stretches hamstrings and lower back — essential for achieving a deep squat.',
+    cues: [
+      'Sit on floor, legs straight ahead',
+      'Flex feet toward you',
+      'Hinge at hips — reach toward toes',
+      'Go as far as comfortable — use a towel if needed',
+      'Breathe out and relax deeper each exhale',
+      'Spine stays long — no excessive rounding',
     ],
   },
   'Downward Dog': {
     tags: ['Hamstrings', 'Calves', 'Shoulders'],
-    images: ["Downward_Dog/0.jpg", "Downward_Dog/1.jpg"],
     sets: '2 × 30 sec',
     benefit: 'Stretches the entire posterior chain while building shoulder stability.',
-    cues: ['Start on all-fours', 'Tuck toes, press hands into floor, lift knees', 'Push hips up and back to form an inverted V', 'Try to press heels toward floor', 'Pedal heels alternately to warm up calves', 'Hold 30 sec — with each exhale push hips higher'],
+    cues: [
+      'Start on all-fours',
+      'Tuck toes, press hands into floor, lift knees',
+      'Push hips up and back to form an inverted V',
+      'Try to press heels toward floor',
+      'Pedal heels alternately to warm up calves',
+      'Hold 30 sec — with each exhale push hips higher',
+    ],
   },
-  'Pigeon Pose': {
-    tags: ['Hips', 'Glutes', 'Flexibility'],
-    images: ["Pigeon_Stretch/0.jpg", "Pigeon_Stretch/1.jpg"],
-    sets: '2 × 45 sec each side',
-    benefit: 'Opens deep hip rotators. Critical for people who sit all day. Improves squat depth.',
-    cues: ['From all-fours, bring right knee toward right hand', 'Extend left leg straight back behind you', 'Lower hips toward the floor', 'Fold torso forward over front leg for deeper stretch', 'Breathe slowly — this one is intense, that is okay', 'Hold 45 sec, switch sides'],
-  },
-  'Seated Forward Fold': {
-    tags: ['Hamstrings', 'Lower Back', 'Flexibility'],
-    images: ["Seated_Hamstring/0.jpg", "Seated_Hamstring/1.jpg"],
-    sets: '2 × 30 sec',
-    benefit: 'Stretches hamstrings and lower back — essential for achieving a deep squat.',
-    cues: ['Sit on floor, legs straight ahead', 'Flex feet toward you', 'Hinge at hips — reach toward toes', 'Go as far as comfortable — use a towel if needed', 'Breathe out and relax deeper each exhale', 'Spine stays long — no excessive rounding'],
+  'Squat Hold (Deep)': {
+    tags: ['Flexibility', 'Hips', 'Ankles'],
+    sets: '2–3 × 30 sec',
+    benefit: 'Most direct path to regaining deep squat ability. Builds mobility in hips, knees, and ankles.',
+    cues: [
+      'Stand feet wider than shoulder-width, toes out 30–45°',
+      'Lower into squat as deep as possible',
+      'Use a doorframe for balance if needed',
+      'Keep heels on floor — elevate on books if impossible',
+      'Chest tall, elbows press knees out gently',
+      'Hold — breathe deeply, relax into it',
+    ],
   },
   'Active Rest Walk': {
     tags: ['Cardio', 'Recovery', 'Low Impact'],
     sets: '20 min moderate pace',
     benefit: 'Active recovery improves blood flow, burns calories, and builds aerobic base without fatigue.',
-    cues: ['Walk at a pace where you can hold a conversation', 'Aim for 20 minutes continuously', 'Swing arms naturally — do not hunch', 'Focus on heel-to-toe foot strike', 'Optional: listen to a podcast', 'This is restorative — not intense'],
-  },
-  'Push-Up': {
-    tags: ['Chest', 'Core', 'Triceps'],
-    images: ["Pushup/0.jpg", "Pushup/1.jpg"],
-    sets: '3 × 10',
-    benefit: 'The king of upper body calisthenics. Develops chest, shoulders, triceps, and core stability.',
-    cues: ['Hands slightly wider than shoulder-width', 'Body in perfect straight line from head to heel', 'Lower until chest nearly touches floor — 3 count down', 'Push explosively back to top', 'Elbows track at ~45° from torso (not flared)', 'Squeeze glutes and abs throughout'],
-  },
-  'Bicycle Crunches': {
-    images: ["Air_Bike/0.jpg", "Air_Bike/1.jpg"],
-    sets: "3 sets × 20 reps (10 per side)",
-    muscles: "Obliques, rectus abdominis, hip flexors",
     cues: [
-      "Lie on back, hands loosely behind head — do not pull your neck",
-      "Bring right elbow toward left knee while extending right leg straight",
-      "Rotate through the torso, not just the elbow",
-      "Keep lower back pressed flat into the floor the entire time",
-      "Slow controlled reps beat fast sloppy ones — quality over speed"
+      'Walk at a pace where you can hold a conversation',
+      'Aim for 20 minutes continuously',
+      'Swing arms naturally — do not hunch',
+      'Focus on heel-to-toe foot strike',
+      'Optional: listen to a podcast',
+      'This is restorative — not intense',
     ],
   },
-  '90/90 Hip Stretch': {
-    images: ["90_90_Hamstring/0.jpg", "90_90_Hamstring/1.jpg"],
-    sets: "45 seconds each side × 2 rounds",
-    muscles: "Hip external rotators, piriformis, glutes",
+  'Chin Tucks': {
+    tags: ['Neck', 'Posture', 'Daily'],
+    sets: '3 × 10 reps',
+    benefit: 'Combats forward head posture. Every inch of forward head = +10 lbs load on the cervical spine.',
     cues: [
-      "Sit with front leg bent 90° in front of you, rear leg bent 90° out to the side",
-      "Sit tall — do not collapse or lean into the hip",
-      "Lean forward over your front shin to deepen the stretch",
-      "This is the #1 drill for cross-legged sitting comfort — do it daily",
-      "Switch sides and repeat"
+      'Sit or stand tall with neutral spine',
+      'Gently pull chin straight back — not tucked down',
+      'Feel a gentle stretch at the back of your neck',
+      'Hold for 5 seconds',
+      'Release slowly, repeat 10 times',
+      'Do every 60–90 minutes at desk',
+    ],
+  },
+  'Wall Angels': {
+    tags: ['Shoulders', 'Upper Back', 'Posture'],
+    sets: '3 × 10 reps',
+    benefit: 'Activates lower traps and opens the chest. Directly reverses the rounded-shoulder posture from desk work.',
+    cues: [
+      'Stand with back, head, and butt flat against wall',
+      'Arms at 90° (goalpost position) — also against wall',
+      'Slowly slide arms up overhead, keeping contact with wall',
+      'Lower back down to start — controlled',
+      'If you cannot keep arms on wall, go as far as possible',
+      '3 sets of 10 slow reps',
+    ],
+  },
+  'Thoracic Extension': {
+    tags: ['Upper Back', 'Posture', 'Daily'],
+    sets: '10 reps × 3 sec hold',
+    benefit: 'Opens the thoracic spine. Directly counteracts the hunched-over desk posture and improves breathing.',
+    cues: [
+      'Sit at the edge of your chair',
+      'Clasp hands behind your head',
+      'Position the top of the chair back at your mid-upper spine',
+      'Gently arch backwards over the chair',
+      'Feel the stretch open your upper back',
+      'Hold 3–5 seconds, repeat 8–10 times — do not force it',
     ],
   },
 };
 
-// ── WEEK SCHEDULE ─────────────────────────────────────────────────────────────
+// ── WEEK SCHEDULE (Phase-based) ────────────────────────────────────────────────
 
-const WEEK = [
-  {
-    day: 'MON', num: '01', name: 'Strength + Core',
-    type: 'strength', badge: 'badge-strength', badgeLabel: 'Strength',
-    duration: '30 min', isRest: false,
-    exercises: [
-      { name: 'Jumping Jacks', detail: 'Warm-up · Full body', sets: '2 × 30 sec' },
-      { name: 'Wall Push-Up', detail: 'Chest · Shoulders', sets: '3 × 12' },
-      { name: 'Bodyweight Squat', detail: 'Legs · Glutes', sets: '3 × 12' },
-      { name: 'Glute Bridge', detail: 'Glutes · Lower Back', sets: '3 × 12' },
-      { name: 'Plank', detail: 'Core · Posture', sets: '3 × 20 sec' },
-      { name: 'Dead Bug', detail: 'Core · Spine Stability', sets: '3 × 10' },
-      { name: 'Bicycle Crunches', detail: 'Core · Obliques', sets: '3 × 20' },
-      { name: 'Cat-Cow Stretch', detail: 'Cool-down · Spine', sets: '10 cycles' },
-    ]
-  },
-  {
-    day: 'TUE', num: '02', name: 'Mobility + Flexibility',
-    type: 'mobility', badge: 'badge-mobility', badgeLabel: 'Mobility',
-    duration: '25 min', isRest: false,
-    exercises: [
-      { name: 'Cat-Cow Stretch', detail: 'Spine · Warm-up', sets: '10 cycles' },
-      { name: 'World\'s Greatest Stretch', detail: 'Full Body · Hips', sets: '4 each side' },
-      { name: 'Hip Flexor Lunge Stretch', detail: 'Hips · Posture Fix', sets: '2 × 30 sec' },
-      { name: 'Butterfly Stretch', detail: '🎯 Cross-legged goal', sets: '60 sec × 2' },
-      { name: '90/90 Hip Stretch', detail: '🎯 Cross-legged goal', sets: '45 sec × 2' },
-      { name: 'Squat Hold (Deep)', detail: 'Flexibility Goal', sets: '2 × 30 sec' },
-    ]
-  },
-  {
-    day: 'WED', num: '03', name: 'Full Body Circuit',
-    type: 'full', badge: 'badge-full', badgeLabel: 'Full Body',
-    duration: '30 min', isRest: false,
-    exercises: [
-      { name: 'Jumping Jacks', detail: 'Warm-up', sets: '2 × 30 sec' },
-      { name: 'Knee Push-Up', detail: 'Chest · Shoulders', sets: '3 × 10' },
-      { name: 'Bodyweight Squat', detail: 'Legs · Glutes', sets: '3 × 12' },
-      { name: 'Superman Hold', detail: 'Lower Back · Posture', sets: '3 × 10' },
-      { name: 'Mountain Climbers', detail: 'Cardio · Core', sets: '2 × 20 sec' },
-      { name: 'Bicycle Crunches', detail: 'Core · Obliques', sets: '3 × 20' },
-      { name: 'Cat-Cow Stretch', detail: 'Cool-down', sets: '10 cycles' },
-    ]
-  },
-  {
-    day: 'THU', num: '04', name: 'Active Recovery Walk',
-    type: 'cardio', badge: 'badge-cardio', badgeLabel: 'Active Rest',
-    duration: '20 min', isRest: false,
-    exercises: [
-      { name: 'Active Rest Walk', detail: 'Low impact · Stamina base', sets: '20 min' },
-      { name: 'Cat-Cow Stretch', detail: 'Spine health · Daily', sets: '10 cycles' },
-    ]
-  },
-  {
-    day: 'FRI', num: '05', name: 'Strength + Posture',
-    type: 'full', badge: 'badge-full', badgeLabel: 'Full Body',
-    duration: '30 min', isRest: false,
-    exercises: [
-      { name: 'Jumping Jacks', detail: 'Warm-up', sets: '2 × 30 sec' },
-      { name: 'Wall Push-Up', detail: 'Chest · Shoulders', sets: '3 × 12' },
-      { name: 'Glute Bridge', detail: 'Glutes · Lower Back', sets: '3 × 12' },
-      { name: 'Dead Bug', detail: 'Core · Spine Stability', sets: '3 × 10' },
-      { name: 'Bicycle Crunches', detail: 'Core · Obliques', sets: '3 × 20' },
-      { name: 'Superman Hold', detail: 'Lower Back · Posture', sets: '3 × 10' },
-      { name: 'Downward Dog', detail: 'Cool-down · Full stretch', sets: '2 × 30 sec' },
-    ]
-  },
-  {
-    day: 'SAT', num: '06', name: 'Flexibility Focus',
-    type: 'mobility', badge: 'badge-mobility', badgeLabel: 'Mobility',
-    duration: '25 min', isRest: false,
-    exercises: [
-      { name: 'Cat-Cow Stretch', detail: 'Spine warm-up', sets: '10 cycles' },
-      { name: 'Pigeon Pose', detail: 'Deep hip opener', sets: '2 × 45 sec' },
-      { name: 'Seated Forward Fold', detail: 'Hamstrings · Lower Back', sets: '2 × 30 sec' },
-      { name: 'Squat Hold (Deep)', detail: 'Flexibility goal', sets: '3 × 30 sec' },
-      { name: 'Butterfly Stretch', detail: '🎯 Cross-legged goal', sets: '60 sec × 2' },
-      { name: '90/90 Hip Stretch', detail: '🎯 Cross-legged goal', sets: '45 sec × 2' },
-    ]
-  },
-  {
-    day: 'SUN', num: '07', name: 'Full Rest Day',
-    type: 'rest', badge: 'badge-rest', badgeLabel: 'Rest',
-    duration: null, isRest: true,
-    exercises: []
-  }
+const EVENING_WINDOWN = [
+  { name: '90/90 Hip Stretch',   detail: '45 sec each side' },
+  { name: 'Butterfly Stretch',   detail: '60 sec hold' },
 ];
 
-// ── BUILD WEEK GRID ───────────────────────────────────────────────────────────
+const PHASE_META = {
+  1: {
+    label: "Foundation",
+    description: "🌱 Build the habit. Focus on form over reps. Every session completed is a win.",
+    color: "#4A90D9"
+  },
+  2: {
+    label: "Build",
+    description: "💪 Pulling and unilateral legs introduced. You should feel challenged but not destroyed.",
+    color: "#E8A838"
+  },
+  3: {
+    label: "Peak",
+    description: "🔥 Full intensity. Harder variations, longer holds. Definition becoming visible.",
+    color: "#E85D38"
+  }
+};
 
-function buildWeekGrid() {
-  const grid = document.getElementById('week-grid');
-  grid.innerHTML = '';
-  WEEK.forEach((day, i) => {
-    const card = document.createElement('div');
-    card.className = 'day-card';
-    card.id = `day-card-${i}`;
-
-    let bodyContent = '';
-    if (day.isRest) {
-      bodyContent = `<div class="rest-content"><div class="rest-icon">🌙</div><div class="rest-title">Rest & Recover</div><div class="rest-desc">Muscles grow during rest, not during exercise. Sleep 7–8 hours. Hydrate. You earned it.</div></div>`;
-    } else {
-      const rows = day.exercises.map(ex => `
-        <div class="ex-row" onclick="showExerciseModal('${ex.name.replace(/'/g,"\\'")}','${ex.detail}','${(EXERCISES[ex.name]||{benefit:''}).benefit.replace(/'/g,"\\'")}',${JSON.stringify((EXERCISES[ex.name]||{cues:[]}).cues).replace(/"/g,'&quot;')},'${ex.detail}','${ex.sets}')">
-          <div>
-            <div class="ex-name">${ex.name}</div>
-            <div class="ex-detail">${ex.detail}</div>
-          </div>
-          <div class="ex-sets">${ex.sets}</div>
-        </div>`).join('');
-      bodyContent = `<div class="ex-table">${rows}</div>`;
+const WEEK_PHASES = {
+  1: [
+    {
+      day: "Monday", focus: "Strength + Core", duration: "30 min",
+      exercises: [
+        { name: "Knee Push-Up",       detail: "3 sets × 10 reps" },
+        { name: "Bodyweight Squat",   detail: "3 sets × 12 reps" },
+        { name: "Glute Bridge",       detail: "3 sets × 12 reps" },
+        { name: "Plank",              detail: "3 sets × 20 sec hold" },
+        { name: "Dead Bug",           detail: "3 sets × 6 reps per side" },
+        { name: "Bicycle Crunches",   detail: "3 sets × 10 reps per side" },
+      ]
+    },
+    {
+      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
+      exercises: [
+        { name: "Cat-Cow Stretch",          detail: "2 sets × 10 reps" },
+        { name: "Hip Flexor Lunge Stretch", detail: "30 sec each side × 2" },
+        { name: "Butterfly Stretch",        detail: "45 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch",        detail: "30 sec each side × 2  🎯" },
+        { name: "Seated Forward Fold",      detail: "45 sec hold × 2" },
+        { name: "Downward Dog",             detail: "30 sec hold × 2" },
+      ]
+    },
+    {
+      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      exercises: [
+        { name: "Knee Push-Up",       detail: "3 sets × 12 reps" },
+        { name: "Bodyweight Squat",   detail: "3 sets × 15 reps" },
+        { name: "Mountain Climbers",  detail: "2 sets × 20 sec" },
+        { name: "Glute Bridge",       detail: "3 sets × 12 reps" },
+        { name: "Bicycle Crunches",   detail: "2 sets × 10 reps per side" },
+        { name: "Cat-Cow Stretch",    detail: "Cool-down · 10 cycles" },
+      ]
+    },
+    {
+      day: "Thursday", focus: "Active Recovery", duration: "20 min",
+      exercises: [
+        { name: "Active Rest Walk", detail: "20 min easy walk" },
+      ]
+    },
+    {
+      day: "Friday", focus: "Strength + Posture", duration: "30 min",
+      exercises: [
+        { name: "Knee Push-Up",       detail: "3 sets × 12 reps" },
+        { name: "Bodyweight Squat",   detail: "3 sets × 12 reps" },
+        { name: "Superman Hold",      detail: "3 sets × 10 reps" },
+        { name: "Plank",              detail: "3 sets × 25 sec hold" },
+        { name: "Dead Bug",           detail: "3 sets × 6 reps per side" },
+        { name: "Bicycle Crunches",   detail: "3 sets × 10 reps per side" },
+      ]
+    },
+    {
+      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
+      exercises: [
+        { name: "World's Greatest Stretch", detail: "3 reps each side" },
+        { name: "Butterfly Stretch",        detail: "60 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch",        detail: "45 sec each side × 2  🎯" },
+        { name: "Pigeon Pose",              detail: "45 sec each side × 2" },
+        { name: "Squat Hold (Deep)",        detail: "3 sets × 20 sec hold" },
+      ]
+    },
+    {
+      day: "Sunday", focus: "Full Rest", duration: "0 min",
+      exercises: [
+        { name: "Rest", detail: "Recovery is when you actually improve. Take it. Wind-Down optional." },
+      ]
     }
+  ],
 
-    card.innerHTML = `
-      <div class="day-header" onclick="toggleDay(${i})">
-        <div class="day-left">
-          <div class="day-num">${day.num}</div>
-          <div class="day-info">
-            <h4>${day.name}</h4>
-            <span>${day.day}${day.duration ? ' · ' + day.duration : ''}</span>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span class="day-badge ${day.badge}">${day.badgeLabel}</span>
-          <span class="day-chevron">⌄</span>
-        </div>
-      </div>
-      <div class="day-body">${bodyContent}</div>`;
-    grid.appendChild(card);
-  });
+  2: [
+    {
+      day: "Monday", focus: "Strength + Core", duration: "30 min",
+      exercises: [
+        { name: "Push-Up",            detail: "3 sets × 10 reps" },
+        { name: "Door Towel Row",     detail: "3 sets × 10 reps" },
+        { name: "Reverse Lunge",      detail: "3 sets × 8 reps each side" },
+        { name: "Glute Bridge March", detail: "3 sets × 8 reps each side" },
+        { name: "Plank",              detail: "3 sets × 40 sec hold" },
+        { name: "Dead Bug",           detail: "3 sets × 8 reps per side" },
+      ]
+    },
+    {
+      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
+      exercises: [
+        { name: "Cat-Cow Stretch",          detail: "2 sets × 12 reps" },
+        { name: "Hip Flexor Lunge Stretch", detail: "45 sec each side × 2" },
+        { name: "Butterfly Stretch",        detail: "60 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch",        detail: "45 sec each side × 2  🎯" },
+        { name: "Seated Forward Fold",      detail: "60 sec hold × 2" },
+        { name: "Downward Dog",             detail: "45 sec hold × 2" },
+      ]
+    },
+    {
+      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      exercises: [
+        { name: "Push-Up",            detail: "3 sets × 10 reps" },
+        { name: "Door Towel Row",     detail: "3 sets × 10 reps" },
+        { name: "Bodyweight Squat",   detail: "4 sets × 15 reps" },
+        { name: "Mountain Climbers",  detail: "3 sets × 30 sec" },
+        { name: "Bicycle Crunches",   detail: "3 sets × 12 reps per side" },
+      ]
+    },
+    {
+      day: "Thursday", focus: "Active Recovery", duration: "20 min",
+      exercises: [
+        { name: "Active Rest Walk", detail: "20–30 min easy walk" },
+      ]
+    },
+    {
+      day: "Friday", focus: "Strength + Posture", duration: "30 min",
+      exercises: [
+        { name: "Push-Up",            detail: "3 sets × 12 reps" },
+        { name: "Door Towel Row",     detail: "3 sets × 12 reps" },
+        { name: "Reverse Lunge",      detail: "3 sets × 10 reps each side" },
+        { name: "Superman Hold",      detail: "3 sets × 12 reps" },
+        { name: "Plank",              detail: "3 sets × 45 sec hold" },
+        { name: "Bicycle Crunches",   detail: "3 sets × 12 reps per side" },
+      ]
+    },
+    {
+      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
+      exercises: [
+        { name: "World's Greatest Stretch", detail: "4 reps each side" },
+        { name: "Butterfly Stretch",        detail: "60 sec hold × 3  🎯" },
+        { name: "90/90 Hip Stretch",        detail: "45 sec each side × 3  🎯" },
+        { name: "Pigeon Pose",              detail: "60 sec each side × 2" },
+        { name: "Squat Hold (Deep)",        detail: "3 sets × 30 sec hold" },
+      ]
+    },
+    {
+      day: "Sunday", focus: "Full Rest", duration: "0 min",
+      exercises: [
+        { name: "Rest", detail: "Recovery is when you actually improve. Take it. Wind-Down optional." },
+      ]
+    }
+  ],
+
+  3: [
+    {
+      day: "Monday", focus: "Strength + Core", duration: "30 min",
+      exercises: [
+        { name: "Push-Up",            detail: "4 sets × 12 reps (3 sec slow negative)" },
+        { name: "Door Towel Row",     detail: "4 sets × 12 reps (2 sec hold at top)" },
+        { name: "Reverse Lunge",      detail: "3 sets × 12 reps each side" },
+        { name: "Glute Bridge March", detail: "3 sets × 12 reps each side" },
+        { name: "Plank",              detail: "3 sets × 60 sec hold" },
+        { name: "Dead Bug",           detail: "3 sets × 10 reps per side" },
+      ]
+    },
+    {
+      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
+      exercises: [
+        { name: "Cat-Cow Stretch",          detail: "2 sets × 15 reps" },
+        { name: "Hip Flexor Lunge Stretch", detail: "60 sec each side × 2" },
+        { name: "Butterfly Stretch",        detail: "90 sec hold × 2  🎯" },
+        { name: "90/90 Hip Stretch",        detail: "60 sec each side × 2  🎯" },
+        { name: "Seated Forward Fold",      detail: "75 sec hold × 2" },
+        { name: "Downward Dog",             detail: "60 sec hold × 2" },
+      ]
+    },
+    {
+      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      exercises: [
+        { name: "Push-Up",            detail: "4 sets × 12 reps" },
+        { name: "Door Towel Row",     detail: "4 sets × 12 reps" },
+        { name: "Bodyweight Squat",   detail: "4 sets × 20 reps" },
+        { name: "Mountain Climbers",  detail: "3 sets × 45 sec" },
+        { name: "Bicycle Crunches",   detail: "3 sets × 15 reps per side" },
+      ]
+    },
+    {
+      day: "Thursday", focus: "Active Recovery", duration: "20 min",
+      exercises: [
+        { name: "Active Rest Walk", detail: "30 min easy walk" },
+      ]
+    },
+    {
+      day: "Friday", focus: "Strength + Posture", duration: "30 min",
+      exercises: [
+        { name: "Push-Up",            detail: "4 sets × 12 reps (3 sec slow negative)" },
+        { name: "Door Towel Row",     detail: "4 sets × 12 reps" },
+        { name: "Reverse Lunge",      detail: "4 sets × 12 reps each side" },
+        { name: "Superman Hold",      detail: "3 sets × 15 reps" },
+        { name: "Plank",              detail: "3 sets × 60–90 sec hold" },
+        { name: "Dead Bug",           detail: "3 sets × 10 reps per side" },
+      ]
+    },
+    {
+      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
+      exercises: [
+        { name: "World's Greatest Stretch", detail: "5 reps each side" },
+        { name: "Butterfly Stretch",        detail: "90 sec hold × 3  🎯" },
+        { name: "90/90 Hip Stretch",        detail: "60 sec each side × 3  🎯" },
+        { name: "Pigeon Pose",              detail: "75 sec each side × 2" },
+        { name: "Squat Hold (Deep)",        detail: "3 sets × 45 sec hold" },
+      ]
+    },
+    {
+      day: "Sunday", focus: "Full Rest", duration: "0 min",
+      exercises: [
+        { name: "Rest", detail: "Recovery is when you actually improve. Take it. Wind-Down optional." },
+      ]
+    }
+  ]
+};
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+
+function getExerciseImage(exName) {
+  const src = IMAGE_MAP[exName];
+  if (!src) return '';
+  return `<img src="${src}" alt="${exName}" loading="lazy">`;
 }
 
-function toggleDay(i) {
-  const card = document.getElementById(`day-card-${i}`);
-  card.classList.toggle('open');
-}
-
-// ── EXERCISE MODAL ────────────────────────────────────────────────────────────
-
-function getExerciseMedia(exName) {
-  const imgs = IMAGE_MAP[exName];
-  if (!imgs || imgs.length === 0) return '';
-  return imgs.map((img, i) => {
-    const src = img.startsWith('./') ? img : BASE_IMG + img;
-    const style = imgs.length === 1
-      ? 'width:100%;height:auto;border-radius:8px;display:block;object-fit:contain;background:#1a1a1a;'
-      : 'width:48%;height:auto;border-radius:8px;display:inline-block;margin:1%;object-fit:contain;background:#1a1a1a;';
-    return `<img src="${src}" style="${style}" onerror="this.style.display='none'">`;
-  }).join('');
-}
-
-function showExerciseModal(name, tags, benefit, cues, tagsStr, sets) {
+function openExerciseModal(name) {
   const ex = EXERCISES[name] || {};
   document.getElementById('modal-title').textContent = name;
-  document.getElementById('modal-subtitle').textContent = benefit || ex.benefit || ex.muscles || '';
+  document.getElementById('modal-subtitle').textContent = ex.benefit || ex.muscles || '';
 
-  // Tags
+  // Tags + sets badge
   const badgeRow = document.getElementById('modal-badges');
-  const tagList = ex.tags || tagsStr.split(' · ');
+  const tagList = ex.tags || [];
   badgeRow.innerHTML = tagList.map(t => `<span class="modal-badge">${t}</span>`).join('') +
-    `<span class="modal-badge" style="background:rgba(96,200,240,0.1);color:var(--accent2);border-color:rgba(96,200,240,0.2)">${sets || ex.sets}</span>`;
+    (ex.sets ? `<span class="modal-badge" style="background:rgba(96,200,240,0.1);color:var(--accent2);border-color:rgba(96,200,240,0.2)">${ex.sets}</span>` : '');
 
   // Illustration
-  const illDiv = document.getElementById('modal-illustration');
-  illDiv.innerHTML = getExerciseMedia(name);
+  document.getElementById('modal-illustration').innerHTML = getExerciseImage(name);
 
   // Cues
-  const cueList = document.getElementById('modal-cues');
-  const cueArr = ex.cues || cues || [];
-  cueList.innerHTML = cueArr.map((c, i) => `
+  const cueArr = ex.cues || [];
+  document.getElementById('modal-cues').innerHTML = cueArr.map((c, i) => `
     <div class="cue">
       <div class="cue-num">${i+1}</div>
       <div class="cue-text">${c}</div>
     </div>`).join('');
 
-  setupTimer(sets || ex.sets || '');
+  setupTimer(ex.sets || '');
 
+  // Lock body scroll when modal is open
+  document.body.style.overflow = 'hidden';
   document.getElementById('modal-overlay').classList.add('open');
 }
 
@@ -1466,6 +1699,13 @@ function closeModal(e) {
   if (e.target === document.getElementById('modal-overlay')) {
     doCloseModal();
   }
+}
+
+function doCloseModal() {
+  clearTimerInterval();
+  timerState.running = false;
+  document.body.style.overflow = '';
+  document.getElementById('modal-overlay').classList.remove('open');
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────────
@@ -1536,245 +1776,7 @@ function renderWeightHistory() {
   el.innerHTML = html;
 }
 
-// ── EVENING PAGE ──────────────────────────────────────────────────────────────
-
-// ── EVENING WIND-DOWN (appended to every non-Sunday day) ──────────────────────
-
-const EVENING_WINDOWN = [
-  { name: '90/90 Hip Stretch',   detail: '45 sec each side' },
-  { name: 'Butterfly Stretch',   detail: '60 sec hold' },
-];
-
-// ── PHASE DATA ────────────────────────────────────────────────────────────────
-
-const PHASE_META = {
-  1: {
-    label: "Foundation",
-    description: "🌱 Build the habit. Focus on form over reps. Every session completed is a win.",
-    color: "#4A90D9"
-  },
-  2: {
-    label: "Build",
-    description: "💪 Increase volume and intensity. You should feel challenged but not destroyed.",
-    color: "#E8A838"
-  },
-  3: {
-    label: "Peak",
-    description: "🔥 Full intensity. Harder variations, longer holds. Cross-legged sitting getting comfortable.",
-    color: "#E85D38"
-  }
-};
-
-const WEEK_PHASES = {
-  1: [
-    {
-      day: "Monday", focus: "Strength + Core", duration: "30 min",
-      exercises: [
-        { name: "Jumping Jacks", detail: "2 sets × 30 sec" },
-        { name: "Wall Push-Up", detail: "3 sets × 12 reps" },
-        { name: "Bodyweight Squat", detail: "3 sets × 10 reps" },
-        { name: "Glute Bridge", detail: "3 sets × 12 reps" },
-        { name: "Plank", detail: "3 sets × 20 sec hold" },
-        { name: "Dead Bug", detail: "2 sets × 6 reps per side" }
-      ]
-    },
-    {
-      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
-      exercises: [
-        { name: "Cat-Cow Stretch", detail: "2 sets × 10 reps" },
-        { name: "Hip Flexor Lunge Stretch", detail: "30 sec each side × 2" },
-        { name: "Butterfly Stretch", detail: "45 sec hold × 2  🎯" },
-        { name: "90/90 Hip Stretch", detail: "30 sec each side × 2  🎯" },
-        { name: "Seated Forward Fold", detail: "45 sec hold × 2" },
-        { name: "Downward Dog", detail: "30 sec hold × 2" }
-      ]
-    },
-    {
-      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
-      exercises: [
-        { name: "Jumping Jacks", detail: "2 sets × 30 sec" },
-        { name: "Knee Push-Up", detail: "3 sets × 10 reps" },
-        { name: "Bodyweight Squat", detail: "3 sets × 12 reps" },
-        { name: "Mountain Climbers", detail: "2 sets × 20 sec" },
-        { name: "Glute Bridge", detail: "3 sets × 12 reps" },
-        { name: "Bicycle Crunches", detail: "2 sets × 10 reps per side" }
-      ]
-    },
-    {
-      day: "Thursday", focus: "Active Recovery", duration: "20 min",
-      exercises: [
-        { name: "Active Rest Walk", detail: "20 min easy walk" }
-      ]
-    },
-    {
-      day: "Friday", focus: "Strength + Posture", duration: "30 min",
-      exercises: [
-        { name: "Wall Push-Up", detail: "3 sets × 15 reps" },
-        { name: "Bodyweight Squat", detail: "3 sets × 12 reps" },
-        { name: "Superman Hold", detail: "3 sets × 10 reps" },
-        { name: "Plank", detail: "3 sets × 20 sec hold" },
-        { name: "Dead Bug", detail: "2 sets × 6 reps per side" },
-        { name: "Bicycle Crunches", detail: "2 sets × 10 reps per side" }
-      ]
-    },
-    {
-      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
-      exercises: [
-        { name: "World's Greatest Stretch", detail: "3 reps each side" },
-        { name: "Butterfly Stretch", detail: "60 sec hold × 2  🎯" },
-        { name: "90/90 Hip Stretch", detail: "45 sec each side × 2  🎯" },
-        { name: "Pigeon Pose", detail: "45 sec each side × 2" },
-        { name: "Squat Hold (Deep)", detail: "3 sets × 20 sec hold" }
-      ]
-    },
-    {
-      day: "Sunday", focus: "Full Rest", duration: "0 min",
-      exercises: [
-        { name: "Rest", detail: "Recovery is when you actually improve. Take it. Wind-Down optional." }
-      ]
-    }
-  ],
-
-  2: [
-    {
-      day: "Monday", focus: "Strength + Core", duration: "30 min",
-      exercises: [
-        { name: "Jumping Jacks", detail: "2 sets × 45 sec" },
-        { name: "Push-Up", detail: "3 sets × 10 reps" },
-        { name: "Bodyweight Squat", detail: "4 sets × 15 reps" },
-        { name: "Glute Bridge", detail: "3 sets × 15 reps" },
-        { name: "Plank", detail: "3 sets × 40 sec hold" },
-        { name: "Dead Bug", detail: "3 sets × 8 reps per side" },
-        { name: "Bicycle Crunches", detail: "3 sets × 12 reps per side" }
-      ]
-    },
-    {
-      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
-      exercises: [
-        { name: "Cat-Cow Stretch", detail: "2 sets × 12 reps" },
-        { name: "Hip Flexor Lunge Stretch", detail: "45 sec each side × 2" },
-        { name: "Butterfly Stretch", detail: "60 sec hold × 2  🎯" },
-        { name: "90/90 Hip Stretch", detail: "45 sec each side × 2  🎯" },
-        { name: "Seated Forward Fold", detail: "60 sec hold × 2" },
-        { name: "Downward Dog", detail: "45 sec hold × 2" }
-      ]
-    },
-    {
-      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
-      exercises: [
-        { name: "Jumping Jacks", detail: "2 sets × 45 sec" },
-        { name: "Push-Up", detail: "3 sets × 8 reps" },
-        { name: "Bodyweight Squat", detail: "4 sets × 15 reps" },
-        { name: "Mountain Climbers", detail: "3 sets × 30 sec" },
-        { name: "Glute Bridge", detail: "3 sets × 15 reps" },
-        { name: "Bicycle Crunches", detail: "3 sets × 12 reps per side" }
-      ]
-    },
-    {
-      day: "Thursday", focus: "Active Recovery", duration: "20 min",
-      exercises: [
-        { name: "Active Rest Walk", detail: "20–30 min easy walk" }
-      ]
-    },
-    {
-      day: "Friday", focus: "Strength + Posture", duration: "30 min",
-      exercises: [
-        { name: "Push-Up", detail: "3 sets × 10 reps" },
-        { name: "Bodyweight Squat", detail: "4 sets × 15 reps" },
-        { name: "Superman Hold", detail: "3 sets × 12 reps" },
-        { name: "Plank", detail: "3 sets × 45 sec hold" },
-        { name: "Dead Bug", detail: "3 sets × 8 reps per side" },
-        { name: "Bicycle Crunches", detail: "3 sets × 12 reps per side" }
-      ]
-    },
-    {
-      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
-      exercises: [
-        { name: "World's Greatest Stretch", detail: "4 reps each side" },
-        { name: "Butterfly Stretch", detail: "60 sec hold × 3  🎯" },
-        { name: "90/90 Hip Stretch", detail: "45 sec each side × 3  🎯" },
-        { name: "Pigeon Pose", detail: "60 sec each side × 2" },
-        { name: "Squat Hold (Deep)", detail: "3 sets × 30 sec hold" }
-      ]
-    },
-    {
-      day: "Sunday", focus: "Full Rest", duration: "0 min",
-      exercises: [
-        { name: "Rest", detail: "Recovery is when you actually improve. Take it. Wind-Down optional." }
-      ]
-    }
-  ],
-
-  3: [
-    {
-      day: "Monday", focus: "Strength + Core", duration: "30 min",
-      exercises: [
-        { name: "Jumping Jacks", detail: "2 sets × 60 sec" },
-        { name: "Push-Up", detail: "4 sets × 12 reps (3 sec slow negative)" },
-        { name: "Bodyweight Squat", detail: "4 sets × 20 reps" },
-        { name: "Glute Bridge", detail: "4 sets × 15 reps" },
-        { name: "Plank", detail: "3 sets × 60 sec hold" },
-        { name: "Dead Bug", detail: "3 sets × 10 reps per side" },
-        { name: "Bicycle Crunches", detail: "3 sets × 15 reps per side" }
-      ]
-    },
-    {
-      day: "Tuesday", focus: "Mobility + Flexibility", duration: "25 min",
-      exercises: [
-        { name: "Cat-Cow Stretch", detail: "2 sets × 15 reps" },
-        { name: "Hip Flexor Lunge Stretch", detail: "60 sec each side × 2" },
-        { name: "Butterfly Stretch", detail: "90 sec hold × 2  🎯" },
-        { name: "90/90 Hip Stretch", detail: "60 sec each side × 2  🎯" },
-        { name: "Seated Forward Fold", detail: "75 sec hold × 2" },
-        { name: "Downward Dog", detail: "60 sec hold × 2" }
-      ]
-    },
-    {
-      day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
-      exercises: [
-        { name: "Jumping Jacks", detail: "2 sets × 60 sec" },
-        { name: "Push-Up", detail: "4 sets × 12 reps" },
-        { name: "Bodyweight Squat", detail: "4 sets × 20 reps" },
-        { name: "Mountain Climbers", detail: "3 sets × 45 sec" },
-        { name: "Glute Bridge", detail: "4 sets × 15 reps" },
-        { name: "Bicycle Crunches", detail: "3 sets × 15 reps per side" }
-      ]
-    },
-    {
-      day: "Thursday", focus: "Active Recovery", duration: "20 min",
-      exercises: [
-        { name: "Active Rest Walk", detail: "30 min easy walk" }
-      ]
-    },
-    {
-      day: "Friday", focus: "Strength + Posture", duration: "30 min",
-      exercises: [
-        { name: "Push-Up", detail: "4 sets × 12 reps (3 sec slow negative)" },
-        { name: "Bodyweight Squat", detail: "4 sets × 20 reps" },
-        { name: "Superman Hold", detail: "3 sets × 15 reps" },
-        { name: "Plank", detail: "3 sets × 60–90 sec hold" },
-        { name: "Dead Bug", detail: "3 sets × 10 reps per side" },
-        { name: "Bicycle Crunches", detail: "3 sets × 15 reps per side" }
-      ]
-    },
-    {
-      day: "Saturday", focus: "Flexibility Focus", duration: "25 min",
-      exercises: [
-        { name: "World's Greatest Stretch", detail: "5 reps each side" },
-        { name: "Butterfly Stretch", detail: "90 sec hold × 3  🎯" },
-        { name: "90/90 Hip Stretch", detail: "60 sec each side × 3  🎯" },
-        { name: "Pigeon Pose", detail: "75 sec each side × 2" },
-        { name: "Squat Hold (Deep)", detail: "3 sets × 45 sec hold" }
-      ]
-    },
-    {
-      day: "Sunday", focus: "Full Rest", duration: "0 min",
-      exercises: [
-        { name: "Rest", detail: "Recovery is when you actually improve. Take it. Wind-Down optional." }
-      ]
-    }
-  ]
-};
+// ── WEEK PLAN RENDERER ────────────────────────────────────────────────────────
 
 function switchPhase(p) {
   currentPhase = p;
@@ -1784,14 +1786,14 @@ function switchPhase(p) {
     const btn = document.getElementById('phase-btn-' + n);
     if (!btn) return;
     const meta = PHASE_META[n];
-    btn.style.background = n === p ? meta.color : '#2a2a2a';
-    btn.style.color = n === p ? '#fff' : '#ccc';
+    btn.style.background = n === p ? meta.color : 'var(--surface2)';
+    btn.style.color = n === p ? '#fff' : 'var(--muted)';
   });
   const desc = document.getElementById('phase-description');
   if (desc) {
     const meta = PHASE_META[p];
-    desc.innerHTML = `<strong>${meta.label}</strong> — ${meta.description}`;
-    desc.style.borderLeft = `4px solid ${meta.color}`;
+    desc.innerHTML = `<strong style="color:var(--text)">${meta.label}</strong> — ${meta.description}`;
+    desc.style.borderLeftColor = meta.color;
   }
 }
 
@@ -1800,31 +1802,32 @@ function renderWeekPlan() {
   if (!container) return;
   const days = WEEK_PHASES[currentPhase];
   container.innerHTML = days.map(day => `
-    <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;margin-bottom:12px;overflow:hidden;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;">
       <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"
            onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
         <div>
-          <div style="font-weight:700;font-size:16px;color:#e0e0e0">${day.day}</div>
-          <div style="font-size:13px;color:#999">${day.focus}</div>
+          <div style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:15px;color:var(--text)">${day.day}</div>
+          <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.focus}</div>
         </div>
-        <div style="font-size:13px;color:#999">${day.duration} ▾</div>
+        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.duration} ▾</div>
       </div>
-      <div style="display:none;padding:0 16px 14px">
+      <div style="display:none;border-top:1px solid var(--border)">
         ${day.exercises.map(ex => `
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #2a2a2a;cursor:pointer"
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s"
+               onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background=''"
                onclick="openExerciseModal('${ex.name.replace(/'/g, "\\'")}')">
-            <span style="font-size:15px;color:#e0e0e0">${ex.name}</span>
-            <span style="font-size:13px;color:#999">${ex.detail}</span>
+            <span style="font-size:13px;color:var(--text);font-weight:500">${ex.name}</span>
+            <span style="font-size:11px;color:var(--accent);font-family:'DM Mono',monospace">${ex.detail}</span>
           </div>
         `).join('')}
         ${day.day !== 'Sunday' ? `
-          <div style="margin-top:14px;padding-top:10px;border-top:1px solid #333">
-            <div style="font-size:12px;color:#888;font-weight:600;letter-spacing:0.5px;margin-bottom:6px">🌙&nbsp; Evening Wind-Down &nbsp;<span style="font-weight:400">(optional — 10 min)</span></div>
+          <div style="padding:12px 16px 14px">
+            <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">🌙 Evening Wind-Down (optional · 10 min)</div>
             ${EVENING_WINDOWN.map(ex => `
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid #222;cursor:pointer"
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--border);cursor:pointer"
                    onclick="openExerciseModal('${ex.name.replace(/'/g, "\\'")}')">
-                <span style="font-size:14px;color:#888">${ex.name}</span>
-                <span style="font-size:12px;color:#666">${ex.detail}</span>
+                <span style="font-size:13px;color:var(--muted)">${ex.name}</span>
+                <span style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace">${ex.detail}</span>
               </div>
             `).join('')}
           </div>` : ''}
@@ -1833,14 +1836,9 @@ function renderWeekPlan() {
   `).join('');
 }
 
-function openExerciseModal(name) {
-  const ex = EXERCISES[name] || {};
-  showExerciseModal(name, '', ex.benefit || ex.muscles || '', ex.cues || [], '', ex.sets || '');
-}
-
 // ── TIMER ─────────────────────────────────────────────────────────────────────
 
-const TIMER_RING_DASH = 2 * Math.PI * 65; // ≈ 408.41
+const TIMER_RING_DASH = 2 * Math.PI * 65;
 
 let timerCfg = null;
 let timerState = { total: 0, remaining: 0, running: false, interval: null,
@@ -1960,12 +1958,6 @@ function timerSwitchSide() {
   clearTimerInterval();
   document.getElementById('timer-switch-prompt').style.display = 'none';
   updateTimerUI();
-}
-
-function doCloseModal() {
-  clearTimerInterval();
-  timerState.running = false;
-  document.getElementById('modal-overlay').classList.remove('open');
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────

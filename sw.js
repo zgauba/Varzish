@@ -1,12 +1,40 @@
-const CACHE = 'fitzee-v7';
+// FitZee Service Worker — cache version bumped to v8 for v2 rebuild
+// Includes all new local exercise images in the precache manifest.
+
+const CACHE = 'fitzee-v8';
 
 const PRECACHE = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './assets/ex-knee-push-up.png',
+  './assets/ex-push-up.png',
+  './assets/ex-door-towel-row.png',
+  './assets/ex-bodyweight-squat.png',
+  './assets/ex-reverse-lunge.png',
+  './assets/ex-glute-bridge.png',
+  './assets/ex-glute-bridge-march.png',
+  './assets/ex-plank.png',
+  './assets/ex-dead-bug.png',
+  './assets/ex-superman-hold.png',
+  './assets/ex-mountain-climbers.png',
+  './assets/ex-bicycle-crunches.png',
+  './assets/ex-cat-cow-stretch.png',
+  './assets/ex-worlds-greatest-stretch.png',
+  './assets/ex-hip-flexor-lunge-stretch.png',
+  './assets/ex-butterfly-stretch.png',
+  './assets/ex-90-90-hip-stretch.png',
+  './assets/ex-pigeon-pose.png',
+  './assets/ex-seated-forward-fold.png',
+  './assets/ex-downward-dog.png',
+  './assets/ex-squat-hold-deep.png',
+  './assets/ex-wall-angels.png',
+  './assets/ex-chin-tuck.png',
+  './assets/ex-thoracic-extension.png',
+  './assets/ex-active-rest-walk.png',
 ];
 
-// On install, cache the app shell
+// On install, cache the app shell + all images
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(cache => cache.addAll(PRECACHE))
@@ -26,7 +54,8 @@ self.addEventListener('activate', e => {
 
 // Fetch strategy:
 // - Google Fonts: network first, cache on success, fall back to cache when offline
-// - Everything else: cache first, network fallback
+// - HTML navigation: network first so updates are always picked up
+// - Everything else (images, assets): cache first, network fallback
 self.addEventListener('fetch', e => {
   const url = e.request.url;
 
@@ -57,7 +86,7 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Cache-first for everything else (JS, CSS, images, fonts already handled above)
+  // Cache-first for everything else (images, JS, CSS)
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
