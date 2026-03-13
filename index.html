@@ -1097,6 +1097,9 @@ const IMAGE_MAP = {
   'Chin Tucks':               './assets/ex-chin-tuck.png',
   'Thoracic Extension':       './assets/ex-thoracic-extension.png',
   'Active Rest Walk':         './assets/ex-active-rest-walk.png',
+  'Banded Glute Bridge':       './assets/ex-banded-glute-bridge.png',
+  'Banded Row':                './assets/ex-banded-row.png',
+  'Banded Lateral Walk':       './assets/ex-banded-lateral-walk.png',
 };
 
 // ── EXERCISE DATA ─────────────────────────────────────────────────────────────
@@ -1424,6 +1427,58 @@ const EXERCISES = {
       'Hold 3–5 seconds, repeat 8–10 times — do not force it',
     ],
   },
+  'Banded Glute Bridge': {
+    tags: ['Glutes', 'Hamstrings', 'Hips'],
+    sets: '3 × 15 reps',
+    benefit: 'The resistance band forces your glutes to work harder against the outward resistance, dramatically increasing glute activation compared to a standard bridge. Key for lower body definition.',
+    cues: [
+      'Loop the resistance band just above your knees',
+      'Lie on your back, knees bent, feet flat on the floor hip-width apart',
+      'Press your knees OUT against the band — this is critical, do not let them cave in',
+      'Drive through your heels and lift your hips until your body forms a straight line from shoulders to knees',
+      'Squeeze your glutes hard at the top for 1 second',
+      'Lower slowly — 2 seconds down. That is 1 rep.',
+    ],
+  },
+  'Banded Row': {
+    tags: ['Back', 'Biceps', 'Rear Delts'],
+    sets: '3 × 12 reps',
+    benefit: 'Replaces the door towel row with cleaner resistance. Targets the lats, mid-back, and rear deltoids — the muscles that create the V-taper and pull your shoulders back for better posture.',
+    cues: [
+      'Sit on the floor with legs extended straight in front of you',
+      'Loop the resistance band around the soles of both feet',
+      'Hold one end of the band in each hand, arms extended forward',
+      'Sit tall — do not round your lower back',
+      'Pull both hands toward your hips, driving elbows back and squeezing your shoulder blades together',
+      'Hold the squeeze for 1 second, then extend arms slowly back to start. That is 1 rep.',
+    ],
+  },
+  'Banded Lateral Walk': {
+    tags: ['Glutes', 'Hip Abductors', 'Outer Thighs'],
+    sets: '3 × 12 steps each side',
+    benefit: 'Targets the glute medius — the side glute that creates the rounded, defined look. Also stabilises the knee and hip, reducing injury risk during squats and lunges.',
+    cues: [
+      'Loop the resistance band just above your knees',
+      'Stand with feet shoulder-width apart, knees slightly bent in an athletic stance',
+      'Keep tension on the band at all times — feet never come fully together',
+      'Step sideways with your right foot, then follow with your left — that is 1 step',
+      'Take 12 steps to the right, then 12 steps back to the left',
+      'Keep your torso upright and hips level throughout — do not waddle',
+    ],
+  },
+  'Rest': {
+    tags: ['Recovery', 'Rest'],
+    sets: 'Full Day',
+    benefit: 'Muscle is built during rest, not during the workout. This day is not optional — it is when your body adapts, repairs, and gets stronger.',
+    cues: [
+      'No structured exercise today',
+      'Prioritise 7–9 hours of sleep — this is when growth hormone peaks',
+      'Stay hydrated: 3–3.5L water',
+      'Light walking is fine if you feel restless',
+      'Optional: 10 min evening wind-down stretching (butterfly + 90/90)',
+      'Come back tomorrow stronger',
+    ],
+  },
 };
 
 // ── WEEK SCHEDULE (Phase-based) ────────────────────────────────────────────────
@@ -1526,11 +1581,12 @@ const WEEK_PHASES = {
       day: "Monday", focus: "Strength + Core", duration: "30 min",
       exercises: [
         { name: "Push-Up",            detail: "3 sets × 10 reps" },
-        { name: "Door Towel Row",     detail: "3 sets × 10 reps" },
+        { name: "Banded Row",          detail: "3 sets × 10 reps" },
         { name: "Reverse Lunge",      detail: "3 sets × 8 reps each side" },
-        { name: "Glute Bridge March", detail: "3 sets × 8 reps each side" },
-        { name: "Plank",              detail: "3 sets × 40 sec hold" },
-        { name: "Dead Bug",           detail: "3 sets × 8 reps per side" },
+        { name: "Banded Glute Bridge", detail: "3 sets × 12 reps" },
+        { name: "Banded Lateral Walk",  detail: "3 sets × 10 steps each side" },
+        { name: "Plank",               detail: "3 sets × 40 sec hold" },
+        { name: "Dead Bug",            detail: "3 sets × 8 reps per side" },
       ]
     },
     {
@@ -1548,7 +1604,7 @@ const WEEK_PHASES = {
       day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
       exercises: [
         { name: "Push-Up",            detail: "3 sets × 10 reps" },
-        { name: "Door Towel Row",     detail: "3 sets × 10 reps" },
+        { name: "Banded Row",         detail: "3 sets × 10 reps" },
         { name: "Bodyweight Squat",   detail: "4 sets × 15 reps" },
         { name: "Mountain Climbers",  detail: "3 sets × 30 sec" },
         { name: "Bicycle Crunches",   detail: "3 sets × 12 reps per side" },
@@ -1564,7 +1620,7 @@ const WEEK_PHASES = {
       day: "Friday", focus: "Strength + Posture", duration: "30 min",
       exercises: [
         { name: "Push-Up",            detail: "3 sets × 12 reps" },
-        { name: "Door Towel Row",     detail: "3 sets × 12 reps" },
+        { name: "Banded Row",          detail: "3 sets × 12 reps" },
         { name: "Reverse Lunge",      detail: "3 sets × 10 reps each side" },
         { name: "Superman Hold",      detail: "3 sets × 12 reps" },
         { name: "Plank",              detail: "3 sets × 45 sec hold" },
@@ -1593,12 +1649,13 @@ const WEEK_PHASES = {
     {
       day: "Monday", focus: "Strength + Core", duration: "30 min",
       exercises: [
-        { name: "Push-Up",            detail: "4 sets × 12 reps (3 sec slow negative)" },
-        { name: "Door Towel Row",     detail: "4 sets × 12 reps (2 sec hold at top)" },
-        { name: "Reverse Lunge",      detail: "3 sets × 12 reps each side" },
-        { name: "Glute Bridge March", detail: "3 sets × 12 reps each side" },
-        { name: "Plank",              detail: "3 sets × 60 sec hold" },
-        { name: "Dead Bug",           detail: "3 sets × 10 reps per side" },
+        { name: "Push-Up",             detail: "4 sets × 12 reps (3 sec slow negative)" },
+        { name: "Banded Row",          detail: "4 sets × 12 reps (2 sec hold at top)" },
+        { name: "Reverse Lunge",       detail: "3 sets × 12 reps each side" },
+        { name: "Banded Glute Bridge", detail: "4 sets × 15 reps" },
+        { name: "Banded Lateral Walk", detail: "3 sets × 15 steps each side" },
+        { name: "Plank",               detail: "3 sets × 60 sec hold" },
+        { name: "Dead Bug",            detail: "3 sets × 10 reps per side" },
       ]
     },
     {
@@ -1616,7 +1673,7 @@ const WEEK_PHASES = {
       day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
       exercises: [
         { name: "Push-Up",            detail: "4 sets × 12 reps" },
-        { name: "Door Towel Row",     detail: "4 sets × 12 reps" },
+        { name: "Banded Row",         detail: "4 sets × 12 reps" },
         { name: "Bodyweight Squat",   detail: "4 sets × 20 reps" },
         { name: "Mountain Climbers",  detail: "3 sets × 45 sec" },
         { name: "Bicycle Crunches",   detail: "3 sets × 15 reps per side" },
@@ -1632,7 +1689,7 @@ const WEEK_PHASES = {
       day: "Friday", focus: "Strength + Posture", duration: "30 min",
       exercises: [
         { name: "Push-Up",            detail: "4 sets × 12 reps (3 sec slow negative)" },
-        { name: "Door Towel Row",     detail: "4 sets × 12 reps" },
+        { name: "Banded Row",         detail: "4 sets × 12 reps (2 sec hold at top)" },
         { name: "Reverse Lunge",      detail: "4 sets × 12 reps each side" },
         { name: "Superman Hold",      detail: "3 sets × 15 reps" },
         { name: "Plank",              detail: "3 sets × 60–90 sec hold" },

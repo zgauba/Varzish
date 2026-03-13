@@ -1,7 +1,5 @@
-// FitZee Service Worker — cache version bumped to v8 for v2 rebuild
-// Includes all new local exercise images in the precache manifest.
-
-const CACHE = 'fitzee-v8';
+// FitZee Service Worker — v9: fixed images (90/90, dead bug, wall angels, walk) + resistance band exercises
+const CACHE = 'fitzee-v9';
 
 const PRECACHE = [
   './',
@@ -32,6 +30,9 @@ const PRECACHE = [
   './assets/ex-chin-tuck.png',
   './assets/ex-thoracic-extension.png',
   './assets/ex-active-rest-walk.png',
+  './assets/ex-banded-glute-bridge.png',
+  './assets/ex-banded-row.png',
+  './assets/ex-banded-lateral-walk.png',
 ];
 
 // On install, cache the app shell + all images
