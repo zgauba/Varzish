@@ -93,6 +93,41 @@
   }
   .print-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+  .wake-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 16px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .wake-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
+
+  .workout-style-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 9px;
+    margin-top: 5px;
+    letter-spacing: 0.3px;
+  }
+  .workout-style-badge .ws-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
   .tab-bar {
     position: sticky;
     top: 55px;
@@ -759,8 +794,14 @@
   <!-- NAV -->
   <nav class="nav-bar">
     <div class="nav-logo">VAR<span>ZISH</span></div>
-    <button class="print-btn" onclick="window.print()">⎙ Print</button>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="wake-btn" id="wake-btn" title="Keep screen on" onclick="toggleWakeLock()">☀</button>
+      <button class="print-btn" onclick="window.print()">⎙ Print</button>
+    </div>
   </nav>
+  <!-- Silent video for iOS PWA screen wake lock -->
+  <video id="wake-video" src="./assets/silent.mp4" loop muted playsinline
+         style="position:fixed;width:1px;height:1px;opacity:0.01;pointer-events:none;top:0;left:0;z-index:-1"></video>
 
   <!-- TABS -->
   <div class="tab-bar" id="tabs">
@@ -1866,6 +1907,7 @@ function renderWeekPlan() {
         <div>
           <div style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:15px;color:var(--text)">${day.day}</div>
           <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.focus}</div>
+          ${getWorkoutStyleBadge(day.day)}
         </div>
         <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.duration} ▾</div>
       </div>
@@ -2034,26 +2076,52 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
 }
 
-// ── SCREEN WAKE LOCK ──────────────────────────────────────────────────────────
-// Keeps the iPhone screen on while the app is open.
-// Automatically re-acquires the lock if the user backgrounds and returns.
-let wakeLock = null;
+// ── WORKOUT STYLE BADGE ───────────────────────────────────────────────────────
+function getWorkoutStyleBadge(dayName) {
+  const styles = {
+    'Monday':    { label: 'Straight Sets', rest: 'Rest 60–90s between sets' },
+    'Friday':    { label: 'Straight Sets', rest: 'Rest 60–90s between sets' },
+    'Wednesday': { label: 'Circuit',       rest: 'Rest 90s between rounds' },
+    'Tuesday':   { label: 'Flow Through',  rest: 'No rest — hold each stretch' },
+    'Saturday':  { label: 'Flow Through',  rest: 'No rest — hold each stretch' },
+  };
+  const s = styles[dayName];
+  if (!s) return '';
+  return `<div class="workout-style-badge"><span class="ws-dot"></span>${s.label} &nbsp;·&nbsp; ${s.rest}</div>`;
+}
 
-async function requestWakeLock() {
-  if (!('wakeLock' in navigator)) return; // not supported
-  try {
-    wakeLock = await navigator.wakeLock.request('screen');
-  } catch (err) {
-    // silently fail — user may have denied or battery saver is on
+// ── SCREEN WAKE LOCK (silent video method — works in iOS PWA standalone mode) ──
+// The Wake Lock API alone doesn't work in iOS standalone PWA mode.
+// Playing a looping silent video keeps the screen on reliably on iOS.
+let wakeActive = false;
+
+function toggleWakeLock() {
+  const video = document.getElementById('wake-video');
+  const btn   = document.getElementById('wake-btn');
+  if (!video) return;
+  if (wakeActive) {
+    video.pause();
+    btn.classList.remove('active');
+    btn.title = 'Keep screen on';
+    wakeActive = false;
+  } else {
+    video.play().catch(() => {});
+    btn.classList.add('active');
+    btn.title = 'Screen lock active — tap to disable';
+    wakeActive = true;
+  }
+  // Also try the native Wake Lock API as a bonus where supported
+  if ('wakeLock' in navigator && wakeActive) {
+    navigator.wakeLock.request('screen').catch(() => {});
   }
 }
 
-// Acquire on load
-requestWakeLock();
-
-// Re-acquire when the user returns to the app after backgrounding
+// Re-play the video if the user backgrounds and returns (iOS kills video on background)
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') requestWakeLock();
+  if (document.visibilityState === 'visible' && wakeActive) {
+    const video = document.getElementById('wake-video');
+    if (video) video.play().catch(() => {});
+  }
 });
 
 </script>
