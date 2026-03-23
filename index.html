@@ -108,24 +108,44 @@
   .wake-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
 
   .workout-style-badge {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-size: 10px;
     font-family: 'DM Mono', monospace;
-    color: var(--muted);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 3px 9px;
-    margin-top: 5px;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-top: 8px;
     letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .workout-style-badge.style-sets {
+    color: var(--accent);
+    background: rgba(200,240,96,0.08);
+    border: 1px solid rgba(200,240,96,0.25);
+  }
+  .workout-style-badge.style-circuit {
+    color: var(--accent2);
+    background: rgba(96,200,240,0.08);
+    border: 1px solid rgba(96,200,240,0.25);
+  }
+  .workout-style-badge.style-flow {
+    color: var(--accent3);
+    background: rgba(240,96,200,0.08);
+    border: 1px solid rgba(240,96,200,0.25);
   }
   .workout-style-badge .ws-dot {
-    width: 5px; height: 5px;
+    width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--accent);
     flex-shrink: 0;
+  }
+  .style-sets .ws-dot  { background: var(--accent); }
+  .style-circuit .ws-dot { background: var(--accent2); }
+  .style-flow .ws-dot  { background: var(--accent3); }
+  .ws-divider {
+    color: inherit;
+    opacity: 0.4;
+    margin: 0 2px;
   }
 
   .tab-bar {
@@ -1902,14 +1922,16 @@ function renderWeekPlan() {
   const days = WEEK_PHASES[currentPhase];
   container.innerHTML = days.map(day => `
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;">
-      <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"
+      <div style="padding:14px 16px;cursor:pointer"
            onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
-        <div>
-          <div style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:15px;color:var(--text)">${day.day}</div>
-          <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.focus}</div>
-          ${getWorkoutStyleBadge(day.day)}
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:15px;color:var(--text)">${day.day}</div>
+            <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.focus}</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap;padding-top:2px">${day.duration} ▾</div>
         </div>
-        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${day.duration} ▾</div>
+        ${getWorkoutStyleBadge(day.day)}
       </div>
       <div style="display:none;border-top:1px solid var(--border)">
         ${day.exercises.map(ex => ex.name === 'Rest' ? `
@@ -2079,15 +2101,15 @@ if ('serviceWorker' in navigator) {
 // ── WORKOUT STYLE BADGE ───────────────────────────────────────────────────────
 function getWorkoutStyleBadge(dayName) {
   const styles = {
-    'Monday':    { label: 'Straight Sets', rest: 'Rest 60–90s between sets' },
-    'Friday':    { label: 'Straight Sets', rest: 'Rest 60–90s between sets' },
-    'Wednesday': { label: 'Circuit',       rest: 'Rest 90s between rounds' },
-    'Tuesday':   { label: 'Flow Through',  rest: 'No rest — hold each stretch' },
-    'Saturday':  { label: 'Flow Through',  rest: 'No rest — hold each stretch' },
+    'Monday':    { cls: 'style-sets',    label: 'Straight Sets', rest: 'Rest 60–90s between sets' },
+    'Friday':    { cls: 'style-sets',    label: 'Straight Sets', rest: 'Rest 60–90s between sets' },
+    'Wednesday': { cls: 'style-circuit', label: 'Circuit',       rest: 'Rest 90s between rounds' },
+    'Tuesday':   { cls: 'style-flow',   label: 'Flow Through',  rest: 'No rest — hold each stretch' },
+    'Saturday':  { cls: 'style-flow',   label: 'Flow Through',  rest: 'No rest — hold each stretch' },
   };
   const s = styles[dayName];
   if (!s) return '';
-  return `<div class="workout-style-badge"><span class="ws-dot"></span>${s.label} &nbsp;·&nbsp; ${s.rest}</div>`;
+  return `<div class="workout-style-badge ${s.cls}"><span class="ws-dot"></span><strong>${s.label}</strong><span class="ws-divider">·</span>${s.rest}</div>`;
 }
 
 // ── SCREEN WAKE LOCK (silent video method — works in iOS PWA standalone mode) ──
