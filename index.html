@@ -903,8 +903,8 @@
               <span style="width:8px;height:8px;border-radius:50%;background:var(--accent2);flex-shrink:0;display:inline-block"></span>
               <strong style="color:var(--accent2);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.5px">CIRCUIT &nbsp;·&nbsp; Wednesday</strong>
             </div>
-            <p style="font-size:13px;color:var(--text)">Do <strong style="color:var(--text)">one set of every exercise back-to-back</strong> with no rest between exercises. That is one round. Rest 90 seconds, then repeat the full circuit. Keeps heart rate elevated for fat burn and stamina.</p>
-            <p style="font-size:11px;color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace">e.g. Push-Up → Squat → Row → Plank → rest 90s → repeat</p>
+            <p style="font-size:13px;color:var(--text)">Do <strong style="color:var(--text)">one set of every exercise back-to-back</strong> with no rest between exercises. That is one round. Rest 90 seconds, then repeat the full circuit for the prescribed number of rounds (Phase 1–2: 3 rounds, Phase 3: 4 rounds). All exercises have the same number of rounds. Keeps heart rate elevated for fat burn and stamina.</p>
+            <p style="font-size:11px;color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace">e.g. Push-Up → Squat → Row → Plank → rest 90s → repeat for 3 rounds</p>
           </div>
 
           <div style="background:rgba(240,96,200,0.06);border:1px solid rgba(240,96,200,0.2);border-radius:10px;padding:12px 14px">
@@ -912,8 +912,8 @@
               <span style="width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0;display:inline-block"></span>
               <strong style="color:var(--accent3);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.5px">FLOW THROUGH &nbsp;·&nbsp; Tue &amp; Sat</strong>
             </div>
-            <p style="font-size:13px;color:var(--text)">Move <strong style="color:var(--text)">from one stretch to the next without repeating</strong>. Hold each for the prescribed duration, breathe deeply, and let the nervous system relax progressively. Do not rush — the benefit comes from sustained holds.</p>
-            <p style="font-size:11px;color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace">e.g. Cat-Cow 10 reps → Hip Flexor 30s each side → Butterfly 45s → continue</p>
+            <p style="font-size:13px;color:var(--text)">Move from one stretch to the next, holding each for the prescribed duration. Some stretches are done twice for deeper release — go into the hold, release, then return for a second hold before moving on. Cat-Cow is done as a dynamic warm-up (2 sets of 10 reps) at the start. No rest between stretches — breathe deeply and let the nervous system relax progressively.</p>
+            <p style="font-size:11px;color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace">e.g. Cat-Cow 2×10 → Hip Flexor 30s each side ×2 → Butterfly 45s ×2 → continue</p>
           </div>
 
         </div>
@@ -1630,12 +1630,13 @@ const WEEK_PHASES = {
     },
     {
       day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      note: "3 rounds · Rest 90s between rounds",
       exercises: [
-        { name: "Knee Push-Up",       detail: "3 sets × 12 reps" },
-        { name: "Bodyweight Squat",   detail: "3 sets × 15 reps" },
-        { name: "Mountain Climbers",  detail: "2 sets × 20 sec" },
-        { name: "Glute Bridge",       detail: "3 sets × 12 reps" },
-        { name: "Bicycle Crunches",   detail: "2 sets × 10 reps per side" },
+        { name: "Knee Push-Up",       detail: "12 reps" },
+        { name: "Bodyweight Squat",   detail: "15 reps" },
+        { name: "Mountain Climbers",  detail: "20 sec" },
+        { name: "Glute Bridge",       detail: "12 reps" },
+        { name: "Bicycle Crunches",   detail: "10 reps per side" },
         { name: "Cat-Cow Stretch",    detail: "Cool-down · 10 cycles" },
       ]
     },
@@ -1700,12 +1701,13 @@ const WEEK_PHASES = {
     },
     {
       day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      note: "3 rounds · Rest 90s between rounds",
       exercises: [
-        { name: "Push-Up",            detail: "3 sets × 10 reps" },
-        { name: "Banded Row",         detail: "3 sets × 10 reps" },
-        { name: "Bodyweight Squat",   detail: "4 sets × 15 reps" },
-        { name: "Mountain Climbers",  detail: "3 sets × 30 sec" },
-        { name: "Bicycle Crunches",   detail: "3 sets × 12 reps per side" },
+        { name: "Push-Up",            detail: "10 reps" },
+        { name: "Banded Row",         detail: "10 reps" },
+        { name: "Bodyweight Squat",   detail: "15 reps" },
+        { name: "Mountain Climbers",  detail: "30 sec" },
+        { name: "Bicycle Crunches",   detail: "12 reps per side" },
       ]
     },
     {
@@ -1769,12 +1771,13 @@ const WEEK_PHASES = {
     },
     {
       day: "Wednesday", focus: "Full Body Circuit", duration: "30 min",
+      note: "4 rounds · Rest 90s between rounds",
       exercises: [
-        { name: "Push-Up",            detail: "4 sets × 12 reps" },
-        { name: "Banded Row",         detail: "4 sets × 12 reps" },
-        { name: "Bodyweight Squat",   detail: "4 sets × 20 reps" },
-        { name: "Mountain Climbers",  detail: "3 sets × 45 sec" },
-        { name: "Bicycle Crunches",   detail: "3 sets × 15 reps per side" },
+        { name: "Push-Up",            detail: "12 reps" },
+        { name: "Banded Row",         detail: "12 reps" },
+        { name: "Bodyweight Squat",   detail: "20 reps" },
+        { name: "Mountain Climbers",  detail: "45 sec" },
+        { name: "Bicycle Crunches",   detail: "15 reps per side" },
       ]
     },
     {
@@ -1970,6 +1973,11 @@ function renderWeekPlan() {
         ${getWorkoutStyleBadge(day.day)}
       </div>
       <div style="display:none;border-top:1px solid var(--border)">
+        ${day.note ? `
+          <div style="padding:10px 16px;background:rgba(96,200,240,0.06);border-bottom:1px solid rgba(96,200,240,0.15);display:flex;align-items:center;gap:8px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--accent2);flex-shrink:0;display:inline-block"></span>
+            <span style="font-size:11px;color:var(--accent2);font-family:'DM Mono',monospace;letter-spacing:0.3px">${day.note}</span>
+          </div>` : ''}
         ${day.exercises.map(ex => ex.name === 'Rest' ? `
           <div style="padding:16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s"
                onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background=''"
