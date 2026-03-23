@@ -2034,6 +2034,28 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
 }
 
+// ── SCREEN WAKE LOCK ──────────────────────────────────────────────────────────
+// Keeps the iPhone screen on while the app is open.
+// Automatically re-acquires the lock if the user backgrounds and returns.
+let wakeLock = null;
+
+async function requestWakeLock() {
+  if (!('wakeLock' in navigator)) return; // not supported
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+  } catch (err) {
+    // silently fail — user may have denied or battery saver is on
+  }
+}
+
+// Acquire on load
+requestWakeLock();
+
+// Re-acquire when the user returns to the app after backgrounding
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') requestWakeLock();
+});
+
 </script>
 </body>
 </html>
