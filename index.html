@@ -80,32 +80,51 @@
   }
   .nav-logo span { color: var(--accent); }
 
-  .print-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 12px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'DM Mono', monospace;
-    transition: all 0.2s;
+  /* ── Nav icon buttons — same visual language as timer buttons ── */
+  .nav-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
   }
-  .print-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-icon-wrap span {
+    font-size: 9px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
 
-  .wake-btn {
+  .nav-icon-btn {
+    width: 40px; height: 40px;
     background: var(--surface2);
     border: 1px solid var(--border);
     color: var(--muted);
-    font-size: 16px;
-    width: 34px; height: 34px;
     border-radius: 50%;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.2s;
     flex-shrink: 0;
+    padding: 0;
   }
-  .wake-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
+  .nav-icon-btn svg {
+    width: 18px; height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+  .nav-icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-icon-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
+  #update-check-btn { transition: all 0.2s, transform 0.5s ease; }
+
+  /* Keep print-btn and wake-btn aliases for JS compatibility */
+  .wake-btn { /* handled by nav-icon-btn */ }
+  .print-btn { /* handled by nav-icon-btn */ }
 
   .workout-style-badge {
     display: flex;
@@ -450,14 +469,14 @@
     position: sticky;
     top: 0;
     float: right;
-    width: 32px;
-    height: 32px;
-    background: rgba(10, 10, 18, 0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+    width: 36px;
+    height: 36px;
+    background: rgba(10, 10, 18, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
     border-radius: 50%;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.9);
     font-size: 15px;
     cursor: pointer;
     display: flex;
@@ -465,11 +484,11 @@
     justify-content: center;
     z-index: 10;
     margin-left: 8px;
-    margin-bottom: -32px;
+    margin-bottom: -36px;
     transition: all 0.2s;
     flex-shrink: 0;
   }
-  .modal-close-sticky:hover { background: rgba(200,240,96,0.2); color: var(--accent); border-color: rgba(200,240,96,0.5); }
+  .modal-close-sticky:hover { background: rgba(200,240,96,0.25); color: var(--accent); border-color: rgba(200,240,96,0.5); }
 
   @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -842,21 +861,7 @@
     gap: 8px;
   }
 
-  /* Update check button in nav */
-  .update-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .update-btn:hover { border-color: var(--accent); color: var(--accent); }
+  /* update-btn now uses nav-icon-btn */
 </style>
 </head>
 <body>
@@ -868,10 +873,52 @@
   <!-- NAV -->
   <nav class="nav-bar">
     <div class="nav-logo">VAR<span>ZISH</span></div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <button class="wake-btn" id="wake-btn" title="Keep screen on" onclick="toggleWakeLock()">☀</button>
-      <button class="update-btn" id="update-check-btn" onclick="checkForUpdate()" title="Check for app update">↻</button>
-      <button class="print-btn" onclick="window.print()">⎙ Print</button>
+    <div style="display:flex;align-items:flex-end;gap:12px">
+
+      <!-- Wake lock -->
+      <div class="nav-icon-wrap">
+        <button class="nav-icon-btn wake-btn" id="wake-btn" title="Keep screen on" onclick="toggleWakeLock()">
+          <!-- Sun icon -->
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="5"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+            <line x1="2" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="22" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+        <span>Screen</span>
+      </div>
+
+      <!-- Update check -->
+      <div class="nav-icon-wrap">
+        <button class="nav-icon-btn" id="update-check-btn" onclick="checkForUpdate()" title="Check for app update">
+          <!-- Refresh / rotate-cw icon -->
+          <svg viewBox="0 0 24 24">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+        </button>
+        <span>Update</span>
+      </div>
+
+      <!-- Print -->
+      <div class="nav-icon-wrap">
+        <button class="nav-icon-btn print-btn" onclick="window.print()" title="Print week plan">
+          <!-- Printer icon -->
+          <svg viewBox="0 0 24 24">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+          </svg>
+        </button>
+        <span>Print</span>
+      </div>
+
     </div>
   </nav>
   <!-- Silent video for iOS PWA screen wake lock -->
@@ -1180,7 +1227,12 @@
 
 <!-- EXERCISE MODAL --><div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal" id="modal-content">
-    <button class="modal-close-sticky" onclick="doCloseModal()" title="Close">✕</button>
+    <button class="modal-close-sticky" onclick="doCloseModal()" title="Close">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
 
     <div class="modal-handle"></div>
     <div class="modal-badge-row" id="modal-badges"></div>
@@ -2260,13 +2312,20 @@ function checkForUpdate() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistration().then(reg => {
       if (reg) {
+        const btn = document.getElementById('update-check-btn');
+        // Spin the icon while checking
+        if (btn) btn.style.transform = 'rotate(360deg)';
         reg.update().then(() => {
-          // If no update found, show brief feedback
-          const btn = document.getElementById('update-check-btn');
-          if (btn) {
-            const orig = btn.textContent;
-            btn.textContent = '✓';
-            setTimeout(() => { btn.textContent = orig; }, 1500);
+          // Brief visual feedback — show a checkmark label then restore
+          const wrap = btn && btn.closest('.nav-icon-wrap');
+          const label = wrap && wrap.querySelector('span');
+          if (label) {
+            const orig = label.textContent;
+            label.textContent = 'up to date';
+            if (btn) btn.style.transform = '';
+            setTimeout(() => { label.textContent = orig; }, 2000);
+          } else if (btn) {
+            btn.style.transform = '';
           }
         });
       }

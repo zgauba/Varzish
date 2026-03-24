@@ -1,5 +1,5 @@
-// Varzish Service Worker — v11: robust update mechanism (postMessage + auto-reload banner)
-const CACHE = 'varzish-v11';
+// Varzish Service Worker — v12: SVG nav icons + labels, transparent close button
+const CACHE = 'varzish-v12';
 
 const PRECACHE = [
   './',
