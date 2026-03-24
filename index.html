@@ -452,11 +452,13 @@
     float: right;
     width: 32px;
     height: 32px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: rgba(20, 20, 30, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 50%;
-    color: var(--muted);
-    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -467,7 +469,7 @@
     transition: all 0.2s;
     flex-shrink: 0;
   }
-  .modal-close-sticky:hover { background: var(--surface); color: var(--accent); border-color: var(--accent); }
+  .modal-close-sticky:hover { background: rgba(200,240,96,0.15); color: var(--accent); border-color: rgba(200,240,96,0.4); }
 
   @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -2037,7 +2039,6 @@ function setupTimer(sets) {
                  running: false, interval: null, currentRound: 1,
                  totalRounds: timerCfg.rounds, side: 1 };
   wrap.style.display = 'block';
-  document.getElementById('timer-switch-prompt').style.display = 'none';
   updateTimerUI();
 }
 
