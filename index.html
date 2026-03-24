@@ -452,12 +452,12 @@
     float: right;
     width: 32px;
     height: 32px;
-    background: rgba(20, 20, 30, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(10, 10, 18, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 50%;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.85);
     font-size: 15px;
     cursor: pointer;
     display: flex;
@@ -469,7 +469,7 @@
     transition: all 0.2s;
     flex-shrink: 0;
   }
-  .modal-close-sticky:hover { background: rgba(200,240,96,0.15); color: var(--accent); border-color: rgba(200,240,96,0.4); }
+  .modal-close-sticky:hover { background: rgba(200,240,96,0.2); color: var(--accent); border-color: rgba(200,240,96,0.5); }
 
   @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -770,41 +770,46 @@
 
   .timer-controls {
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 20px;
+    align-items: flex-end;
+    justify-content: center;
   }
 
-  #timer-reset-btn, #timer-restart-btn {
-    width: 40px; height: 40px;
+  .timer-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .timer-btn-wrap span {
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  #timer-reset-btn, #timer-restart-btn, #timer-start-btn {
+    width: 52px; height: 52px;
     background: var(--surface2);
     border: 1px solid var(--border);
     color: var(--muted);
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0;
   }
   #timer-reset-btn:hover { border-color: var(--accent); color: var(--accent); }
-  #timer-restart-btn { font-size: 14px; }
   #timer-restart-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-
-  #timer-start-btn {
-    background: var(--accent);
-    color: #0a0a0f;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 24px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: opacity 0.2s;
-    min-width: 120px;
-  }
-  #timer-start-btn:hover { opacity: 0.85; }
+  #timer-start-btn { border-color: var(--accent); color: var(--accent); font-size: 20px; }
+  #timer-start-btn:hover { background: rgba(200,240,96,0.1); }
+  #timer-start-btn.running { border-color: var(--muted); color: var(--muted); }
 
   .timer-switch-prompt { display: none !important; }
 </style>
@@ -1149,9 +1154,18 @@
         </div>
         <div id="timer-round-label" class="timer-round-label" style="display:none"></div>
         <div class="timer-controls">
-          <button id="timer-reset-btn" onclick="timerReset()" title="Reset to start">↺</button>
-          <button id="timer-start-btn" onclick="timerToggle()">▶ Start</button>
-          <button id="timer-restart-btn" onclick="timerRestart()" title="Restart">⟳</button>
+          <div class="timer-btn-wrap">
+            <button id="timer-reset-btn" onclick="timerReset()">↺</button>
+            <span>Reset</span>
+          </div>
+          <div class="timer-btn-wrap">
+            <button id="timer-start-btn" onclick="timerToggle()">▶</button>
+            <span id="timer-start-label">Start</span>
+          </div>
+          <div class="timer-btn-wrap">
+            <button id="timer-restart-btn" onclick="timerRestart()">⟳</button>
+            <span>Restart</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2052,8 +2066,20 @@ function updateTimerUI() {
   document.getElementById('timer-ring').style.strokeDashoffset =
     TIMER_RING_DASH * (1 - progress);
   const startBtn = document.getElementById('timer-start-btn');
-  startBtn.textContent = running ? '⏸ Pause'
-    : (remaining < total && remaining > 0 ? '▶ Resume' : '▶ Start');
+  const startLabel = document.getElementById('timer-start-label');
+  if (running) {
+    startBtn.textContent = '⏸';
+    startBtn.classList.add('running');
+    if (startLabel) startLabel.textContent = 'Pause';
+  } else if (remaining < total && remaining > 0) {
+    startBtn.textContent = '▶';
+    startBtn.classList.remove('running');
+    if (startLabel) startLabel.textContent = 'Resume';
+  } else {
+    startBtn.textContent = '▶';
+    startBtn.classList.remove('running');
+    if (startLabel) startLabel.textContent = 'Start';
+  }
   const roundLabel = document.getElementById('timer-round-label');
   if (timerCfg && timerCfg.eachSide) {
     roundLabel.textContent = side === 1 ? 'Side 1' : 'Side 2';

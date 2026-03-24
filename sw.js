@@ -1,5 +1,5 @@
 // FitZee Service Worker — v10: all images regenerated in consistent masculine style
-const CACHE = 'varzish-v8';
+const CACHE = 'varzish-v9';
 
 const PRECACHE = [
   './',
