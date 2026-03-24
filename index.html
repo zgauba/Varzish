@@ -60,16 +60,19 @@
   }
 
   .nav-bar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0; right: 0;
     z-index: 100;
-    background: rgba(10,10,15,0.92);
+    background: rgba(10,10,15,0.97);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 14px 20px 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 430px;
+    margin: 0 auto;
   }
 
   .nav-logo {
@@ -167,10 +170,11 @@
   }
 
   .tab-bar {
-    position: sticky;
-    top: 55px;
+    position: fixed;
+    top: 0; /* will be set by JS after nav renders */
+    left: 0; right: 0;
     z-index: 99;
-    background: rgba(10,10,15,0.92);
+    background: rgba(10,10,15,0.97);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -178,6 +182,8 @@
     scrollbar-width: none;
     gap: 4px;
     padding: 10px 16px;
+    max-width: 430px;
+    margin: 0 auto;
   }
   .tab-bar::-webkit-scrollbar { display: none; }
 
@@ -204,6 +210,7 @@
   .content {
     flex: 1;
     padding: 20px 16px 100px;
+    padding-top: 140px; /* fallback — overridden by JS */
   }
 
   .page { display: none; }
@@ -2369,6 +2376,22 @@ renderWeightHistory();
 switchPhase(currentPhase);
 // Load cloud data after initial render (non-blocking)
 loadFromCloud();
+
+// Fix fixed-position layout: measure nav height, position tab-bar below it,
+// and set content padding-top to clear both bars.
+function fixLayout() {
+  const nav  = document.querySelector('.nav-bar');
+  const tabs = document.getElementById('tabs');
+  const content = document.querySelector('.content');
+  if (!nav || !tabs || !content) return;
+  const navH  = nav.getBoundingClientRect().height;
+  const tabsH = tabs.getBoundingClientRect().height;
+  tabs.style.top = navH + 'px';
+  content.style.paddingTop = (navH + tabsH + 12) + 'px';
+}
+document.addEventListener('DOMContentLoaded', fixLayout);
+window.addEventListener('load', fixLayout);
+window.addEventListener('resize', fixLayout);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

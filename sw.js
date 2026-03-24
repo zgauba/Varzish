@@ -1,5 +1,5 @@
-// Varzish Service Worker — v19: dynamic phase bar, remove v2 changelog, weight entries added
-const CACHE = 'varzish-v19';
+// Varzish Service Worker — v20: fixed nav+tab layout, always-visible tab bar
+const CACHE = 'varzish-v20';
 
 const PRECACHE = [
   './',
