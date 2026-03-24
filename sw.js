@@ -1,5 +1,5 @@
-// Varzish Service Worker — v17: icon dim-back permanent fix (no inline style cleanup)
-const CACHE = 'varzish-v17';
+// Varzish Service Worker — v18: fix DIM_BG to surface2 so button fill restores correctly
+const CACHE = 'varzish-v18';
 
 const PRECACHE = [
   './',
