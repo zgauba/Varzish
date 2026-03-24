@@ -446,6 +446,29 @@
     position: relative;
   }
 
+  .modal-close-sticky {
+    position: sticky;
+    top: 0;
+    float: right;
+    width: 32px;
+    height: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    margin-left: 8px;
+    margin-bottom: -32px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .modal-close-sticky:hover { background: var(--surface); color: var(--accent); border-color: var(--accent); }
+
   @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
   .modal-handle {
@@ -749,7 +772,7 @@
     align-items: center;
   }
 
-  #timer-reset-btn {
+  #timer-reset-btn, #timer-restart-btn {
     width: 40px; height: 40px;
     background: var(--surface2);
     border: 1px solid var(--border);
@@ -763,6 +786,8 @@
     transition: all 0.2s;
   }
   #timer-reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+  #timer-restart-btn { font-size: 14px; }
+  #timer-restart-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 
   #timer-start-btn {
     background: var(--accent);
@@ -779,33 +804,7 @@
   }
   #timer-start-btn:hover { opacity: 0.85; }
 
-  .timer-switch-prompt {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    background: rgba(200,240,96,0.08);
-    border: 1px solid rgba(200,240,96,0.2);
-    border-radius: 12px;
-    padding: 12px 18px;
-    text-align: center;
-    width: 100%;
-  }
-  .timer-switch-prompt span {
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
-  }
-  #timer-switch-btn {
-    background: var(--accent);
-    color: #0a0a0f;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-  }
+  .timer-switch-prompt { display: none !important; }
 </style>
 </head>
 <body>
@@ -1123,10 +1122,10 @@
   </div><!-- end content -->
 </div><!-- end shell -->
 
-<!-- EXERCISE MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+<!-- EXERCISE MODAL --><div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal" id="modal-content">
-    <button onclick="doCloseModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:#999;font-size:22px;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;">✕</button>
+    <button class="modal-close-sticky" onclick="doCloseModal()" title="Close">✕</button>
+
     <div class="modal-handle"></div>
     <div class="modal-badge-row" id="modal-badges"></div>
     <h2 id="modal-title">Exercise</h2>
@@ -1148,12 +1147,9 @@
         </div>
         <div id="timer-round-label" class="timer-round-label" style="display:none"></div>
         <div class="timer-controls">
-          <button id="timer-reset-btn" onclick="timerReset()" title="Reset">↺</button>
+          <button id="timer-reset-btn" onclick="timerReset()" title="Reset to start">↺</button>
           <button id="timer-start-btn" onclick="timerToggle()">▶ Start</button>
-        </div>
-        <div id="timer-switch-prompt" class="timer-switch-prompt" style="display:none">
-          <span>Switch sides!</span>
-          <button id="timer-switch-btn" onclick="timerSwitchSide()">Restart for other side →</button>
+          <button id="timer-restart-btn" onclick="timerRestart()" title="Restart">⟳</button>
         </div>
       </div>
     </div>
@@ -2090,9 +2086,8 @@ function timerFinished() {
   if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
   if (timerCfg && timerCfg.eachSide && timerState.side === 1) {
     document.getElementById('timer-display').textContent = 'Done!';
-    document.getElementById('timer-round-label').textContent = 'Switch sides!';
+    document.getElementById('timer-round-label').textContent = 'Switch sides — tap ⟳';
     document.getElementById('timer-round-label').style.display = 'block';
-    document.getElementById('timer-switch-prompt').style.display = 'flex';
     document.getElementById('timer-start-btn').textContent = '▶ Start';
     return;
   }
@@ -2118,7 +2113,19 @@ function timerReset() {
   timerState.running = false;
   timerState.side = 1;
   timerState.currentRound = 1;
-  document.getElementById('timer-switch-prompt').style.display = 'none';
+  updateTimerUI();
+}
+
+// Restart: reset time but keep current side/round and immediately start
+function timerRestart() {
+  clearTimerInterval();
+  timerState.remaining = timerCfg ? timerCfg.seconds : timerState.total;
+  // If eachSide and we were on side 1 done, advance to side 2
+  if (timerCfg && timerCfg.eachSide && timerState.side === 1 && timerState.remaining === 0) {
+    timerState.side = 2;
+  }
+  timerState.running = true;
+  timerState.interval = setInterval(timerTick, 1000);
   updateTimerUI();
 }
 
@@ -2128,7 +2135,6 @@ function timerSwitchSide() {
   timerState.total = timerCfg.seconds;
   timerState.running = false;
   clearTimerInterval();
-  document.getElementById('timer-switch-prompt').style.display = 'none';
   updateTimerUI();
 }
 
