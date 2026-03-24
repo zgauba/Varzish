@@ -1,5 +1,5 @@
-// Varzish Service Worker — v13: icon active/dim state fixes
-const CACHE = 'varzish-v13';
+// Varzish Service Worker — v14: full dim-back fix for all icon buttons via inline styles
+const CACHE = 'varzish-v14';
 
 const PRECACHE = [
   './',

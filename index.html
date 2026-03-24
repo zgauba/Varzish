@@ -119,7 +119,6 @@
     pointer-events: none;
   }
   .nav-icon-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .nav-icon-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
   #update-check-btn { transition: all 0.2s, transform 0.5s ease; }
 
   /* Keep print-btn and wake-btn aliases for JS compatibility */
@@ -471,7 +470,7 @@
     float: right;
     width: 36px;
     height: 36px;
-    background: rgba(10, 10, 18, 0.25);
+    background: rgba(10, 10, 18, 0.08);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255,255,255,0.25);
@@ -841,10 +840,9 @@
   /* Running = pause showing — keep lit in accent */
   #timer-start-btn.running { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
 
-  /* .lit = momentary flash then fades back via the existing transition:all 0.2s */
-  #timer-reset-btn.lit   { border-color: var(--accent);  color: var(--accent);  background: rgba(200,240,96,0.1); }
-  #timer-restart-btn.lit { border-color: var(--accent2); color: var(--accent2); background: rgba(100,220,255,0.1); }
-  .nav-icon-btn.lit      { border-color: var(--accent);  color: var(--accent);  background: rgba(200,240,96,0.1); }
+  /* Ensure reset/restart default to muted (no persistent accent color) */
+  #timer-reset-btn   { border-color: var(--border); color: var(--muted); }
+  #timer-restart-btn { border-color: var(--border); color: var(--muted); }
 
   .timer-switch-prompt { display: none !important; }
 
@@ -2262,11 +2260,7 @@ function timerReset() {
   timerState.currentRound = 1;
   updateTimerUI();
   // Flash lit then fade back
-  const btn = document.getElementById('timer-reset-btn');
-  if (btn) {
-    btn.classList.add('lit');
-    setTimeout(() => btn.classList.remove('lit'), 600);
-  }
+  flashBtn(document.getElementById('timer-reset-btn'), '#c8f060', 'rgba(200,240,96,0.1)', 600);
 }
 
 // Restart: reset time but keep current side/round and immediately start
@@ -2281,11 +2275,7 @@ function timerRestart() {
   timerState.interval = setInterval(timerTick, 1000);
   updateTimerUI();
   // Flash lit for 1s then fade back
-  const btn = document.getElementById('timer-restart-btn');
-  if (btn) {
-    btn.classList.add('lit');
-    setTimeout(() => btn.classList.remove('lit'), 1000);
-  }
+  flashBtn(document.getElementById('timer-restart-btn'), '#60c8f0', 'rgba(100,220,255,0.1)', 1000);
 }
 
 function timerSwitchSide() {
@@ -2334,19 +2324,14 @@ function checkForUpdate() {
         const wrap = btn && btn.closest('.nav-icon-wrap');
         const label = wrap && wrap.querySelector('span');
         // Light up while checking
-        if (btn) { btn.classList.add('lit'); btn.style.transform = 'rotate(360deg)'; }
+        if (btn) btn.style.transform = 'rotate(360deg)';
+        flashBtn(btn, '#c8f060', 'rgba(200,240,96,0.1)', 1500);
         reg.update().then(() => {
-          // Fade back after 1.5s
-          if (btn) { btn.style.transform = ''; }
+          if (btn) btn.style.transform = '';
           if (label) {
             const orig = label.textContent;
             label.textContent = 'up to date';
-            setTimeout(() => {
-              label.textContent = orig;
-              if (btn) btn.classList.remove('lit');
-            }, 1500);
-          } else if (btn) {
-            setTimeout(() => btn.classList.remove('lit'), 1500);
+            setTimeout(() => { label.textContent = orig; }, 2000);
           }
         });
       }
@@ -2354,10 +2339,29 @@ function checkForUpdate() {
   }
 }
 
-function navIconFlash(btn, duration) {
+// Flash a button with accent color then fade fully back to muted.
+// Uses inline styles so there is no CSS specificity fight.
+function flashBtn(btn, accentColor, bgColor, duration) {
   if (!btn) return;
-  btn.classList.add('lit');
-  setTimeout(() => btn.classList.remove('lit'), duration || 600);
+  duration = duration || 600;
+  // Set transition on the element so the fade-back is smooth
+  btn.style.transition = 'color 0.6s ease, border-color 0.6s ease, background 0.6s ease';
+  // Apply lit state immediately
+  btn.style.color = accentColor;
+  btn.style.borderColor = accentColor;
+  btn.style.background = bgColor;
+  // After duration, clear inline styles so CSS base rules (muted) take over
+  setTimeout(() => {
+    btn.style.color = '';
+    btn.style.borderColor = '';
+    btn.style.background = '';
+    // Restore original transition after fade completes
+    setTimeout(() => { btn.style.transition = ''; }, 650);
+  }, duration);
+}
+
+function navIconFlash(btn, duration) {
+  flashBtn(btn, '#c8f060', 'rgba(200,240,96,0.1)', duration || 600);
 }
 
 // ── WORKOUT STYLE BADGE ───────────────────────────────────────────────────────
@@ -2383,20 +2387,21 @@ function toggleWakeLock() {
   const video = document.getElementById('wake-video');
   const btn   = document.getElementById('wake-btn');
   if (!video) return;
+  const wrap  = btn && btn.closest('.nav-icon-wrap');
+  const label = wrap && wrap.querySelector('span');
+  // Use 0.4s transition for smooth toggle
+  if (btn) btn.style.transition = 'color 0.4s ease, border-color 0.4s ease, background 0.4s ease';
   if (wakeActive) {
     video.pause();
-    // Remove both active (persistent) and lit (momentary) so it fully dims
-    btn.classList.remove('active', 'lit');
-    const wrap = btn.closest('.nav-icon-wrap');
-    const label = wrap && wrap.querySelector('span');
+    // Dim back to muted — clear inline styles so CSS base rules take over
+    if (btn) { btn.style.color = ''; btn.style.borderColor = ''; btn.style.background = ''; }
     if (label) label.textContent = 'Screen';
     btn.title = 'Keep screen on';
     wakeActive = false;
   } else {
     video.play().catch(() => {});
-    btn.classList.add('active');
-    const wrap = btn.closest('.nav-icon-wrap');
-    const label = wrap && wrap.querySelector('span');
+    // Persistent lit state via inline styles
+    if (btn) { btn.style.color = '#c8f060'; btn.style.borderColor = '#c8f060'; btn.style.background = 'rgba(200,240,96,0.08)'; }
     if (label) label.textContent = 'On';
     btn.title = 'Screen on — tap to disable';
     wakeActive = true;
