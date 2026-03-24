@@ -2442,25 +2442,22 @@ const DIM_BG     = 'transparent';
 function flashBtn(btn, accentColor, bgColor, duration) {
   if (!btn) return;
   duration = duration || 600;
-  // Snap to lit state (no transition for the on-flash)
-  btn.style.transition = 'none';
+  // Snap to lit state immediately (no transition on the way up)
+  btn.style.transition  = 'none';
   btn.style.color       = accentColor;
   btn.style.borderColor = accentColor;
   btn.style.background  = bgColor;
-  // After duration, explicitly transition TO the concrete muted values
-  // (never clear inline styles — iOS Safari won't re-evaluate var() smoothly)
+  // After duration, smoothly transition TO concrete muted values.
+  // We intentionally leave these inline styles in place permanently —
+  // clearing them hands control back to CSS which causes the hover rule
+  // to re-fire the accent color on iOS tap.
   setTimeout(() => {
     btn.style.transition  = 'color 0.55s ease, border-color 0.55s ease, background 0.55s ease';
     btn.style.color       = DIM_COLOR;
     btn.style.borderColor = DIM_BORDER;
     btn.style.background  = DIM_BG;
-    // After fade completes, clear inline styles so hover CSS still works
-    setTimeout(() => {
-      btn.style.transition  = '';
-      btn.style.color       = '';
-      btn.style.borderColor = '';
-      btn.style.background  = '';
-    }, 600);
+    // Only clear the transition property after fade, not the color values
+    setTimeout(() => { btn.style.transition = ''; }, 600);
   }, duration);
 }
 
@@ -2497,11 +2494,9 @@ function toggleWakeLock() {
   if (btn) btn.style.transition = 'color 0.4s ease, border-color 0.4s ease, background 0.4s ease';
   if (wakeActive) {
     video.pause();
-    // Explicitly transition to concrete muted values (don't clear — iOS won't re-eval var())
+    // Transition to concrete muted values — leave them in place (don't clear)
     if (btn) { btn.style.color = DIM_COLOR; btn.style.borderColor = DIM_BORDER; btn.style.background = DIM_BG; }
-    setTimeout(() => {
-      if (btn) { btn.style.transition = ''; btn.style.color = ''; btn.style.borderColor = ''; btn.style.background = ''; }
-    }, 450);
+    setTimeout(() => { if (btn) btn.style.transition = ''; }, 450);
     if (label) label.textContent = 'Screen';
     btn.title = 'Keep screen on';
     wakeActive = false;

@@ -1,5 +1,5 @@
-// Varzish Service Worker — v16: KV always wins, weight delete, icon dim-back fix
-const CACHE = 'varzish-v16';
+// Varzish Service Worker — v17: icon dim-back permanent fix (no inline style cleanup)
+const CACHE = 'varzish-v17';
 
 const PRECACHE = [
   './',
