@@ -838,7 +838,13 @@
   #timer-restart-btn:hover { border-color: var(--accent2); color: var(--accent2); }
   #timer-start-btn { border-color: var(--accent); color: var(--accent); font-size: 20px; }
   #timer-start-btn:hover { background: rgba(200,240,96,0.1); }
-  #timer-start-btn.running { border-color: var(--muted); color: var(--muted); }
+  /* Running = pause showing — keep lit in accent */
+  #timer-start-btn.running { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.08); }
+
+  /* .lit = momentary flash then fades back via the existing transition:all 0.2s */
+  #timer-reset-btn.lit   { border-color: var(--accent);  color: var(--accent);  background: rgba(200,240,96,0.1); }
+  #timer-restart-btn.lit { border-color: var(--accent2); color: var(--accent2); background: rgba(100,220,255,0.1); }
+  .nav-icon-btn.lit      { border-color: var(--accent);  color: var(--accent);  background: rgba(200,240,96,0.1); }
 
   .timer-switch-prompt { display: none !important; }
 
@@ -908,7 +914,7 @@
 
       <!-- Print -->
       <div class="nav-icon-wrap">
-        <button class="nav-icon-btn print-btn" onclick="window.print()" title="Print week plan">
+        <button class="nav-icon-btn print-btn" onclick="navIconFlash(this,600);window.print()" title="Print week plan">
           <!-- Printer icon -->
           <svg viewBox="0 0 24 24">
             <polyline points="6 9 6 2 18 2 18 9"/>
@@ -2255,6 +2261,12 @@ function timerReset() {
   timerState.side = 1;
   timerState.currentRound = 1;
   updateTimerUI();
+  // Flash lit then fade back
+  const btn = document.getElementById('timer-reset-btn');
+  if (btn) {
+    btn.classList.add('lit');
+    setTimeout(() => btn.classList.remove('lit'), 600);
+  }
 }
 
 // Restart: reset time but keep current side/round and immediately start
@@ -2268,6 +2280,12 @@ function timerRestart() {
   timerState.running = true;
   timerState.interval = setInterval(timerTick, 1000);
   updateTimerUI();
+  // Flash lit for 1s then fade back
+  const btn = document.getElementById('timer-restart-btn');
+  if (btn) {
+    btn.classList.add('lit');
+    setTimeout(() => btn.classList.remove('lit'), 1000);
+  }
 }
 
 function timerSwitchSide() {
@@ -2313,24 +2331,33 @@ function checkForUpdate() {
     navigator.serviceWorker.getRegistration().then(reg => {
       if (reg) {
         const btn = document.getElementById('update-check-btn');
-        // Spin the icon while checking
-        if (btn) btn.style.transform = 'rotate(360deg)';
+        const wrap = btn && btn.closest('.nav-icon-wrap');
+        const label = wrap && wrap.querySelector('span');
+        // Light up while checking
+        if (btn) { btn.classList.add('lit'); btn.style.transform = 'rotate(360deg)'; }
         reg.update().then(() => {
-          // Brief visual feedback — show a checkmark label then restore
-          const wrap = btn && btn.closest('.nav-icon-wrap');
-          const label = wrap && wrap.querySelector('span');
+          // Fade back after 1.5s
+          if (btn) { btn.style.transform = ''; }
           if (label) {
             const orig = label.textContent;
             label.textContent = 'up to date';
-            if (btn) btn.style.transform = '';
-            setTimeout(() => { label.textContent = orig; }, 2000);
+            setTimeout(() => {
+              label.textContent = orig;
+              if (btn) btn.classList.remove('lit');
+            }, 1500);
           } else if (btn) {
-            btn.style.transform = '';
+            setTimeout(() => btn.classList.remove('lit'), 1500);
           }
         });
       }
     });
   }
+}
+
+function navIconFlash(btn, duration) {
+  if (!btn) return;
+  btn.classList.add('lit');
+  setTimeout(() => btn.classList.remove('lit'), duration || 600);
 }
 
 // ── WORKOUT STYLE BADGE ───────────────────────────────────────────────────────
@@ -2358,13 +2385,20 @@ function toggleWakeLock() {
   if (!video) return;
   if (wakeActive) {
     video.pause();
-    btn.classList.remove('active');
+    // Remove both active (persistent) and lit (momentary) so it fully dims
+    btn.classList.remove('active', 'lit');
+    const wrap = btn.closest('.nav-icon-wrap');
+    const label = wrap && wrap.querySelector('span');
+    if (label) label.textContent = 'Screen';
     btn.title = 'Keep screen on';
     wakeActive = false;
   } else {
     video.play().catch(() => {});
     btn.classList.add('active');
-    btn.title = 'Screen lock active — tap to disable';
+    const wrap = btn.closest('.nav-icon-wrap');
+    const label = wrap && wrap.querySelector('span');
+    if (label) label.textContent = 'On';
+    btn.title = 'Screen on — tap to disable';
     wakeActive = true;
   }
   // Also try the native Wake Lock API as a bonus where supported

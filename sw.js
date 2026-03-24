@@ -1,5 +1,5 @@
-// Varzish Service Worker — v12: SVG nav icons + labels, transparent close button
-const CACHE = 'varzish-v12';
+// Varzish Service Worker — v13: icon active/dim state fixes
+const CACHE = 'varzish-v13';
 
 const PRECACHE = [
   './',
