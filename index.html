@@ -1042,20 +1042,7 @@
 
       <div class="info-card">
         <h3>Phase Progression (12 Weeks)</h3>
-        <div class="phase-bar" style="margin-top:12px">
-          <div class="phase-seg active"></div>
-          <div class="phase-seg active"></div>
-          <div class="phase-seg active"></div>
-          <div class="phase-seg active"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-          <div class="phase-seg future"></div>
-        </div>
+        <div class="phase-bar" id="phase-progress-bar" style="margin-top:12px"></div>
         <ul style="margin-top:10px">
           <li><strong style="color:var(--text)">Phase 1 (Wks 1–4):</strong> Foundation — form, habit, baseline strength</li>
           <li><strong style="color:var(--text)">Phase 2 (Wks 5–8):</strong> Build — add pulling, unilateral legs, more volume</li>
@@ -1063,17 +1050,6 @@
         </ul>
       </div>
 
-      <div class="info-card">
-        <h3>What Changed in v2</h3>
-        <ul>
-          <li><strong style="color:var(--accent)">Added Door Towel Row</strong> — fixes the missing pulling movement for back definition</li>
-          <li><strong style="color:var(--accent)">Added Reverse Lunge</strong> — unilateral leg work for better definition in Phase 2+</li>
-          <li><strong style="color:var(--accent)">Added Glute Bridge March</strong> — progression from standard bridge in Phase 2+</li>
-          <li><strong style="color:var(--text)">Removed Wall Push-Up</strong> — replaced by Knee Push-Up as the true Phase 1 entry</li>
-          <li><strong style="color:var(--text)">All workouts capped at 30 min</strong> — realistic for a desk worker</li>
-          <li><strong style="color:var(--text)">Custom illustrations</strong> — uniform muscle-highlight images for every exercise</li>
-        </ul>
-      </div>
     </div>
 
     <!-- ══ WEEK PAGE ══ -->
@@ -2165,6 +2141,14 @@ function switchPhase(p) {
     const meta = PHASE_META[p];
     desc.innerHTML = `<strong style="color:var(--text)">${meta.label}</strong> — ${meta.description}`;
     desc.style.borderLeftColor = meta.color;
+  }
+  // Update phase progress bar: Phase 1 = 4 active, Phase 2 = 8, Phase 3 = 12
+  const bar = document.getElementById('phase-progress-bar');
+  if (bar) {
+    const activeCount = p * 4;
+    bar.innerHTML = Array.from({length: 12}, (_, i) =>
+      `<div class="phase-seg ${i < activeCount ? 'active' : 'future'}"></div>`
+    ).join('');
   }
 }
 

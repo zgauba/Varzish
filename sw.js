@@ -1,5 +1,5 @@
-// Varzish Service Worker — v18: fix DIM_BG to surface2 so button fill restores correctly
-const CACHE = 'varzish-v18';
+// Varzish Service Worker — v19: dynamic phase bar, remove v2 changelog, weight entries added
+const CACHE = 'varzish-v19';
 
 const PRECACHE = [
   './',
