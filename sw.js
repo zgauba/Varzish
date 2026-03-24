@@ -1,5 +1,5 @@
-// Varzish Service Worker — v14: full dim-back fix for all icon buttons via inline styles
-const CACHE = 'varzish-v14';
+// Varzish Service Worker — v15: Cloudflare KV sync for streak and weight log
+const CACHE = 'varzish-v15';
 
 const PRECACHE = [
   './',

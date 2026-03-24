@@ -1139,7 +1139,7 @@
 
     <!-- ══ TRACKER PAGE ══ -->
     <div class="page" id="page-tracker">
-      <div class="section-label">Weekly Completion</div>
+      <div class="section-label" style="display:flex;align-items:center;justify-content:space-between">Weekly Completion <span id="sync-status" style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.5px"></span></div>
       <div class="tracker-week" id="tracker-week"></div>
 
       <div class="streak-card">
@@ -2011,11 +2011,73 @@ let currentPhase = getPhase();
 // ── TRACKER ───────────────────────────────────────────────────────────────────
 
 const DAYS_SHORT = ['M','T','W','T','F','S','S'];
+const SYNC_URL = 'https://varzish-sync.zgauba.workers.dev/sync';
+
+// In-memory state — always kept in sync with localStorage AND Cloudflare KV
 let completedDays = JSON.parse(localStorage.getItem('completed') || '[]');
-let weightLog = JSON.parse(localStorage.getItem('weights') || '[]');
+let weightLog     = JSON.parse(localStorage.getItem('weights')   || '[]');
+
+// ── Sync status indicator ────────────────────────────────────────────────────
+function setSyncStatus(msg, color) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = color || 'var(--muted)';
+}
+
+// ── Load from KV on startup (merge: KV wins if newer) ───────────────────────
+async function loadFromCloud() {
+  try {
+    setSyncStatus('syncing…', 'var(--muted)');
+    const res = await fetch(SYNC_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    // Merge: use cloud data if it has more entries (cloud wins on conflict)
+    if (Array.isArray(data.weightLog) && data.weightLog.length >= weightLog.length) {
+      weightLog = data.weightLog;
+      try { localStorage.setItem('weights', JSON.stringify(weightLog)); } catch(e){}
+    }
+    if (data.streak && Array.isArray(data.streak.completedDays) &&
+        data.streak.completedDays.length >= completedDays.length) {
+      completedDays = data.streak.completedDays;
+      try { localStorage.setItem('completed', JSON.stringify(completedDays)); } catch(e){}
+    }
+    buildTracker();
+    renderWeightHistory();
+    setSyncStatus('synced', '#c8f060');
+    setTimeout(() => setSyncStatus(''), 3000);
+  } catch(e) {
+    setSyncStatus('offline', 'var(--muted)');
+    setTimeout(() => setSyncStatus(''), 4000);
+  }
+}
+
+// ── Save to localStorage + KV (fire-and-forget, localStorage is source of truth) ──
+function persistData() {
+  try { localStorage.setItem('completed', JSON.stringify(completedDays)); } catch(e){}
+  try { localStorage.setItem('weights',   JSON.stringify(weightLog));     } catch(e){}
+  // Background sync to KV — don't await, don't block UI
+  fetch(SYNC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      streak: { completedDays },
+      weightLog
+    })
+  }).then(r => {
+    if (r.ok) {
+      setSyncStatus('saved ✓', '#c8f060');
+      setTimeout(() => setSyncStatus(''), 2500);
+    }
+  }).catch(() => {
+    setSyncStatus('saved locally', 'var(--muted)');
+    setTimeout(() => setSyncStatus(''), 3000);
+  });
+}
 
 function buildTracker() {
   const row = document.getElementById('tracker-week');
+  if (!row) return;
   row.innerHTML = DAYS_SHORT.map((d, i) => `
     <div class="tracker-day">
       <span class="tracker-label">${d}</span>
@@ -2030,8 +2092,8 @@ function toggleDay2(i) {
   } else {
     completedDays.push(i);
   }
-  try { localStorage.setItem('completed', JSON.stringify(completedDays)); } catch(e){}
   buildTracker();
+  persistData();
 }
 
 function logWeight() {
@@ -2039,13 +2101,14 @@ function logWeight() {
   if (!val || val < 100 || val > 400) return;
   const today = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric'});
   weightLog.push({ date: today, weight: val });
-  try { localStorage.setItem('weights', JSON.stringify(weightLog)); } catch(e){}
   document.getElementById('weight-input').value = '';
   renderWeightHistory();
+  persistData();
 }
 
 function renderWeightHistory() {
   const el = document.getElementById('weight-history');
+  if (!el) return;
   let html = `<div class="weight-row"><span class="weight-date">Start</span><span class="weight-val">175 lbs</span><span class="weight-delta" style="color:var(--muted)">baseline</span></div>`;
   weightLog.forEach((entry, i) => {
     const prev = i === 0 ? 175 : weightLog[i-1].weight;
@@ -2287,11 +2350,14 @@ function timerSwitchSide() {
   updateTimerUI();
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
+// ── INIT ────────────────────────────────────────────────────────────────────────────────────
 
+// Render immediately from localStorage, then fetch latest from cloud
 buildTracker();
 renderWeightHistory();
 switchPhase(currentPhase);
+// Load cloud data after initial render (non-blocking)
+loadFromCloud();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
