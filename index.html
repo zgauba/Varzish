@@ -105,7 +105,7 @@
     border-radius: 50%;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
     flex-shrink: 0;
     padding: 0;
   }
@@ -662,9 +662,10 @@
   .streak-label { font-size: 12px; color: var(--muted); margin-top: 4px; font-family: 'DM Mono', monospace; letter-spacing: 1px; }
 
   .weight-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
     padding: 10px 0;
     border-bottom: 1px solid var(--border);
   }
@@ -674,6 +675,20 @@
   .weight-delta { font-size: 11px; font-family: 'DM Mono', monospace; }
   .delta-down { color: var(--accent); }
   .delta-up { color: var(--danger); }
+  .weight-del {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    transition: opacity 0.2s, color 0.2s;
+    border-radius: 4px;
+  }
+  .weight-del:hover { opacity: 1; color: var(--danger); }
 
   .weight-input-row {
     display: flex;
@@ -819,7 +834,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
     font-family: 'DM Sans', sans-serif;
     padding: 0;
   }
@@ -2025,20 +2040,19 @@ function setSyncStatus(msg, color) {
   el.style.color = color || 'var(--muted)';
 }
 
-// ── Load from KV on startup (merge: KV wins if newer) ───────────────────────
+// ── Load from KV on startup — KV is always the source of truth ──────────────
 async function loadFromCloud() {
   try {
     setSyncStatus('syncing…', 'var(--muted)');
     const res = await fetch(SYNC_URL);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    // Merge: use cloud data if it has more entries (cloud wins on conflict)
-    if (Array.isArray(data.weightLog) && data.weightLog.length >= weightLog.length) {
+    // KV always wins — it is the canonical store. localStorage is just a cache.
+    if (Array.isArray(data.weightLog)) {
       weightLog = data.weightLog;
       try { localStorage.setItem('weights', JSON.stringify(weightLog)); } catch(e){}
     }
-    if (data.streak && Array.isArray(data.streak.completedDays) &&
-        data.streak.completedDays.length >= completedDays.length) {
+    if (data.streak && Array.isArray(data.streak.completedDays)) {
       completedDays = data.streak.completedDays;
       try { localStorage.setItem('completed', JSON.stringify(completedDays)); } catch(e){}
     }
@@ -2047,8 +2061,8 @@ async function loadFromCloud() {
     setSyncStatus('synced', '#c8f060');
     setTimeout(() => setSyncStatus(''), 3000);
   } catch(e) {
-    setSyncStatus('offline', 'var(--muted)');
-    setTimeout(() => setSyncStatus(''), 4000);
+    setSyncStatus('offline — showing local data', 'var(--muted)');
+    setTimeout(() => setSyncStatus(''), 5000);
   }
 }
 
@@ -2106,16 +2120,29 @@ function logWeight() {
   persistData();
 }
 
+function deleteWeight(i) {
+  weightLog.splice(i, 1);
+  renderWeightHistory();
+  persistData();
+}
+
 function renderWeightHistory() {
   const el = document.getElementById('weight-history');
   if (!el) return;
-  let html = `<div class="weight-row"><span class="weight-date">Start</span><span class="weight-val">175 lbs</span><span class="weight-delta" style="color:var(--muted)">baseline</span></div>`;
+  let html = `<div class="weight-row"><span class="weight-date">Start</span><span class="weight-val">175 lbs</span><span class="weight-delta" style="color:var(--muted)">baseline</span><span class="weight-del"></span></div>`;
   weightLog.forEach((entry, i) => {
     const prev = i === 0 ? 175 : weightLog[i-1].weight;
     const delta = entry.weight - prev;
     const cls = delta <= 0 ? 'delta-down' : 'delta-up';
     const sign = delta <= 0 ? '▼' : '▲';
-    html += `<div class="weight-row"><span class="weight-date">${entry.date}</span><span class="weight-val">${entry.weight} lbs</span><span class="weight-delta ${cls}">${sign} ${Math.abs(delta).toFixed(1)}</span></div>`;
+    html += `<div class="weight-row">
+      <span class="weight-date">${entry.date}</span>
+      <span class="weight-val">${entry.weight} lbs</span>
+      <span class="weight-delta ${cls}">${sign} ${Math.abs(delta).toFixed(1)}</span>
+      <button class="weight-del" onclick="deleteWeight(${i})" title="Delete entry">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>`;
   });
   el.innerHTML = html;
 }
@@ -2407,22 +2434,33 @@ function checkForUpdate() {
 
 // Flash a button with accent color then fade fully back to muted.
 // Uses inline styles so there is no CSS specificity fight.
+// Concrete resolved values for the muted/dim state — must match CSS vars
+const DIM_COLOR  = '#888898'; // --muted
+const DIM_BORDER = '#2a2a38'; // --border
+const DIM_BG     = 'transparent';
+
 function flashBtn(btn, accentColor, bgColor, duration) {
   if (!btn) return;
   duration = duration || 600;
-  // Set transition on the element so the fade-back is smooth
-  btn.style.transition = 'color 0.6s ease, border-color 0.6s ease, background 0.6s ease';
-  // Apply lit state immediately
-  btn.style.color = accentColor;
+  // Snap to lit state (no transition for the on-flash)
+  btn.style.transition = 'none';
+  btn.style.color       = accentColor;
   btn.style.borderColor = accentColor;
-  btn.style.background = bgColor;
-  // After duration, clear inline styles so CSS base rules (muted) take over
+  btn.style.background  = bgColor;
+  // After duration, explicitly transition TO the concrete muted values
+  // (never clear inline styles — iOS Safari won't re-evaluate var() smoothly)
   setTimeout(() => {
-    btn.style.color = '';
-    btn.style.borderColor = '';
-    btn.style.background = '';
-    // Restore original transition after fade completes
-    setTimeout(() => { btn.style.transition = ''; }, 650);
+    btn.style.transition  = 'color 0.55s ease, border-color 0.55s ease, background 0.55s ease';
+    btn.style.color       = DIM_COLOR;
+    btn.style.borderColor = DIM_BORDER;
+    btn.style.background  = DIM_BG;
+    // After fade completes, clear inline styles so hover CSS still works
+    setTimeout(() => {
+      btn.style.transition  = '';
+      btn.style.color       = '';
+      btn.style.borderColor = '';
+      btn.style.background  = '';
+    }, 600);
   }, duration);
 }
 
@@ -2459,8 +2497,11 @@ function toggleWakeLock() {
   if (btn) btn.style.transition = 'color 0.4s ease, border-color 0.4s ease, background 0.4s ease';
   if (wakeActive) {
     video.pause();
-    // Dim back to muted — clear inline styles so CSS base rules take over
-    if (btn) { btn.style.color = ''; btn.style.borderColor = ''; btn.style.background = ''; }
+    // Explicitly transition to concrete muted values (don't clear — iOS won't re-eval var())
+    if (btn) { btn.style.color = DIM_COLOR; btn.style.borderColor = DIM_BORDER; btn.style.background = DIM_BG; }
+    setTimeout(() => {
+      if (btn) { btn.style.transition = ''; btn.style.color = ''; btn.style.borderColor = ''; btn.style.background = ''; }
+    }, 450);
     if (label) label.textContent = 'Screen';
     btn.title = 'Keep screen on';
     wakeActive = false;

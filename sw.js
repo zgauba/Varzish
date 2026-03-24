@@ -1,5 +1,5 @@
-// Varzish Service Worker — v15: Cloudflare KV sync for streak and weight log
-const CACHE = 'varzish-v15';
+// Varzish Service Worker — v16: KV always wins, weight delete, icon dim-back fix
+const CACHE = 'varzish-v16';
 
 const PRECACHE = [
   './',
