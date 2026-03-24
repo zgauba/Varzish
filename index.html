@@ -822,16 +822,55 @@
   #timer-start-btn.running { border-color: var(--muted); color: var(--muted); }
 
   .timer-switch-prompt { display: none !important; }
+
+  /* Update banner */
+  #update-banner {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    background: var(--accent);
+    color: #000;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Update check button in nav */
+  .update-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .update-btn:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
 <div class="shell">
+
+  <!-- Update banner -->
+  <div id="update-banner">⟳ Updating Varzish…</div>
 
   <!-- NAV -->
   <nav class="nav-bar">
     <div class="nav-logo">VAR<span>ZISH</span></div>
     <div style="display:flex;align-items:center;gap:8px">
       <button class="wake-btn" id="wake-btn" title="Keep screen on" onclick="toggleWakeLock()">☀</button>
+      <button class="update-btn" id="update-check-btn" onclick="checkForUpdate()" title="Check for app update">↻</button>
       <button class="print-btn" onclick="window.print()">⎙ Print</button>
     </div>
   </nav>
@@ -2195,7 +2234,44 @@ renderWeightHistory();
 switchPhase(currentPhase);
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      // Poll for updates every 60 seconds
+      setInterval(() => reg.update(), 60000);
+    });
+
+    // When the new SW sends SW_UPDATED, show banner and reload
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data && e.data.type === 'SW_UPDATED') {
+        const banner = document.getElementById('update-banner');
+        if (banner) {
+          banner.style.display = 'flex';
+          // Auto-reload after 2s so user sees the banner briefly
+          setTimeout(() => window.location.reload(), 2000);
+        } else {
+          window.location.reload();
+        }
+      }
+    });
+  });
+}
+
+function checkForUpdate() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(reg => {
+      if (reg) {
+        reg.update().then(() => {
+          // If no update found, show brief feedback
+          const btn = document.getElementById('update-check-btn');
+          if (btn) {
+            const orig = btn.textContent;
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = orig; }, 1500);
+          }
+        });
+      }
+    });
+  }
 }
 
 // ── WORKOUT STYLE BADGE ───────────────────────────────────────────────────────

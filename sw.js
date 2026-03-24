@@ -1,5 +1,5 @@
-// FitZee Service Worker — v10: all images regenerated in consistent masculine style
-const CACHE = 'varzish-v10';
+// Varzish Service Worker — v11: robust update mechanism (postMessage + auto-reload banner)
+const CACHE = 'varzish-v11';
 
 const PRECACHE = [
   './',
@@ -36,22 +36,30 @@ const PRECACHE = [
   './assets/ex-banded-lateral-walk.png',
 ];
 
-// On install, cache the app shell + all images
+// On install, cache the app shell + all assets, then immediately activate
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(cache => cache.addAll(PRECACHE))
   );
+  // Skip waiting so the new SW activates as soon as it's installed
   self.skipWaiting();
 });
 
-// On activate, remove old caches
+// On activate, remove old caches, claim all clients, then notify them to reload
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    )
+    ).then(() => {
+      // Claim all open clients immediately
+      return self.clients.claim();
+    }).then(() => {
+      // Tell every open window/tab that a new version is active → triggers auto-reload
+      return self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+        clients.forEach(client => client.postMessage({ type: 'SW_UPDATED', version: CACHE }));
+      });
+    })
   );
-  self.clients.claim();
 });
 
 // Fetch strategy:
